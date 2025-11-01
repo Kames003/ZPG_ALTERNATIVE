@@ -1,76 +1,79 @@
 #pragma once
-#ifndef CAMERA_H
-#define CAMERA_H
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <vector>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+#include <glm/vec3.hpp> // glm::vec3
+#include <glm/vec4.hpp> // glm::vec4
+#include <glm/mat4x4.hpp> // glm::mat4
+#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
+
 #include "Subject.h"
+
+#define VIEWMATRIX 0
+#define PROJECTIONMATRIX 1
 
 class Camera : public Subject
 {
 private:
-    glm::vec3 position;
-    glm::vec3 front;
-    glm::vec3 up;
-    glm::vec3 right;
-    glm::vec3 worldUp;
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 target = glm::vec3(0.0f, 0.0f, -1.0f);
+    glm::vec3 cameraPosition = glm::vec3(0.0f, 0.0f, 10.0f);
 
-    float yaw;
-    float pitch;
-    float movementSpeed;
-    float mouseSensitivity;
+    GLFWwindow* window;
+    float fov;
+    float near;
+    float far;
+    float ratio = 0;
+
+    int previousWidth = 0;
+    int previousHeight = 0;
+    int currentWidth = 0;
+    int currentHeight = 0;
+
+    glm::vec3 previousCameraPosition = glm::vec3(0.0f);
+    glm::vec3 previousTarget = glm::vec3(0.0f);
+
+    float speed = 0.05f;
+    float sensitivity = 0.1f;
+
+    bool firstClick = true;
+
+    float alpha = 0.0f;
+    float beta = 0.0f;
+
+    double startX = 0;
+    double startY = 0;
+
+    double endX = 0;
+    double endY = 0;
+
+    double offsetX = 0;
+    double offsetY = 0;
 
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
-    float fov; // verticalos uhlos
-    float aspectRatio;
-    float nearPlane;
-    float farPlane;
 
-    bool firstMouse;
-    double lastX, lastY;
-    bool isMovable;
-    bool needsNotification;
+    void calculateViewMatrix();
+    void calculateProjectionMatrix();
 
-    void updateCameraVectors();
-    void updateViewMatrix();
-    void updateProjectionMatrix();
+    bool checkViewMatrixChanges();
+    bool checkProjectionMatrixChanges();
+
+    void notify(int message);
 
 public:
-    Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 3.0f),
-           glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
-           float yaw = -90.0f,
-           float pitch = 0.0f,
-           bool movable = false);
+    Camera(GLFWwindow* w, float fov, float near, float far);
 
-    // Gettery
-    glm::mat4 getProjectionMatrix() const { return projectionMatrix; }
-    float getFOV() const { return fov; }
-    float getAspectRatio() const { return aspectRatio; }
-    glm::mat4 getViewMatrix() const { return viewMatrix; }
-    glm::vec3 getPosition() const { return position; }
-    glm::vec3 getFront() const { return front; }
-    bool getIsMovable() const { return isMovable; }
+    void checkChanges();
+    void controls();
 
-    // Nenotifikuje hneď, len nastaví flag
-    void setAspectRatio(float aspect);
-    void setFOV(float newFov);
-    void setProjectionPlanes(float near, float far);
-
-    // Bezpečná notifikácia mimo render loop
-    void flushPendingNotifications();
-
-    void processMouseInput(double xpos, double ypos);
-    void setPosition(const glm::vec3& pos);
-    void lookAt(const glm::vec3& target);
-
-    void moveForward(float deltaTime);
-    void moveBackward(float deltaTime);
-    void moveLeft(float deltaTime);
-    void moveRight(float deltaTime);
-
-    void resetMouseState() { firstMouse = true; }
+    glm::mat4 getViewMatrix();
+    glm::mat4 getProjectionMatrix();
+    glm::vec3 getCameraPosition();
+    glm::vec3 getCameraDirection();
+    int getWidth();
+    int getHeight();
 };
 
-#endif

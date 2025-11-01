@@ -73,6 +73,29 @@ else()
 endif()
 
 # ========================================
+# ASSIMP (NOVÉ!)
+# ========================================
+find_path(ASSIMP_INCLUDE_DIR
+        NAMES assimp/Importer.hpp
+        HINTS ${HOMEBREW_PREFIX}/include
+)
+if (ASSIMP_INCLUDE_DIR)
+    message(STATUS "Found Assimp include directory: ${ASSIMP_INCLUDE_DIR}")
+else()
+    message(FATAL_ERROR "Could not find Assimp include directory. Install with: brew install assimp")
+endif()
+
+find_library(ASSIMP_LIB
+        NAMES assimp
+        HINTS ${HOMEBREW_PREFIX}/lib
+)
+if (ASSIMP_LIB)
+    message(STATUS "Found Assimp library: ${ASSIMP_LIB}")
+else()
+    message(FATAL_ERROR "Could not find Assimp library. Install with: brew install assimp")
+endif()
+
+# ========================================
 # SOURCE FILES (BEZ DUPLICÍT!)
 # ========================================
 set(SOURCES
@@ -94,40 +117,80 @@ set(SOURCES
         src/Model.h
 
         # Transformations
-        src/TransformComponent.cpp
-        src/TransformComponent.h
-        src/Translate.cpp
-        src/Translate.h
-        src/Rotate.cpp
-        src/Rotate.h
-        src/Scale.cpp
-        src/Scale.h
-        src/TransformComposite.cpp
-        src/TransformComposite.h
+        src/Transformation.cpp
+        src/Transformation.h
+        src/TransformationTranslate.cpp
+        src/TransformationTranslate.h
+        src/TransformationRotate.cpp
+        src/TransformationRotate.h
+        src/TransformationScale.cpp
+        src/TransformationScale.h
+        src/TransformationComposite.cpp
+        src/TransformationComposite.h
 
         # Objects & Scenes
         src/DrawableObject.cpp
         src/DrawableObject.h
-        src/Scene.cpp
-        src/Scene.h
-        src/SceneManager.cpp
-        src/SceneManager.h
         src/Camera.cpp
         src/Camera.h
         src/models/plane.h
         src/models/lamp.h
         src/models/bench.h
-        src/Controller.cpp
-        src/Controller.h
         src/Light.cpp
         src/Light.h
-        src/ShaderLoader.cpp
-        src/ShaderLoader.h
         src/models/triangle.h
         src/Subject.h
         src/Subject.cpp
-        src/SceneFactory.cpp
-        src/SceneFactory.h
+        src/AbstractModel.cpp
+        src/AbstractModel.h
+        src/SphereModel.cpp
+        src/SphereModel.h
+        src/VAO.cpp
+        src/VAO.h
+        src/VBO.cpp
+        src/VBO.h
+        src/TreeModel.cpp
+        src/TreeModel.h
+        src/BushModel.cpp
+        src/BushModel.h
+        src/PlainModel.cpp
+        src/PlainModel.h
+        src/GiftModel.cpp
+        src/GiftModel.h
+        src/BenchModel.cpp
+        src/BenchModel.h
+        src/FileReader.cpp
+        src/FileReader.h
+        src/LoadedModel.cpp
+        src/LoadedModel.h
+        src/PointLight.cpp
+        src/PointLight.h
+        src/DirectionalLight.cpp
+        src/DirectionalLight.h
+        src/SpotlightCamera.cpp
+        src/SpotlightCamera.h
+        src/Spotlight.cpp
+        src/Spotlight.h
+        src/LightManager.cpp
+        src/LightManager.h
+        src/ObjectManager.cpp
+        src/ObjectManager.h
+        src/ShaderProgramManager.cpp
+        src/ShaderProgramManager.h
+        src/AbstractScene.cpp
+        src/AbstractScene.h
+        src/Window.cpp
+        src/Window.h
+        src/VertexShader.cpp
+        src/VertexShader.h
+        src/FragmentShader.cpp
+        src/FragmentShader.h
+        src/Callback.cpp
+        src/Callback.h
+        src/MinimalForestScene.h
+        src/MinimalForestScene.cpp
+        src/SceneManager.cpp
+        src/SceneManager.h
 )
 
 # ========================================
@@ -142,6 +205,7 @@ target_include_directories(untitled2 PRIVATE
         ${GLFW_INCLUDE_DIR}
         ${GLM_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIR}
+        ${ASSIMP_INCLUDE_DIR}          # ✅ ASSIMP!
         ${CMAKE_SOURCE_DIR}/src        # ✅ src/ priečinok
         ${CMAKE_SOURCE_DIR}/src/models # ✅ models/ priečinok!
 )
@@ -152,6 +216,7 @@ target_include_directories(untitled2 PRIVATE
 target_link_libraries(untitled2 PRIVATE
         ${GLFW_LIB}
         ${GLEW_LIB}
+        ${ASSIMP_LIB}                  # ✅ ASSIMP!
         "-framework Cocoa"
         "-framework IOKit"
         "-framework CoreVideo"
@@ -162,3 +227,17 @@ target_link_libraries(untitled2 PRIVATE
 
 # Potlačenie deprecated warnings
 target_compile_definitions(untitled2 PRIVATE GL_SILENCE_DEPRECATION)
+# ========================================
+# COPY SHADERS TO BUILD DIRECTORY
+# ========================================
+# Skopíruje Shaders priečinok do build priečinka pri každom buildu
+add_custom_command(TARGET untitled2 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/src/Shaders
+        $<TARGET_FILE_DIR:untitled2>/Shaders
+        COMMENT "📁 Copying shaders to build directory..."
+)
+
+# Alternatívne: Skopíruj pri konfigurácii (raz)
+file(COPY ${CMAKE_SOURCE_DIR}/src/Shaders
+        DESTINATION ${CMAKE_BINARY_DIR})

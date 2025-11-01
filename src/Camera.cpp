@@ -1,224 +1,173 @@
 #include "Camera.h"
-#include <algorithm>
-#include <cstdio>
-#include <GLFW/glfw3.h>
+#include "Observer.h"
+#include <iostream>
 
-// ========================================
-// CONSTRUCTOR
-// ========================================
-Camera::Camera(glm::vec3 pos, glm::vec3 up, float yaw, float pitch, bool movable)
-    : position(pos), worldUp(up), yaw(yaw), pitch(pitch),
-      movementSpeed(2.5f), mouseSensitivity(0.1f),
-      firstMouse(true), lastX(400.0), lastY(300.0),
-      isMovable(movable),
-      fov(45.0f),
-      aspectRatio(4.0f / 3.0f),
-      nearPlane(0.1f),
-      farPlane(100.0f),
-      needsNotification(false)
+bool Camera::checkViewMatrixChanges()
 {
-    front = glm::vec3(0.0f, 0.0f, -1.0f);
-    updateCameraVectors();
-    updateViewMatrix();
-    updateProjectionMatrix();
+	if (previousCameraPosition != cameraPosition || previousTarget != target)
+	{
+		previousCameraPosition = cameraPosition;
+		previousTarget = target;
+		calculateViewMatrix();
+
+		return true;
+	}
+	return false;
 }
 
-// ========================================
-// MOUSE INPUT
-// ========================================
-void Camera::processMouseInput(double xpos, double ypos)
+bool Camera::checkProjectionMatrixChanges()
 {
-    if (!isMovable) return;  // Statická kamera - bez otáčania
+	glfwGetWindowSize(window, &currentWidth, &currentHeight);
 
-    if (firstMouse)
-    {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-        return;
-    }
+	if (currentWidth != previousWidth || currentHeight != previousHeight)
+	{
+		ratio = float(currentWidth) / float(currentHeight);
+		previousWidth = currentWidth;
+		previousHeight = currentHeight;
+		calculateProjectionMatrix();
 
-    double xOffset = xpos - lastX;
-    double yOffset = lastY - ypos;
+		return true;
+	}
 
-    lastX = xpos;
-    lastY = ypos;
-
-    xOffset *= mouseSensitivity;
-    yOffset *= mouseSensitivity;
-
-    yaw += xOffset;
-    pitch += yOffset;
-
-    if (pitch > 89.0f) pitch = 89.0f;
-    if (pitch < -89.0f) pitch = -89.0f;
-
-    updateCameraVectors();
-    updateViewMatrix();
-    notifyAll();
+	return false;
 }
 
-// ========================================
-// UPDATE CAMERA VECTORS
-// ========================================
-void Camera::updateCameraVectors()
+void Camera::notify(int message)
 {
-    // new front vector
-    glm::vec3 newFront;
-    newFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    newFront.y = sin(glm::radians(pitch));
-    newFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front = glm::normalize(newFront);
-
-    // right a up vectors
-    right = glm::normalize(glm::cross(front, worldUp));
-    up = glm::normalize(glm::cross(right, front));
+	for (Observer* o : observers)
+	{
+		o->update(message);
+	}
 }
 
-// ========================================
-// UPDATE VIEW MATRIX
-// ========================================
-void Camera::updateViewMatrix()
+Camera::Camera(GLFWwindow* w, float fov, float near, float far)
 {
-    // Recalculate view matrix - internal responsibility of the camera
-    viewMatrix = glm::lookAt(position, position + front, up);
+	this->window = w;
+	this->fov = fov;
+	this->near = near;
+	this->far = far;
 }
 
-// ========================================
-// UPDATE PROJECTION MATRIX
-// ========================================
-void Camera::updateProjectionMatrix()
+void Camera::calculateViewMatrix()
 {
-    projectionMatrix = glm::perspective(
-        glm::radians(fov),
-        aspectRatio, // pomer stran ( width / with )
-        nearPlane,
-        farPlane
-    );
+	this->viewMatrix = glm::lookAt(cameraPosition, cameraPosition + target, up);
 }
 
-// ========================================
-// SET ASPECT RATIO (s odloženou notifikáciou)
-// ========================================
-void Camera::setAspectRatio(float aspect)
+void Camera::calculateProjectionMatrix()
 {
-    aspectRatio = aspect;
-    updateProjectionMatrix();
-    needsNotification = true;  // ← Odložená notifikácia!
-
-    printf("Camera: Aspect ratio changed to %.2f (notification pending)\n", aspect);
+	this->projectionMatrix = glm::perspective(glm::radians(fov), ratio, near, far);
 }
 
-// ========================================
-// SET FOV (s odloženou notifikáciou)
-// ========================================
-void Camera::setFOV(float newFov)
+void Camera::checkChanges()
 {
-    fov = newFov;
-    updateProjectionMatrix();   // prepočíta projekčnú maticu
-    needsNotification = true;
+	if (checkViewMatrixChanges())
+	{
+		notify(VIEWMATRIX);
+	}
 
-    printf("Camera: FOV changed to %.1f° (notification pending)\n", fov);
+	if (checkProjectionMatrixChanges())
+	{
+		notify(PROJECTIONMATRIX);
+	}
 }
 
-// ========================================
-// SET PROJECTION PLANES
-// ========================================
-void Camera::setProjectionPlanes(float near, float far)
+void Camera::controls()
 {
-    nearPlane = near;
-    farPlane = far;
-    updateProjectionMatrix();
-    needsNotification = true;
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		cameraPosition += speed * target;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		cameraPosition -= speed * target;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		cameraPosition -= speed * glm::normalize(glm::cross(target, up));
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		cameraPosition += speed * glm::normalize(glm::cross(target, up));
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		cameraPosition += speed * up;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+	{
+		cameraPosition -= speed * up;
+	}
+
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+	{
+		if (firstClick)
+		{
+			startX = currentWidth / 2;
+			startY = currentHeight / 2;
+			glfwSetCursorPos(window, startX, startY);
+			firstClick = false;
+		}
+
+		glfwGetCursorPos(window, &endX, &endY);
+
+		offsetX = endX - startX;
+		offsetY = startY - endY;
+
+		startX = endX;
+		startY = endY;
+
+		offsetX *= sensitivity;
+		offsetY *= sensitivity;
+
+		alpha += offsetX;
+		beta += offsetY;
+
+		if (beta > 89.9f)
+			beta = 89.9f;
+		if (beta < -89.9f)
+			beta = -89.9f;
+
+		target.x = sin(glm::radians(alpha)) * cos(glm::radians(beta));
+		target.y = sin(glm::radians(beta));
+		target.z = cos(glm::radians(alpha)) * -cos(glm::radians(beta));
+	}
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE)
+	{
+		firstClick = true;
+	}
 }
 
-// ========================================
-// FLUSH PENDING NOTIFICATIONS
-// ========================================
-void Camera::flushPendingNotifications()
+glm::mat4 Camera::getViewMatrix()
 {
-    if (!needsNotification) return;  // Early exit
-
-    notifyAll();
-    needsNotification = false;
-    printf("Camera: Observers notified ✓\n");
+	return this->viewMatrix;
 }
 
-// ========================================
-// MOVEMENT METHODS
-// ========================================
-void Camera::moveForward(float deltaTime)
+glm::mat4 Camera::getProjectionMatrix()
 {
-    if (!isMovable) return;  // Statická kamera sa neposunie
-
-    glm::vec3 forward = glm::normalize(glm::vec3(front.x, 0.0f, front.z));
-    position += forward * movementSpeed * deltaTime;
-    position.y = 0.3f;  // Ostáva nad zemou
-
-    updateViewMatrix();
-    notifyAll();
+	return this->projectionMatrix;
 }
 
-void Camera::moveBackward(float deltaTime)
+glm::vec3 Camera::getCameraPosition()
 {
-    if (!isMovable) return;
-
-    glm::vec3 forward = glm::normalize(glm::vec3(front.x, 0.0f, front.z));
-    position -= forward * movementSpeed * deltaTime;
-    position.y = 0.3f;
-
-    updateViewMatrix();
-    notifyAll();
+	return this->cameraPosition;
 }
 
-void Camera::moveLeft(float deltaTime)
+glm::vec3 Camera::getCameraDirection()
 {
-    if (!isMovable) return;
-
-    glm::vec3 forward = glm::normalize(glm::vec3(front.x, 0.0f, front.z));
-    glm::vec3 rightVec = glm::normalize(glm::cross(forward, worldUp));
-    position -= rightVec * movementSpeed * deltaTime;
-    position.y = 0.3f;
-
-    updateViewMatrix();
-    notifyAll();
+	return this->target;
 }
 
-void Camera::moveRight(float deltaTime)
-{
-    if (!isMovable) return;
-
-    glm::vec3 forward = glm::normalize(glm::vec3(front.x, 0.0f, front.z));
-    glm::vec3 rightVec = glm::normalize(glm::cross(forward, worldUp));
-    position += rightVec * movementSpeed * deltaTime;
-    position.y = 0.3f;
-
-    updateViewMatrix();
-    notifyAll();
-}
-
-// ========================================
-// SET POSITION
-// ========================================
-void Camera::setPosition(const glm::vec3& pos)
-{
-    position = pos;
-    updateViewMatrix();
-    notifyAll();
-}
-
-// ========================================
-// LOOK AT
-// ========================================
-void Camera::lookAt(const glm::vec3& target)
-{
-    glm::vec3 direction = glm::normalize(target - position);
-
-    // Vypočítaj yaw a pitch z direction vektora
-    pitch = glm::degrees(asin(direction.y));
-    yaw = glm::degrees(atan2(direction.z, direction.x));
-
-    updateCameraVectors();
-    updateViewMatrix();
-    notifyAll();
-}
+//int Camera::getWidth()
+//{
+//	return this->currentWidth;
+//}
+//
+//int Camera::getHeight()
+//{
+//	return this->currentHeight;
+//}

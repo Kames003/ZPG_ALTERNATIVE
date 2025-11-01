@@ -1,28 +1,15 @@
 #pragma once
-#ifndef SHADER_H
-#define SHADER_H
 
 #include <GL/glew.h>
-
-// shader = jednotlivý shader ( vertex alebo fragment )
-
-class IShaderLoader;
+#include <GLFW/glfw3.h>
+#include "FileReader.h"
 
 class Shader
 {
-private:
-    GLuint shaderID; // privátne bez gettera
-    GLenum shaderType;
-
-
+protected:
+    GLuint ID;
+    const char* shaderCode;
 public:
-    Shader(GLenum type, IShaderLoader* loader);
-    ~Shader();
-
-    void attachShader(GLuint programID) const; // wrapper
-
-    GLenum getType() const; // getter def., len typ, nie ID
-
+    virtual GLuint compileShader(const char* filename) = 0;
 };
 
-#endif

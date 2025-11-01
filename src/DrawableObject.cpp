@@ -1,50 +1,83 @@
 #include "DrawableObject.h"
-#include "Model.h"
-#include "TransformComponent.h"
-#include "ShaderProgram.h"
 
-// Pôvodný konštruktor (bez farby)
-DrawableObject::DrawableObject(Model* m, TransformComponent* t, ShaderProgram* sp)
-    : model(m), transformation(t), shaderProgram(sp),
-      objectColor(1.0f, 1.0f, 1.0f), hasColor(false)
-{ }
-
-// Konštruktor (s farbou)
-DrawableObject::DrawableObject(Model* m, TransformComponent* t, ShaderProgram* sp, glm::vec3 color)
-    : model(m), transformation(t), shaderProgram(sp),
-      objectColor(color), hasColor(true)
-{ }
-
-void DrawableObject::draw()
+DrawableObject::DrawableObject(AbstractModel* am, ShaderProgram* sp)
 {
-    shaderProgram->use();
-    shaderProgram->setUniform("modelMatrix", transformation->getMatrix());
+    // Uložíme si referencie
+    abstractModel = am;
+    shaderProgram = sp;
 
-    // Pošli farbu pri KAŽDOM draw()
-    if (hasColor) {
-        shaderProgram->setUniform("objectColor", objectColor);
-    }
+    // Vytvoríme nový transformation composite
+    tc = new TransformationComposite();
 
-    model->draw();
+    // Defaultná farba
+    color = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
-void DrawableObject::setObjectColor(const glm::vec3& color)
+void DrawableObject::drawModel()
 {
-    objectColor = color;
-    hasColor = true;
+    // ✅ KRITICKÉ: Aktivuj shader PRED updatom uniformov
+    shaderProgram->activateShaderProgram();
+
+    // ✅ KRITICKÉ: Nastav farbu objektu
+    shaderProgram->updateUniform("objectColor", color);
+
+    // ✅ KRITICKÉ: Nastav model matrix
+    shaderProgram->updateUniform("modelMatrix",
+        glm::value_ptr(tc->getResultMatrix()));
+
+    // Vykreslí model (zavolá glDrawArrays/glDrawElements)
+    abstractModel->draw();
+
+    // Deaktivuj shader program
+    shaderProgram->deactivateShaderProgram();
 }
 
-Model* DrawableObject::getModel()
+void DrawableObject::rotate(float angle, glm::vec3 axis)
 {
-    return model;
+    // Pridáme rotáciu do transformation composite
+    tc->addTransformation(new TransformationRotate(angle, axis));
 }
 
-TransformComponent* DrawableObject::getTransformation()
+void DrawableObject::scale(glm::vec3 scale)
 {
-    return transformation;
+    // Pridáme škálovanie do transformation composite
+    tc->addTransformation(new TransformationScale(scale));
 }
 
-ShaderProgram* DrawableObject::getShaderProgram()
+void DrawableObject::translate(glm::vec3 translate)
 {
-    return shaderProgram;
+    // Pridáme posunutie do transformation composite
+    tc->addTransformation(new TransformationTranslate(translate));
+}
+
+void DrawableObject::calculateModelMatrix()
+{
+    // Vypočítame model matrix z všetkých transformácií
+    // POZOR: Táto metóda vyprázdni transformation composite!
+    tc->calculateTransformations();
+}
+
+void DrawableObject::updateModelMatrix()
+{
+    // Aktivujeme shader
+    shaderProgram->activateShaderProgram();
+
+    // Pošleme model matrix do shadera
+    shaderProgram->updateUniform("modelMatrix",
+        glm::value_ptr(tc->getResultMatrix()));
+
+    // Deaktivujeme shader
+    shaderProgram->deactivateShaderProgram();
+}
+
+void DrawableObject::updateTexture(const char* variable, int texture)
+{
+    // Aktivujeme shader
+    shaderProgram->activateShaderProgram();
+
+    // Pošleme textúru do shadera
+    shaderProgram->updateUniform(variable, texture);
+
+    // Deaktivujeme shader
+    shaderProgram->deactivateShaderProgram();
 }

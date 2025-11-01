@@ -1,5 +1,11 @@
 // Kompletná 3D lavička s všetkými stranami
-    float benchVertices[] = {
+
+#pragma once
+
+
+
+const float benchVertices[] = {
+
     // ====================================================================
     // 1. SEDADLO (Seat) - Kompletná kocka (6 strán * 6 vertehov/strana = 36 vertehov)
     // ====================================================================

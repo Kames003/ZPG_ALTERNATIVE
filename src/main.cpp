@@ -3,15 +3,8 @@
 
 int main()
 {
-    Application* app = new Application();
-    
-    app->initialization();
-    app->createShaders();
-    app->createModels();
-    app->createScenes();
-    app->setupSceneLights();
-    app->run();
-    
-    delete app;
-    return EXIT_SUCCESS;
+    Application* a = new Application();
+    a->initScene();
+    a->run();
+
 }

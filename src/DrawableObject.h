@@ -1,44 +1,52 @@
 #pragma once
-#ifndef DRAWABLEOBJECT_H
-#define DRAWABLEOBJECT_H
 
-#include <glm/glm.hpp>  // ← MUSÍ BYŤ!
+#include "AbstractModel.h"
+#include "ShaderProgram.h"
+#include "TransformationComposite.h"
+#include "TransformationRotate.h"
+#include "TransformationScale.h"
+#include "TransformationTranslate.h"
+#include <vector>
 
-class Model;
-class TransformComponent;
-class ShaderProgram;
-
+/**
+ * @brief Vykresľovateľný objekt v scéne
+ *
+ * DrawableObject spája:
+ * - AbstractModel (geometria)
+ * - ShaderProgram (ako vykresliť)
+ * - TransformationComposite (pozícia, rotácia, mierka)
+ * - Farba (objectColor uniform)
+ */
 class DrawableObject
 {
 private:
-    Model* model;
-    TransformComponent* transformation;
-    ShaderProgram* shaderProgram;
+	AbstractModel* abstractModel;
+	ShaderProgram* shaderProgram;
+	TransformationComposite* tc;
 
-    // ← NOVÉ: Farba objektu
-    glm::vec3 objectColor;
-    bool hasColor;
+	// ✅ PRIDANÉ: Farba objektu
+	glm::vec3 color;
 
 public:
-    // konštruktor (bez farby)
-    DrawableObject(Model* m, TransformComponent* t, ShaderProgram* sp);
+	bool visible = true;
 
-    // Konštruktor (s farbou)
-    DrawableObject(Model* m, TransformComponent* t, ShaderProgram* sp, glm::vec3 color);
+	DrawableObject(AbstractModel* am, ShaderProgram* sp);
 
-    void draw();
+	void drawModel();
 
-    // Getters
-    Model* getModel();
-    TransformComponent* getTransformation();
-    ShaderProgram* getShaderProgram();
+	void rotate(float angle, glm::vec3 axis);
+	void scale(glm::vec3 scale);
+	void translate(glm::vec3 translate);
 
-    // ← NOVÝ: Setter pre farbu
-    void setObjectColor(const glm::vec3& color);
+	void calculateModelMatrix();
+	void updateModelMatrix();
+	void updateTexture(const char* variable, int texture);
 
-    void setShaderProgram(ShaderProgram* sp) {
-        shaderProgram = sp;
-    }
+	// ✅ NOVÉ METÓDY
+	void setColor(glm::vec3 c) { color = c; }
+	glm::vec3 getColor() { return color; }
+
+	TransformationComposite* getTransformationComposite() { return tc; }
+	AbstractModel* getModel() { return abstractModel; }
+	ShaderProgram* getShaderProgram() { return shaderProgram; }
 };
-
-#endif
