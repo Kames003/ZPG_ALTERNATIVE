@@ -203,6 +203,8 @@ set(SOURCES
         src/Firefly.h
         src/Scene4_BackfaceTest.cpp
         src/Scene4_BackfaceTest.h
+        src/Scene5_LoadedModelTest.cpp
+        src/Scene5_LoadedModelTest.h
 )
 
 # ========================================

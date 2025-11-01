@@ -29,14 +29,18 @@ ShaderProgram* ShaderProgramManager::getShaderProgram(int index)
 	return this->shaderPrograms[index];
 }
 
+// ========================================
+// ✅ OPRAVENÉ: Všetky update metódy
+// ========================================
+
 void ShaderProgramManager::updateAmbient()
 {
 	// Pošli ambient hodnotu do všetkých shaderov
 	for (ShaderProgram* s : shaderPrograms)
 	{
-		s->activateShaderProgram();
+		s->activateShaderProgram();  // ✅ Aktivuj
 		s->updateUniform("ambient", lm->ambient);
-		s->deactivateShaderProgram();
+		s->deactivateShaderProgram();  // ✅ Deaktivuj
 	}
 }
 
@@ -44,7 +48,7 @@ void ShaderProgramManager::updatePointLights()
 {
 	for (ShaderProgram* s : shaderPrograms)
 	{
-		s->activateShaderProgram();
+		s->activateShaderProgram();  // ✅ Aktivuj RAZ na začiatku
 
 		int size = lm->getPointLightsSize();
 		s->updateUniform("numberOfPointLights", size);
@@ -54,7 +58,7 @@ void ShaderProgramManager::updatePointLights()
 		{
 			PointLight* light = lm->getPointLight(i);
 			std::string base = "pointlights[" + std::to_string(i) + "].";
-			
+
 			s->updateUniform((base + "color").c_str(), light->color);
 			s->updateUniform((base + "position").c_str(), light->position);
 			s->updateUniform((base + "constant").c_str(), light->constant);
@@ -62,7 +66,7 @@ void ShaderProgramManager::updatePointLights()
 			s->updateUniform((base + "quadratic").c_str(), light->quadratic);
 		}
 
-		s->deactivateShaderProgram();
+		s->deactivateShaderProgram();  // ✅ Deaktivuj RAZ na konci
 	}
 }
 
@@ -70,7 +74,7 @@ void ShaderProgramManager::updateSpotlights()
 {
 	for (ShaderProgram* s : shaderPrograms)
 	{
-		s->activateShaderProgram();
+		s->activateShaderProgram();  // ✅ Aktivuj
 
 		int size = lm->getSpotlightsSize();
 		s->updateUniform("numberOfSpotlights", size);
@@ -79,7 +83,7 @@ void ShaderProgramManager::updateSpotlights()
 		{
 			Spotlight* light = lm->getSpotlight(i);
 			std::string base = "spotlights[" + std::to_string(i) + "].";
-			
+
 			s->updateUniform((base + "position").c_str(), light->position);
 			s->updateUniform((base + "direction").c_str(), light->direction);
 			s->updateUniform((base + "color").c_str(), light->color);
@@ -89,7 +93,7 @@ void ShaderProgramManager::updateSpotlights()
 			s->updateUniform((base + "angle").c_str(), light->angle);
 		}
 
-		s->deactivateShaderProgram();
+		s->deactivateShaderProgram();  // ✅ Deaktivuj
 	}
 }
 
@@ -102,26 +106,26 @@ void ShaderProgramManager::updateSpotlightCamera()
 
 		for (ShaderProgram* s : shaderPrograms)
 		{
-			s->activateShaderProgram();
+			s->activateShaderProgram();  // ✅ Aktivuj
 
-			s->updateUniform("spotlightCamera_bool", true);  // ✅ Zapni
+			s->updateUniform("spotlightCamera_bool", true);
 			s->updateUniform("spotlightCamera.color", light->color);
 			s->updateUniform("spotlightCamera.constant", light->constant);
 			s->updateUniform("spotlightCamera.linear", light->linear);
 			s->updateUniform("spotlightCamera.quadratic", light->quadratic);
 			s->updateUniform("spotlightCamera.angle", light->angle);
 
-			s->deactivateShaderProgram();
+			s->deactivateShaderProgram();  // ✅ Deaktivuj
 		}
 	}
 	else
 	{
-		// ✅ PRIDANÉ: Baterka je VYPNUTÁ - pošli false do shadera
+		// ✅ Baterka je VYPNUTÁ - pošli false
 		for (ShaderProgram* s : shaderPrograms)
 		{
-			s->activateShaderProgram();
-			s->updateUniform("spotlightCamera_bool", false);  // ✅ Vypni!
-			s->deactivateShaderProgram();
+			s->activateShaderProgram();  // ✅ Aktivuj
+			s->updateUniform("spotlightCamera_bool", false);
+			s->deactivateShaderProgram();  // ✅ Deaktivuj
 		}
 	}
 }
@@ -131,16 +135,16 @@ void ShaderProgramManager::updateDirectionalLight()
 	if (lm->getDirectionalLight())
 	{
 		DirectionalLight* light = lm->getDirectionalLight();
-		
+
 		for (ShaderProgram* s : shaderPrograms)
 		{
-			s->activateShaderProgram();
+			s->activateShaderProgram();  // ✅ Aktivuj
 
 			s->updateUniform("directional_bool", true);
 			s->updateUniform("directional.color", light->color);
 			s->updateUniform("directional.direction", light->direction);
 
-			s->deactivateShaderProgram();
+			s->deactivateShaderProgram();  // ✅ Deaktivuj
 		}
 	}
 }

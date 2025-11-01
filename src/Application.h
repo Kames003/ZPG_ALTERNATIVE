@@ -15,6 +15,7 @@
 #include "SceneManager.h"
 
 // ✅ Include konkrétnych scén
+#include "Scene5_LoadedModelTest.h"
 #include "MinimalForestScene.h"
 #include "Scene1_PhongTest.h"
 #include "Scene2_SolarSystem.h"

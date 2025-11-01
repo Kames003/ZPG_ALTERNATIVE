@@ -45,6 +45,11 @@ void ShaderProgram::deactivateShaderProgram()
 	glUseProgram(0);
 }
 
+// ========================================
+// ✅ VŠECHNY updateUniform metódy už NEVOLAJÍ activate/deactivate
+// Volá sa to zvonku v drawModel() alebo update()
+// ========================================
+
 void ShaderProgram::updateUniform(const char* variable, const GLfloat* value)
 {
 	GLint location = glGetUniformLocation(ID, variable);
@@ -91,8 +96,6 @@ void ShaderProgram::updateUniform(const char* variable, bool value)
 	updateUniform(variable, value ? 1 : 0);
 }
 
-
-
 void ShaderProgram::updateUniform(const char* variable, glm::vec4 value)
 {
 	GLint location = glGetUniformLocation(ID, variable);
@@ -102,25 +105,27 @@ void ShaderProgram::updateUniform(const char* variable, glm::vec4 value)
 	}
 }
 
-
+// ========================================
+// ✅ OPRAVENÉ: Observer pattern update
+// ========================================
 void ShaderProgram::update(int message)
 {
 	if (message == VIEWMATRIX)
 	{
-		activateShaderProgram();
+		activateShaderProgram();  // ✅ Aktivuj PRED updatemi
 		updateUniform("viewMatrix", glm::value_ptr(camera->getViewMatrix()));
 		updateUniform("viewPosition", camera->getCameraPosition());
 		updateUniform("cameraDirection", camera->getCameraDirection());
-		deactivateShaderProgram();
+		deactivateShaderProgram();  // ✅ Deaktivuj PO updatech
 
 		return;
 	}
 
 	if (message == PROJECTIONMATRIX)
 	{
-		activateShaderProgram();
+		activateShaderProgram();  // ✅ Aktivuj PRED updatemi
 		updateUniform("projectionMatrix", glm::value_ptr(camera->getProjectionMatrix()));
-		deactivateShaderProgram();
+		deactivateShaderProgram();  // ✅ Deaktivuj PO updatech
 
 		return;
 	}

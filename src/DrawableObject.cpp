@@ -21,22 +21,23 @@ DrawableObject::DrawableObject(AbstractModel* am, ShaderProgram* sp, glm::vec3 c
     color = c;  // Nastav farbu z parametra
 }
 
+// ========================================
+// ✅ SPRÁVNE: glUseProgram PRED glUniform a glDrawArrays
+// ========================================
 void DrawableObject::drawModel()
 {
-    // ✅ KRITICKÉ: Aktivuj shader PRED updatom uniformov
+    // ✅ KROK 1: Aktivuj shader PRED všetkými operáciami
     shaderProgram->activateShaderProgram();
 
-    // ✅ KRITICKÉ: Nastav farbu objektu
+    // ✅ KROK 2: Nastav uniformy (volá glUniform* interně)
     shaderProgram->updateUniform("objectColor", color);
-
-    // ✅ KRITICKÉ: Nastav model matrix
     shaderProgram->updateUniform("modelMatrix",
         glm::value_ptr(tc->getResultMatrix()));
 
-    // Vykreslí model (zavolá glDrawArrays/glDrawElements)
+    // ✅ KROK 3: Vykresli model (volá glDrawArrays)
     abstractModel->draw();
 
-    // Deaktivuj shader program
+    // ✅ KROK 4: Deaktivuj shader PO všetkých operáciách
     shaderProgram->deactivateShaderProgram();
 }
 
@@ -65,27 +66,33 @@ void DrawableObject::calculateModelMatrix()
     tc->calculateTransformations();
 }
 
+// ========================================
+// ✅ SPRÁVNE: glUseProgram okolo glUniform
+// ========================================
 void DrawableObject::updateModelMatrix()
 {
-    // Aktivujeme shader
+    // ✅ Aktivujeme shader
     shaderProgram->activateShaderProgram();
 
-    // Pošleme model matrix do shadera
+    // ✅ Pošleme model matrix do shadera
     shaderProgram->updateUniform("modelMatrix",
         glm::value_ptr(tc->getResultMatrix()));
 
-    // Deaktivujeme shader
+    // ✅ Deaktivujeme shader
     shaderProgram->deactivateShaderProgram();
 }
 
+// ========================================
+// ✅ SPRÁVNE: glUseProgram okolo glUniform
+// ========================================
 void DrawableObject::updateTexture(const char* variable, int texture)
 {
-    // Aktivujeme shader
+    // ✅ Aktivujeme shader
     shaderProgram->activateShaderProgram();
 
-    // Pošleme textúru do shadera
+    // ✅ Pošleme textúru do shadera
     shaderProgram->updateUniform(variable, texture);
 
-    // Deaktivujeme shader
+    // ✅ Deaktivujeme shader
     shaderProgram->deactivateShaderProgram();
 }

@@ -90,6 +90,8 @@ void Application::initScene()
     sceneManager->registerScene(new Scene2_SolarSystem(), "3. Minimal Forest");
     sceneManager->registerScene(new Scene3_LightingDemo(), "4. Minimal Forest");
     sceneManager->registerScene(new Scene4_BackfaceTest(), "5. Backface Test");
+    sceneManager->registerScene(new Scene5_LoadedModelTest(), "6. Loaded Model Test");
+
 
    // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");
     // sceneManager->registerScene(new Scene2_FourSpheres(), "3. Four Spheres");
