@@ -5,6 +5,11 @@ in vec3 worldNormal;
 
 out vec4 outColor;
 
+// ========================================
+// LIGHT STRUCTURES
+// ========================================
+#define MAX_POINT_LIGHTS 16  // ✅ Zvýšené z 3 na 16
+
 struct PointLight {
     vec3 color;
     vec3 position;
@@ -36,15 +41,17 @@ struct DirectionalLight {
     vec3 direction;
 };
 
+// ========================================
+// UNIFORMS
+// ========================================
 uniform vec3 viewPosition;
 uniform vec3 cameraDirection;
 uniform vec3 objectColor;
 
-
 uniform float ambient;
 
 uniform int numberOfPointLights;
-uniform PointLight pointlights[3];
+uniform PointLight pointlights[MAX_POINT_LIGHTS];  // ✅ Používa MAX_POINT_LIGHTS
 
 uniform int numberOfSpotlights;
 uniform Spotlight spotlights[3];
@@ -54,6 +61,10 @@ uniform SpotlightCamera spotlightCamera;
 
 uniform bool directional_bool = false;
 uniform DirectionalLight directional;
+
+// ========================================
+// HELPER FUNCTIONS
+// ========================================
 
 float calculateAttenuation(float distance, float constant, float linear, float quadratic)
 {
@@ -67,13 +78,17 @@ float calculateDiffuse(vec3 lightVector)
 
 float calculateSpecular(vec3 lightVector, vec3 cameraVector)
 {
-    if ( dot(lightVector, worldNormal) >= 0 )
+    if ( dot(lightVector, worldNormal) >= 0.0 )
     {
-        return pow(max(dot(reflect(-lightVector, worldNormal), cameraVector), 0.0), 16);
+        return pow(max(dot(reflect(-lightVector, worldNormal), cameraVector), 0.0), 16.0);
     } else {
-        return 0;
+        return 0.0;
     }
 }
+
+// ========================================
+// LIGHT CALCULATIONS
+// ========================================
 
 vec4 calcPointLight(PointLight l, vec3 cameraVector)
 {
@@ -90,7 +105,7 @@ vec4 calcPointLight(PointLight l, vec3 cameraVector)
 
 vec4 calcSpotlightCamera(SpotlightCamera s, vec3 cameraVector)
 {
-    vec3 lightPosition = cameraPosition;
+    vec3 lightPosition = viewPosition;
     vec3 lightVector = normalize ( lightPosition - worldFragmentPosition );
 
     float theta = dot(lightVector, normalize(-cameraDirection));
@@ -99,11 +114,12 @@ vec4 calcSpotlightCamera(SpotlightCamera s, vec3 cameraVector)
     {
         float diffuse = calculateDiffuse(lightVector);
         float specular = calculateSpecular(lightVector, cameraVector);
-        float distance = length(cameraPosition - worldFragmentPosition);
+        float distance = length(viewPosition - worldFragmentPosition);
         float attenuation = calculateAttenuation(distance, s.constant, s.linear, s.quadratic);
 
         return attenuation * ( diffuse * vec4(s.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0) );
     }
+    return vec4(0.0);
 }
 
 vec4 calcSpotlight(Spotlight s, vec3 cameraVector)
@@ -122,6 +138,7 @@ vec4 calcSpotlight(Spotlight s, vec3 cameraVector)
 
         return attenuation * ( diffuse * vec4(s.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0) );
     }
+    return vec4(0.0);
 }
 
 vec4 calcDirectionalLight(DirectionalLight d, vec3 cameraVector)
@@ -133,20 +150,23 @@ vec4 calcDirectionalLight(DirectionalLight d, vec3 cameraVector)
     return diffuse * vec4(d.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0);
 }
 
-void main(){
-    vec3 cameraVector = normalize ( cameraPosition - worldFragmentPosition );
+// ========================================
+// MAIN
+// ========================================
 
-    vec4 point = vec4(0.0, 0.0f, 0.0f, 1.0f);
-    vec4 spot = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-    vec4 spotlightCam = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-    vec4 directionalLight = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+void main(){
+    vec3 cameraVector = normalize ( viewPosition - worldFragmentPosition );
+
+    vec4 point = vec4(0.0, 0.0, 0.0, 1.0);
+    vec4 spot = vec4(0.0, 0.0, 0.0, 1.0);
+    vec4 spotlightCam = vec4(0.0, 0.0, 0.0, 1.0);
+    vec4 directionalLight = vec4(0.0, 0.0, 0.0, 1.0);
 
     for(int i = 0; i < numberOfPointLights; i++)
     point += calcPointLight(pointlights[i], cameraVector);
 
     for(int i = 0; i < numberOfSpotlights; i++)
     spot += calcSpotlight(spotlights[i], cameraVector);
-
 
     if (spotlightCamera_bool)
     {
@@ -158,5 +178,5 @@ void main(){
         directionalLight = calcDirectionalLight(directional, cameraVector);
     }
 
-    outColor = vec4(0.385, 0.647, 0.812, 1.0) * ( directionalLight + point + spot + spotlightCam + ambient );
+    outColor = vec4(objectColor, 1.0) * ( directionalLight + point + spot + spotlightCam + ambient );
 }

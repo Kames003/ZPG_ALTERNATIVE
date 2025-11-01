@@ -40,6 +40,7 @@ struct DirectionalLight {
 
 uniform vec3 cameraPosition;
 uniform vec3 cameraDirection;
+uniform vec3 objectColor;
 
 uniform float ambient;
 
@@ -149,5 +150,5 @@ void main() {
         directionalLight = calcDirectionalLight(directional);
     }
 
-    outColor = vec4(0.385, 0.647, 0.812, 1.0) * ( directionalLight + point + spot + spotlightCam + ambient );
+    outColor = vec4(objectColor, 1.0) * ( directionalLight + point + spot + spotlightCam + ambient );
 }

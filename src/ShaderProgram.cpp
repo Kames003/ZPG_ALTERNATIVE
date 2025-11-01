@@ -91,6 +91,18 @@ void ShaderProgram::updateUniform(const char* variable, bool value)
 	updateUniform(variable, value ? 1 : 0);
 }
 
+
+
+void ShaderProgram::updateUniform(const char* variable, glm::vec4 value)
+{
+	GLint location = glGetUniformLocation(ID, variable);
+	if (location >= 0)
+	{
+		glUniform4f(location, value.x, value.y, value.z, value.w);
+	}
+}
+
+
 void ShaderProgram::update(int message)
 {
 	if (message == VIEWMATRIX)

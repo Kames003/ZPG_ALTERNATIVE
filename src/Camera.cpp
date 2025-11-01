@@ -76,6 +76,9 @@ void Camera::controls()
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		cameraPosition += speed * target;
+		printf("Camera position: (%.2f, %.2f, %.2f) [this=%p]\n",
+			  cameraPosition.x, cameraPosition.y, cameraPosition.z,
+			  (void*)this);  // Adresa kamery v pamäti!
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -160,6 +163,15 @@ glm::vec3 Camera::getCameraPosition()
 glm::vec3 Camera::getCameraDirection()
 {
 	return this->target;
+}
+
+// taks cviko 6
+
+void Camera::setFOV(float newFOV)
+{
+	this->fov = newFOV;
+	calculateProjectionMatrix();  // Prepočítaj projection matrix
+	notify(PROJECTIONMATRIX);     // Notifikuj observerov (shadery)
 }
 
 //int Camera::getWidth()

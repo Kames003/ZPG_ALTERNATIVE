@@ -191,6 +191,18 @@ set(SOURCES
         src/MinimalForestScene.cpp
         src/SceneManager.cpp
         src/SceneManager.h
+        src/TriangleModel.cpp
+        src/TriangleModel.h
+        src/Scene1_PhongTest.cpp
+        src/Scene1_PhongTest.h
+        src/Scene2_SolarSystem.cpp
+        src/Scene2_SolarSystem.h
+        src/Scene3_LightingDemo.cpp
+        src/Scene3_LightingDemo.h
+        src/Firefly.cpp
+        src/Firefly.h
+        src/Scene4_BackfaceTest.cpp
+        src/Scene4_BackfaceTest.h
 )
 
 # ========================================

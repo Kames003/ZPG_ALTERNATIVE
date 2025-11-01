@@ -5,7 +5,7 @@ layout(location=0) in vec3 v_position;
 layout(location=1) in vec3 v_normal;
 
 // OUTPUT do fragment shadera
-out vec4 worldPosition;
+out vec3 worldFragmentPosition;
 out vec3 worldNormal;
 
 // UNIFORMS
@@ -15,11 +15,12 @@ uniform mat4 projectionMatrix;
 
 void main() {
     // Vypočítaj world pozíciu
-    worldPosition = modelMatrix * vec4(v_position, 1.0);
+    vec4 worldPos = modelMatrix * vec4(v_position, 1.0);
+    worldFragmentPosition = worldPos.xyz / worldPos.w;
 
-    // Transformuj normálu do world space
+    // ✅ NORMÁLOVÁ MATRICA - správná transformace normál (bod 5 zadání)
     worldNormal = normalize(mat3(transpose(inverse(modelMatrix))) * v_normal);
 
     // Finálna pozícia na obrazovke
-    gl_Position = projectionMatrix * viewMatrix * worldPosition;
+    gl_Position = projectionMatrix * viewMatrix * worldPos;
 }

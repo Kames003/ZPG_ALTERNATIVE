@@ -13,6 +13,14 @@ DrawableObject::DrawableObject(AbstractModel* am, ShaderProgram* sp)
     color = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
+DrawableObject::DrawableObject(AbstractModel* am, ShaderProgram* sp, glm::vec3 c)
+{
+    abstractModel = am;
+    shaderProgram = sp;
+    tc = new TransformationComposite();
+    color = c;  // Nastav farbu z parametra
+}
+
 void DrawableObject::drawModel()
 {
     // ✅ KRITICKÉ: Aktivuj shader PRED updatom uniformov

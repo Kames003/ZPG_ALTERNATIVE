@@ -75,5 +75,10 @@ public:
     glm::vec3 getCameraDirection();
     int getWidth();
     int getHeight();
+
+    void setFOV(float newFOV); // for homework
+    float getFOV() const { return fov; }
+
+
 };
 

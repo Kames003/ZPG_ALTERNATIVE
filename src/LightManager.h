@@ -15,7 +15,7 @@ class LightManager
 private:
     std::vector<PointLight*> pointlights;       // Všetky bodové svetlá
     std::vector<Spotlight*> spotlights;         // Všetky reflektory
-    SpotlightCamera* spotlightCamera;           // Baterka (max 1)
+    SpotlightCamera* spotlightCamera = nullptr;           // Baterka (max 1)
     DirectionalLight* directional;              // Smerové svetlo (max 1)
 
 public:
@@ -26,6 +26,12 @@ public:
     void addSpotlight(Spotlight* l);
     void addSpotlightCamera(SpotlightCamera* l);
     void addDirectionalLight(DirectionalLight* l);
+
+    void removeSpotlightCamera()
+    {
+        spotlightCamera = nullptr;
+    }
+
 
     // Získanie počtu svetiel
     int getPointLightsSize();

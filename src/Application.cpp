@@ -1,130 +1,140 @@
 #include "Application.h"
 
+// ========================================
+// TIETO METÓDY ZOSTÁVAJÚ BEZ ZMENY
+// ========================================
+
 void Application::initGLFW()
 {
-	printf("\n=== Initializing GLFW ===\n");
+    printf("\n=== Initializing GLFW ===\n");
 
-	// Inicializácia GLFW
-	if (!glfwInit()) {
-		fprintf(stderr, "ERROR: Could not start GLFW3\n");
-		exit(EXIT_FAILURE);
-	}
+    if (!glfwInit()) {
+        fprintf(stderr, "ERROR: Could not start GLFW3\n");
+        exit(EXIT_FAILURE);
+    }
 
-	// Nastavenie verzie OpenGL (3.3 Core Profile)
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	printf("  GLFW initialized successfully\n");
+    printf("  GLFW initialized successfully\n");
 }
 
 void Application::initWindow(int width, int height, const char* name)
 {
-	printf("\n=== Creating Window ===\n");
+    printf("\n=== Creating Window ===\n");
 
-	// Vytvorenie okna pomocou Window wrapperu
-	this->window = new Window(width, height, name);
+    this->window = new Window(width, height, name);
+    glfwMakeContextCurrent(this->window->getWindow());
+    glfwSwapInterval(1);
 
-	// Nastavenie okna ako aktívneho OpenGL contextu
-	glfwMakeContextCurrent(this->window->getWindow());
-
-	// Nastavenie V-Sync (synchronizácia s monitorom)
-	glfwSwapInterval(1);
-
-	printf("  Window is now current OpenGL context\n");
-	printf("  V-Sync enabled\n");
+    printf("  Window is now current OpenGL context\n");
+    printf("  V-Sync enabled\n");
 }
 
 void Application::initGLEW()
 {
-	printf("\n=== Initializing GLEW ===\n");
+    printf("\n=== Initializing GLEW ===\n");
 
-	// Povolenie experimentálnych funkcií GLEW
-	glewExperimental = GL_TRUE;
+    glewExperimental = GL_TRUE;
+    GLenum err = glewInit();
+    if (err != GLEW_OK) {
+        fprintf(stderr, "ERROR: GLEW initialization failed: %s\n", glewGetErrorString(err));
+        exit(EXIT_FAILURE);
+    }
 
-	// Inicializácia GLEW
-	GLenum err = glewInit();
-	if (err != GLEW_OK) {
-		fprintf(stderr, "ERROR: GLEW initialization failed: %s\n", glewGetErrorString(err));
-		exit(EXIT_FAILURE);
-	}
-
-	printf("  GLEW initialized successfully\n");
+    printf("  GLEW initialized successfully\n");
 }
 
 void Application::printVersionInfo()
 {
-	printf("\n");
-	printf("╔════════════════════════════════════════════════════════════════╗\n");
-	printf("║                    OPENGL INFORMATION                          ║\n");
-	printf("╠════════════════════════════════════════════════════════════════╣\n");
-	printf("║ OpenGL Version:  %-45s ║\n", glGetString(GL_VERSION));
-	printf("║ GLSL Version:    %-45s ║\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-	printf("║ Vendor:          %-45s ║\n", glGetString(GL_VENDOR));
-	printf("║ Renderer:        %-45s ║\n", glGetString(GL_RENDERER));
+    printf("\n");
+    printf("╔══════════════════════════════════════════════════════════════╗\n");
+    printf("║                    OPENGL INFORMATION                        ║\n");
+    printf("╠══════════════════════════════════════════════════════════════╣\n");
+    printf("║ OpenGL Version:  %-43s ║\n", glGetString(GL_VERSION));
+    printf("║ GLSL Version:    %-43s ║\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+    printf("║ Vendor:          %-43s ║\n", glGetString(GL_VENDOR));
+    printf("║ Renderer:        %-43s ║\n", glGetString(GL_RENDERER));
 
-	int major, minor, revision;
-	glfwGetVersion(&major, &minor, &revision);
-	printf("║ GLFW Version:    %-45s ║\n", (std::string(std::to_string(major) + "." + std::to_string(minor) + "." + std::to_string(revision))).c_str());
-	printf("║ GLEW Version:    %-45s ║\n", glewGetString(GLEW_VERSION));
-	printf("╚════════════════════════════════════════════════════════════════╝\n");
-	printf("\n");
+    int major, minor, revision;
+    glfwGetVersion(&major, &minor, &revision);
+    printf("║ GLFW Version:    %d.%d.%-38d ║\n", major, minor, revision);
+    printf("║ GLEW Version:    %-43s ║\n", glewGetString(GLEW_VERSION));
+    printf("╚══════════════════════════════════════════════════════════════╝\n");
+    printf("\n");
 }
+
+// ========================================
+// ✅ OPRAVENÉ METÓDY
+// ========================================
 
 void Application::initScene()
 {
-	printf("\n");
-	printf("╔════════════════════════════════════════════════════════════════╗\n");
-	printf("║                ZPG - OPENGL PROJECT INITIALIZATION             ║\n");
-	printf("╚════════════════════════════════════════════════════════════════╝\n");
+    printf("\n╔══════════════════════════════════════════════════════════════╗\n");
+    printf("║           ZPG - OPENGL PROJECT INITIALIZATION                ║\n");
+    printf("╚══════════════════════════════════════════════════════════════╝\n");
 
-	// 1. Inicializácia GLFW
-	initGLFW();
+    initGLFW();
+    initWindow(800, 600, "ZPG - OpenGL Project");
+    initGLEW();
+    printVersionInfo();
 
-	// 2. Vytvorenie okna
-	initWindow(800, 600, "ZPG - OpenGL Project");
+    // ✅ Vytvorte SceneManager
+    sceneManager = new SceneManager(this->window->getWindow());
 
-	// 3. Inicializácia GLEW
-	initGLEW();
+    // ✅ ZAREGISTRUJTE VŠETKY SCÉNY
+    sceneManager->registerScene(new MinimalForestScene(), "1. Minimal Forest");
+    sceneManager->registerScene(new Scene1_PhongTest(), "2. Minimal Forest");
+    sceneManager->registerScene(new Scene2_SolarSystem(), "3. Minimal Forest");
+    sceneManager->registerScene(new Scene3_LightingDemo(), "4. Minimal Forest");
+    sceneManager->registerScene(new Scene4_BackfaceTest(), "5. Backface Test");
 
-	// 4. Vypísanie informácií o OpenGL
-	printVersionInfo();
+   // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");
+    // sceneManager->registerScene(new Scene2_FourSpheres(), "3. Four Spheres");
 
-	// 5. Vytvorenie scény
-	printf("=== Creating Scene ===\n");
+    // Nastavíme prvú scénu ako aktívnu
+    sceneManager->setActiveScene(0);
 
-	// ========================================
-	// VÝBER SCÉNY - ODKOMENTUJTE POŽADOVANÚ SCÉNU
-	// ========================================
-
-	// Hlavná scéna (Scene.cpp) - Vaša pôvodná scéna s lesom
-	// as = new Scene();
-
-	// Testovacia scéna so sférami (SphereScene.cpp)
-	as = new MinimalForestScene();
-
-	// Scéna pre cvičenie 7 s animovanými svetluškami
-	// as = new Scene7_ForestWithFireflies();
-
-	printf("  Selected scene: SphereScene\n");
-	printf("  Creating scene...\n");
-
-	// 6. Inicializácia scény
-	as->createScene(this->window->getWindow());
-
-	printf("\n");
-	printf("╔════════════════════════════════════════════════════════════════╗\n");
-	printf("║           INITIALIZATION COMPLETE - READY TO RENDER            ║\n");
-	printf("╚════════════════════════════════════════════════════════════════╝\n");
-	printf("\n");
+    printf("\n╔══════════════════════════════════════════════════════════════╗\n");
+    printf("║           INITIALIZATION COMPLETE - READY TO RENDER          ║\n");
+    printf("╠══════════════════════════════════════════════════════════════╣\n");
+    printf("║ Press H     - Show scene list                                ║\n");
+    printf("║ Press 1-3   - Switch scenes                                  ║\n");
+    printf("║ Press ESC   - Exit                                           ║\n");
+    printf("╚══════════════════════════════════════════════════════════════╝\n\n");
 }
 
 void Application::run()
 {
-	printf("=== Starting Render Loop ===\n\n");
+    printf("=== Starting Main Loop ===\n\n");
 
-	// Spustenie render loop-u scény
-	// Táto metóda sa vráti až keď používateľ zatvorí okno
-	as->renderScene();
+    glEnable(GL_DEPTH_TEST);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    // Hlavný render loop
+    while (!glfwWindowShouldClose(this->window->getWindow()))
+    {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // SceneManager vykreslí aktívnu scénu
+        sceneManager->renderActiveScene();
+
+        glfwSwapBuffers(this->window->getWindow());
+        glfwPollEvents();
+    }
+
+    // ========================================
+    // CLEANUP
+    // ========================================
+    printf("\n=== Shutting down ===\n");
+
+    delete sceneManager;
+
+    glfwDestroyWindow(this->window->getWindow());
+    glfwTerminate();
+
+    printf("✅ Application terminated successfully.\n");
+    exit(EXIT_SUCCESS);
 }

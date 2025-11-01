@@ -100,6 +100,9 @@ public:
 	 */
 	void updateUniform(const char* variable, bool value);
 
+	void updateUniform(const char* variable, glm::vec4 value);
+
+
 	/**
 	 * @brief Observer pattern - reakcia na zmeny v Camera
 	 *

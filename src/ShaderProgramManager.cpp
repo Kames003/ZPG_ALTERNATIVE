@@ -97,19 +97,30 @@ void ShaderProgramManager::updateSpotlightCamera()
 {
 	if (lm->getSpotlightCamera())
 	{
+		// ✅ Baterka je ZAPNUTÁ - pošli dáta
 		SpotlightCamera* light = lm->getSpotlightCamera();
-		
+
 		for (ShaderProgram* s : shaderPrograms)
 		{
 			s->activateShaderProgram();
 
-			s->updateUniform("spotlightCamera_bool", true);
+			s->updateUniform("spotlightCamera_bool", true);  // ✅ Zapni
 			s->updateUniform("spotlightCamera.color", light->color);
 			s->updateUniform("spotlightCamera.constant", light->constant);
 			s->updateUniform("spotlightCamera.linear", light->linear);
 			s->updateUniform("spotlightCamera.quadratic", light->quadratic);
 			s->updateUniform("spotlightCamera.angle", light->angle);
 
+			s->deactivateShaderProgram();
+		}
+	}
+	else
+	{
+		// ✅ PRIDANÉ: Baterka je VYPNUTÁ - pošli false do shadera
+		for (ShaderProgram* s : shaderPrograms)
+		{
+			s->activateShaderProgram();
+			s->updateUniform("spotlightCamera_bool", false);  // ✅ Vypni!
 			s->deactivateShaderProgram();
 		}
 	}

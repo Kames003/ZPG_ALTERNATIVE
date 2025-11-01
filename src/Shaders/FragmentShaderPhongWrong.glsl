@@ -1,6 +1,6 @@
 #version 330
 
-in vec3 worldFragmentPosition;  // ✅ vec3 ako ostatné!
+in vec3 worldFragmentPosition;
 in vec3 worldNormal;
 
 out vec4 outColor;
@@ -36,13 +36,13 @@ struct DirectionalLight {
     vec3 direction;
 };
 
-uniform vec3 viewPosition;       // ✅ PRIDANÉ
-uniform vec3 cameraDirection;    // ✅ PRIDANÉ
-uniform vec3 objectColor;        // ✅ PRIDANÉ
+uniform vec3 viewPosition;
+uniform vec3 cameraDirection;
+uniform vec3 objectColor;
 
-uniform float ambient;           // ✅ PRIDANÉ
+uniform float ambient;
 
-uniform int numberOfPointLights; // ✅ PRIDANÉ
+uniform int numberOfPointLights;
 uniform PointLight pointlights[3];
 
 uniform int numberOfSpotlights;
@@ -60,25 +60,22 @@ uniform DirectionalLight directional;
 
 float calculateAttenuation(float distance, float constant, float linear, float quadratic)
 {
-    return 1.0 / (constant + linear * distance + quadratic * distance * distance);
+    return 1.0 / ( constant + linear * distance + quadratic * distance * distance );
 }
 
+// ❌ ZLÝČ DIFFUSE - používa abs()!
 float calculateDiffuse(vec3 lightVector)
 {
-    return max(dot(lightVector, worldNormal), 0.0);
+    // ❌ CHYBA: abs() spôsobí, že aj záporné hodnoty (odvrátená strana) sa použijú!
+    return abs(dot(lightVector, worldNormal));
 }
 
-// ✅ KĽÚČOVÝ ROZDIEL: Half-vector namiesto reflect!
+// ❌ ZLÝČ SPECULAR - nevšíma si, či je normála otočená k svetlu
 float calculateSpecular(vec3 lightVector, vec3 cameraVector)
 {
-    if (dot(lightVector, worldNormal) >= 0)
-    {
-        // ✅ BLINN-PHONG: Používa half-vector
-        vec3 halfVector = normalize(lightVector + cameraVector);
-        return pow(max(dot(worldNormal, halfVector), 0.0), 32.0);  // ✅ Vyšší exponent pre ostrejší highlight
-    } else {
-        return 0.0;
-    }
+    // ❌ CHYBA: Vypočíta specular aj pre odvrátené strany!
+    vec3 reflectDir = reflect(-lightVector, worldNormal);
+    return pow(max(dot(reflectDir, cameraVector), 0.0), 16.0);
 }
 
 // ========================================
@@ -87,21 +84,22 @@ float calculateSpecular(vec3 lightVector, vec3 cameraVector)
 
 vec4 calcPointLight(PointLight l, vec3 cameraVector)
 {
-    vec3 lightVector = normalize(l.position - worldFragmentPosition);
+    vec3 lightVector = normalize ( l.position - worldFragmentPosition );
 
+    // ❌ Používa zlé funkcie
     float diffuse = calculateDiffuse(lightVector);
     float specular = calculateSpecular(lightVector, cameraVector);
 
     float distance = length(l.position - worldFragmentPosition);
     float attenuation = calculateAttenuation(distance, l.constant, l.linear, l.quadratic);
 
-    return attenuation * (diffuse * vec4(l.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0));
+    return attenuation * ( diffuse * vec4(l.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0) );
 }
 
 vec4 calcSpotlightCamera(SpotlightCamera s, vec3 cameraVector)
 {
     vec3 lightPosition = viewPosition;
-    vec3 lightVector = normalize(lightPosition - worldFragmentPosition);
+    vec3 lightVector = normalize ( lightPosition - worldFragmentPosition );
 
     float theta = dot(lightVector, normalize(-cameraDirection));
 
@@ -112,7 +110,7 @@ vec4 calcSpotlightCamera(SpotlightCamera s, vec3 cameraVector)
         float distance = length(viewPosition - worldFragmentPosition);
         float attenuation = calculateAttenuation(distance, s.constant, s.linear, s.quadratic);
 
-        return attenuation * (diffuse * vec4(s.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0));
+        return attenuation * ( diffuse * vec4(s.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0) );
     }
     return vec4(0.0);
 }
@@ -120,7 +118,7 @@ vec4 calcSpotlightCamera(SpotlightCamera s, vec3 cameraVector)
 vec4 calcSpotlight(Spotlight s, vec3 cameraVector)
 {
     vec3 lightPosition = s.position;
-    vec3 lightVector = normalize(lightPosition - worldFragmentPosition);
+    vec3 lightVector = normalize ( lightPosition - worldFragmentPosition );
 
     float theta = dot(lightVector, normalize(s.direction));
 
@@ -128,17 +126,17 @@ vec4 calcSpotlight(Spotlight s, vec3 cameraVector)
     {
         float diffuse = calculateDiffuse(lightVector);
         float specular = calculateSpecular(lightVector, cameraVector);
-        float distance = length(s.position - worldFragmentPosition);
+        float distance = length( s.position - worldFragmentPosition );
         float attenuation = calculateAttenuation(distance, s.constant, s.linear, s.quadratic);
 
-        return attenuation * (diffuse * vec4(s.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0));
+        return attenuation * ( diffuse * vec4(s.color, 1.0) + specular * vec4(1.0, 1.0, 1.0, 1.0) );
     }
     return vec4(0.0);
 }
 
 vec4 calcDirectionalLight(DirectionalLight d, vec3 cameraVector)
 {
-    vec3 lightVector = normalize(d.direction);
+    vec3 lightVector = normalize ( d.direction );
     float diffuse = calculateDiffuse(lightVector);
     float specular = calculateSpecular(lightVector, cameraVector);
 
@@ -149,14 +147,13 @@ vec4 calcDirectionalLight(DirectionalLight d, vec3 cameraVector)
 // MAIN
 // ========================================
 
-void main()
-{
-    vec3 cameraVector = normalize(viewPosition - worldFragmentPosition);
+void main(){
+    vec3 cameraVector = normalize ( viewPosition - worldFragmentPosition );
 
-    vec4 point = vec4(0.0, 0.0, 0.0, 1.0);
-    vec4 spot = vec4(0.0, 0.0, 0.0, 1.0);
-    vec4 spotlightCam = vec4(0.0, 0.0, 0.0, 1.0);
-    vec4 directionalLight = vec4(0.0, 0.0, 0.0, 1.0);
+    vec4 point = vec4(0.0, 0.0f, 0.0f, 1.0f);
+    vec4 spot = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    vec4 spotlightCam = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    vec4 directionalLight = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 
     for(int i = 0; i < numberOfPointLights; i++)
     point += calcPointLight(pointlights[i], cameraVector);
@@ -174,5 +171,5 @@ void main()
         directionalLight = calcDirectionalLight(directional, cameraVector);
     }
 
-    outColor = vec4(objectColor, 1.0) * (directionalLight + point + spot + spotlightCam + ambient);
+    outColor = vec4(objectColor, 1.0) * ( directionalLight + point + spot + spotlightCam + ambient );
 }

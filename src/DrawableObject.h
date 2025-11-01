@@ -31,6 +31,8 @@ public:
 	bool visible = true;
 
 	DrawableObject(AbstractModel* am, ShaderProgram* sp);
+	DrawableObject(AbstractModel* am, ShaderProgram* sp, glm::vec3 color);
+
 
 	void drawModel();
 

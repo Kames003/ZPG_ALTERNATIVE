@@ -2,6 +2,8 @@
 
 out vec4 outColor;
 
+uniform vec3 objectColor;
+
 void main() {
-    outColor = vec4(0.385, 0.647, 0.812, 1.0);
+    outColor = vec4(objectColor, 1.0);
 }

@@ -1,24 +1,32 @@
-// MinimalForestScene.cpp
 #include "MinimalForestScene.h"
 #include "TreeModel.h"
 #include "PlainModel.h"
 #include "DrawableObject.h"
 #include "PointLight.h"
-#include <cstdlib>
-#include "BenchModel.h"      // ← PRIDAJ
+#include "SpotlightCamera.h"
+#include "BenchModel.h"
 #include "BushModel.h"
+#include "SphereModel.h"
+#include "Firefly.h"
+#include <cstdlib>
 #include <ctime>
 
 void MinimalForestScene::createShaders()
 {
     printf("  Creating shaders...\n");
 
-    // Jediný shader program s Phong osvetlením
+    // ✅ PHONG SHADER - s 16 svetlami + baterka
     spm->addShaderProgram(camera,
-        "Shaders/simple_forest_vertex.glsl",      // Vertex shader
-        "Shaders/simple_forest_fragment.glsl");    // Fragment shader
+        "Shaders/VertexShaderPhong.glsl",
+        "Shaders/FragmentShaderPhong.glsl");
 
-    printf("    ✅ Phong shader created (index 0)\n");
+    // Constant shader pre svetlušky
+    spm->addShaderProgram(camera,
+        "Shaders/VertexShaderConstant.glsl",
+        "Shaders/FragmentShaderConstant.glsl");
+
+    printf("    ✅ Phong shader (index 0) - 16 lights + flashlight\n");
+    printf("    ✅ Constant shader (index 1) - fireflies\n");
 }
 
 void MinimalForestScene::createLights()
@@ -26,72 +34,65 @@ void MinimalForestScene::createLights()
     printf("  Creating lights...\n");
 
     // ========================================
-    // JEDNO BODOVÉ SVETLO NAD SCÉNOU
+    // MESAČNÉ SVETLO
     // ========================================
-    PointLight* mainLight = new PointLight(
-        glm::vec3(0.0f, 15.0f, 0.0f),  // Pozícia vysoko nad scénou
-        1.0f,    // constant
-        0.0f,    // linear
-        0.01f,   // quadratic
-        glm::vec3(1.0f, 1.0f, 0.9f)    // Teplá biela farba
+    PointLight* moonLight = new PointLight(
+        glm::vec3(0.0f, 50.0f, 0.0f),
+        1.0f, 0.0f, 0.005f,
+        glm::vec3(0.3f, 0.3f, 0.4f)
     );
 
-    lm->addPointLight(mainLight);
-    lm->ambient = 0.3f;  // Zvýšený ambient pre lepšiu viditeľnosť
+    lm->addPointLight(moonLight);
+    lm->ambient = 0.20f;
 
     // ========================================
-    // AKTUALIZUJ SVETLÁ V SHADEROCH
+    // 🔦 BATERKA (SpotlightCamera)
     // ========================================
-    // KRITICKÉ: Musíme poslać údaje o svetlách do uniformov
-    ShaderProgram* shader = spm->getShaderProgram(0);
-    shader->activateShaderProgram();
+    flashlight = new SpotlightCamera(
+        1.0f,      // constant
+        0.09f,     // linear
+        0.032f,    // quadratic
+        cos(glm::radians(12.5f)),  // angle (25°)
+        glm::vec3(1.0f, 1.0f, 0.9f)
+    );
 
-    // Počet svetiel
-    shader->updateUniform("numberOfLights", 1);
+    printf("    🔦 Flashlight created (press F to toggle)\n");
 
-    // Údaje prvého svetla
-    shader->updateUniform("lights[0].position",
-        glm::vec4(mainLight->position, 1.0f));
-    shader->updateUniform("lights[0].ambient",
-        glm::vec3(0.2f, 0.2f, 0.2f));
-    shader->updateUniform("lights[0].diffuse",
-        mainLight->color);
-    shader->updateUniform("lights[0].specular",
-        glm::vec3(1.0f, 1.0f, 1.0f));
-    shader->updateUniform("lights[0].intensity", 1.0f);
+    // ✅ NEINICIALIZUJEME baterku hneď (zapne sa klávesou F)
+    spm->updateLights();
 
-    shader->deactivateShaderProgram();
-
-    printf("    ✅ 1 point light created at (0, 15, 0)\n");
-    printf("    ✅ Ambient: 0.3\n");
+    printf("    ✅ Moon light at (0, 50, 0)\n");
+    printf("    ✅ Ambient: 0.20\n");
 }
 
 void MinimalForestScene::createDrawableObjects()
 {
     printf("  Creating objects...\n");
     srand(static_cast<unsigned>(time(nullptr)));
-    ShaderProgram* phongShader = spm->getShaderProgram(0);
 
-    // ========== ROVINA (ZEM) ==========
+    ShaderProgram* phongShader = spm->getShaderProgram(0);
+    ShaderProgram* constantShader = spm->getShaderProgram(1);
+
+    // ========== ZEMA ==========
     PlainModel* groundModel = new PlainModel();
     DrawableObject* ground = new DrawableObject(groundModel, phongShader);
-    ground->setColor(glm::vec3(0.2f, 0.5f, 0.2f));
+    ground->setColor(glm::vec3(0.15f, 0.25f, 0.15f));
     ground->scale(glm::vec3(100.0f, 1.0f, 100.0f));
     ground->translate(glm::vec3(0.0f, -0.5f, 0.0f));
     ground->calculateModelMatrix();
     ground->updateModelMatrix();
     om->addDrawableObject(ground);
 
-    // ========== PIESKOVÁ CESTA ==========
+    // ========== CESTA ==========
     DrawableObject* path = new DrawableObject(groundModel, phongShader);
-    path->setColor(glm::vec3(0.87f, 0.72f, 0.53f));
+    path->setColor(glm::vec3(0.6f, 0.5f, 0.4f));
     path->scale(glm::vec3(3.0f, 1.0f, 100.0f));
     path->translate(glm::vec3(0.0f, -0.4f, 0.0f));
     path->calculateModelMatrix();
     path->updateModelMatrix();
     om->addDrawableObject(path);
 
-    // ========== 70 STROMOV - NIŽŠIE ==========
+    // ========== STROMY ==========
     TreeModel* treeModel = new TreeModel();
     for (int i = 0; i < 70; i++)
     {
@@ -105,9 +106,8 @@ void MinimalForestScene::createDrawableObjects()
         float rotation = static_cast<float>(rand() % 360);
 
         DrawableObject* tree = new DrawableObject(treeModel, phongShader);
-        tree->setColor(glm::vec3(0.2f, 0.5f, 0.1f));
+        tree->setColor(glm::vec3(0.1f, 0.2f, 0.05f));
 
-        // ✅ Y = -0.5f (rovnaká úroveň ako zem)
         tree->translate(glm::vec3(x, -0.5f, z));
         tree->rotate(rotation, glm::vec3(0.0f, 1.0f, 0.0f));
         tree->scale(glm::vec3(scale));
@@ -115,12 +115,12 @@ void MinimalForestScene::createDrawableObjects()
         tree->updateModelMatrix();
         om->addDrawableObject(tree);
     }
-    printf("      ✅ 70 trees created\n");
+    printf("      ✅ 70 trees\n");
 
-    // ========== LAVIČKY - NIŽŠIE ==========
+    // ========== LAVIČKY ==========
     BenchModel* benchModel = new BenchModel();
     float benchPositions[][3] = {
-        {-5.0f, -0.5f, -10.0f},   // ✅ Y = -0.5f
+        {-5.0f, -0.5f, -10.0f},
         {5.0f, -0.5f, -10.0f},
         {-5.0f, -0.5f, 10.0f},
         {5.0f, -0.5f, 10.0f}
@@ -129,7 +129,7 @@ void MinimalForestScene::createDrawableObjects()
     for (int i = 0; i < 4; i++)
     {
         DrawableObject* bench = new DrawableObject(benchModel, phongShader);
-        bench->setColor(glm::vec3(0.55f, 0.27f, 0.07f));
+        bench->setColor(glm::vec3(0.35f, 0.17f, 0.05f));
         bench->translate(glm::vec3(benchPositions[i][0],
                                    benchPositions[i][1],
                                    benchPositions[i][2]));
@@ -139,9 +139,9 @@ void MinimalForestScene::createDrawableObjects()
         bench->updateModelMatrix();
         om->addDrawableObject(bench);
     }
-    printf("      ✅ 4 benches created\n");
+    printf("      ✅ 4 benches\n");
 
-    // ========== KRÍKY - NIŽŠIE ==========
+    // ========== KRÍKY ==========
     BushModel* bushModel = new BushModel();
     for (int i = 0; i < 15; i++)
     {
@@ -155,9 +155,8 @@ void MinimalForestScene::createDrawableObjects()
         float rotation = static_cast<float>(rand() % 360);
 
         DrawableObject* bush = new DrawableObject(bushModel, phongShader);
-        bush->setColor(glm::vec3(0.3f, 0.6f, 0.2f));
+        bush->setColor(glm::vec3(0.2f, 0.35f, 0.15f));
 
-        // ✅ Y = -0.5f (rovnaká úroveň ako zem)
         bush->translate(glm::vec3(x, -0.5f, z));
         bush->rotate(rotation, glm::vec3(0.0f, 1.0f, 0.0f));
         bush->scale(glm::vec3(scale));
@@ -165,18 +164,56 @@ void MinimalForestScene::createDrawableObjects()
         bush->updateModelMatrix();
         om->addDrawableObject(bush);
     }
-    printf("      ✅ 15 bushes created\n");
-    printf("    ✅ Total objects: %d\n", om->getObjectCount());
+    printf("      ✅ 15 bushes\n");
+
+    // ========================================
+    // SVETLUŠKY
+    // ========================================
+    printf("  Creating fireflies...\n");
+    SphereModel* sphereModel = new SphereModel();
+
+    for (int i = 0; i < 12; i++)
+    {
+        float x, z;
+        do {
+            x = (rand() % 50) - 25.0f;
+            z = (rand() % 50) - 25.0f;
+        } while (abs(x) < 4.0f);
+
+        float y = 1.0f + (rand() % 200) / 100.0f;
+
+        glm::vec3 color;
+        int colorType = rand() % 3;
+        if (colorType == 0) {
+            color = glm::vec3(1.0f, 0.9f, 0.5f);
+        } else if (colorType == 1) {
+            color = glm::vec3(0.7f, 1.0f, 0.6f);
+        } else {
+            color = glm::vec3(1.0f, 0.95f, 0.7f);
+        }
+
+        Firefly* firefly = new Firefly(
+            glm::vec3(x, y, z),
+            sphereModel,
+            constantShader,
+            color
+        );
+
+        lm->addPointLight(firefly->getLight());
+        om->addDrawableObject(firefly->getVisual());
+        fireflies.push_back(firefly);
+    }
+
+    printf("      ✅ 12 fireflies\n");
+    printf("    ✅ Total: %d objects\n", om->getObjectCount());
 }
 
 void MinimalForestScene::callbacks()
 {
-    // Callback pre pohyb myši
     glfwSetCursorPosCallback(window, [](GLFWwindow* w, double x, double y) {
         Callback::GetInstance().cursorCallback(w, x, y);
     });
 
-    // Callback pre zmenu veľkosti okna
     glfwSetWindowSizeCallback(window, [](GLFWwindow* w, int width, int height) {
         Callback::GetInstance().windowSizeCallback(w, width, height);
     });
@@ -184,66 +221,131 @@ void MinimalForestScene::callbacks()
 
 void MinimalForestScene::createScene(GLFWwindow* window)
 {
-    printf("\n╔════════════════════════════════════════╗\n");
-    printf("║   CREATING MINIMAL FOREST SCENE       ║\n");
-    printf("╚════════════════════════════════════════╝\n\n");
+    printf("\n╔═══════════════════════════════════════╗\n");
+    printf("║   CREATING FOREST SCENE               ║\n");
+    printf("╚═══════════════════════════════════════╝\n\n");
 
     this->window = window;
-
-    // Vytvor kameru
     this->camera = new Camera(window, 60.0f, 0.1f, 200.0f);
 
-    // Vytvor managery
+    // ✅ NASTAV KAMERU VYŠŠIE (2 metre nad zemou)
+    //camera->setCameraPosition(glm::vec3(0.0f, 2.0f, 10.0f));
+
     this->lm = new LightManager();
     this->spm = new ShaderProgramManager(lm);
     this->om = new ObjectManager();
 
-    // Inicializuj scénu
     createShaders();
     createLights();
     createDrawableObjects();
     callbacks();
 
-    printf("\n╔════════════════════════════════════════╗\n");
-    printf("║         SCENE READY TO RENDER          ║\n");
-    printf("╚════════════════════════════════════════╝\n\n");
+    printf("\n╔═══════════════════════════════════════╗\n");
+    printf("║         SCENE READY                   ║\n");
+    printf("╚═══════════════════════════════════════╝\n\n");
+}
+
+// ========================================
+// 🔦 OBSLUHA KLÁVESY F (BATERKA ON/OFF)
+// ========================================
+void MinimalForestScene::handleFlashlightInput()
+{
+    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+    {
+        if (!keyFWasPressed)
+        {
+            flashlightEnabled = !flashlightEnabled;
+
+            if (flashlightEnabled)
+            {
+                lm->addSpotlightCamera(flashlight);
+                printf("\n🔦 Flashlight ON\n");
+            }
+            else
+            {
+                // ✅ OPRAVENÉ: Použij novú metódu
+                lm->removeSpotlightCamera();
+                printf("\n🔦 Flashlight OFF\n");
+            }
+
+            spm->updateLights();
+            keyFWasPressed = true;
+        }
+    }
+    else
+    {
+        keyFWasPressed = false;
+    }
+}
+
+void MinimalForestScene::renderFrame()
+{
+    camera->checkChanges();
+    camera->controls();
+
+    // 🔦 BATERKA
+    handleFlashlightInput();
+
+    // ANIMÁCIA SVETLUŠIEK
+    float time = static_cast<float>(glfwGetTime());
+    for (Firefly* firefly : fireflies)
+    {
+        firefly->updateAnimation(time);
+    }
+
+    // ✅ DEBUG: Vypíš info o svetlách (len raz za sekundu)
+    static float lastPrintTime = 0.0f;
+    if (time - lastPrintTime > 1.0f)
+    {
+        printf("\n=== DEBUG INFO ===\n");
+        printf("Number of point lights: %d\n", lm->getPointLightsSize());
+        printf("Camera position: (%.2f, %.2f, %.2f)\n",
+               camera->getCameraPosition().x,
+               camera->getCameraPosition().y,
+               camera->getCameraPosition().z);
+        printf("Ambient: %.2f\n", lm->ambient);
+
+        if (lm->getPointLightsSize() > 0) {
+            PointLight* first = lm->getPointLight(0);
+            printf("First light position: (%.2f, %.2f, %.2f)\n",
+                   first->position.x, first->position.y, first->position.z);
+            printf("First light color: (%.2f, %.2f, %.2f)\n",
+                   first->color.r, first->color.g, first->color.b);
+        }
+
+        lastPrintTime = time;
+    }
+
+    // AKTUALIZUJ SVETLÁ
+    spm->updateLights();
+
+    // Vykresli
+    om->drawObjects();
 }
 
 void MinimalForestScene::renderScene()
 {
-    // OpenGL nastavenia
     glEnable(GL_DEPTH_TEST);
-    glClearColor(0.53f, 0.81f, 0.92f, 1.0f);  // Svetlo modrá obloha
+    glClearColor(0.02f, 0.02f, 0.05f, 1.0f);
 
-    printf("╔════════════════════════════════════════╗\n");
-    printf("║       STARTING RENDER LOOP             ║\n");
-    printf("╠════════════════════════════════════════╣\n");
-    printf("║ Controls:                              ║\n");
-    printf("║  W/A/S/D     - Move camera             ║\n");
-    printf("║  Space/Shift - Up/Down                 ║\n");
-    printf("║  Right Mouse - Look around             ║\n");
-    printf("║  ESC         - Exit                    ║\n");
-    printf("╚════════════════════════════════════════╝\n\n");
+    printf("╔═══════════════════════════════════════╗\n");
+    printf("║       RENDER LOOP                     ║\n");
+    printf("╠═══════════════════════════════════════╣\n");
+    printf("║ W/A/S/D     - Move                    ║\n");
+    printf("║ Space/Shift - Up/Down                 ║\n");
+    printf("║ Right Mouse - Look                    ║\n");
+    printf("║ F           - Flashlight ON/OFF       ║\n");
+    printf("║ ESC         - Exit                    ║\n");
+    printf("╚═══════════════════════════════════════╝\n\n");
 
-    // Hlavný render loop
     while (!glfwWindowShouldClose(window))
     {
-        // Vymaž buffery
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // Aktualizuj kameru
-        camera->checkChanges();
-        camera->controls();
-
-        // Vykresli všetky objekty
-        om->drawObjects();
-
-        // Swap buffers a spracuj udalosti
+        renderFrame();
         glfwPollEvents();
         glfwSwapBuffers(window);
     }
 
-    // Upratanie
     glfwDestroyWindow(window);
     glfwTerminate();
     exit(EXIT_SUCCESS);

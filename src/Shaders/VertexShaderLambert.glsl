@@ -15,4 +15,4 @@ void main () {
     worldFragmentPosition = position.xyz / position.w;
     worldNormal = normalize(transpose(inverse(mat3(modelMatrix))) * v_normal);
     gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(v_position, 1.0);
-};
+}
