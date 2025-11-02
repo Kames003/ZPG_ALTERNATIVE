@@ -22,11 +22,8 @@
 class TransformationComponent
 {
 protected:
-
     glm::mat4 matrix = glm::mat4(1.0f);
-
 public:
-
     virtual glm::mat4 resultMatrix() = 0;
     virtual ~TransformationComponent() = default;
 };

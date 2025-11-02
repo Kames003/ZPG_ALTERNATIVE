@@ -3,7 +3,7 @@
 layout(location=0) in vec3 v_position;
 layout(location=1) in vec3 v_normal;
 
-out vec3 worldFragmentPosition;  // ✅ vec3 namiesto vec4!
+out vec3 worldFragmentPosition;
 out vec3 worldNormal;
 
 uniform mat4 modelMatrix;

@@ -45,8 +45,8 @@ struct DirectionalLight {
 // ========================================
 // UNIFORMS
 // ========================================
-uniform vec3 viewPosition;
-uniform vec3 cameraDirection;
+uniform vec3 viewPosition; // pozicia kamery --  tieto uniformmy sa posielaju do shaderu v kazdom frame cez observr pattern
+uniform vec3 cameraDirection; // smer kameery --
 uniform vec3 objectColor;
 uniform float ambient;
 
@@ -105,13 +105,13 @@ vec4 calcPointLight(PointLight l, vec3 cameraVector)
 
 vec4 calcSpotlightCamera(SpotlightCamera s, vec3 cameraVector)
 {
-    vec3 lightPosition = viewPosition;
+    vec3 lightPosition = viewPosition; // flashlight je na pozicii kamery
     vec3 lightVector = normalize ( lightPosition - worldFragmentPosition );
 
-    float theta = dot(lightVector, normalize(-cameraDirection));
+    float theta = dot(lightVector, normalize(-cameraDirection)); // svieti v smere kamery
 
-    if (theta > s.angle)
-    {
+    if (theta > s.angle) // ak sme v kuželi svetla
+    { // tak kalkuluj osvetlenie
         float diffuse = calculateDiffuse(lightVector);
         float specular = calculateSpecular(lightVector, cameraVector);
         float distance = length(viewPosition - worldFragmentPosition);

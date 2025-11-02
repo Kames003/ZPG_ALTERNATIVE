@@ -63,17 +63,17 @@ float calculateAttenuation(float distance, float constant, float linear, float q
     return 1.0 / ( constant + linear * distance + quadratic * distance * distance );
 }
 
-// ❌ ZLÝČ DIFFUSE - používa abs()!
+// ZLÝČ DIFFUSE - používa abs()!
 float calculateDiffuse(vec3 lightVector)
 {
-    // ❌ CHYBA: abs() spôsobí, že aj záporné hodnoty (odvrátená strana) sa použijú!
+    // abs() spôsobí, že aj záporné hodnoty (odvrátená strana) sa použijú!
     return abs(dot(lightVector, worldNormal));
 }
 
-// ❌ ZLÝČ SPECULAR - nevšíma si, či je normála otočená k svetlu
+// evšíma si, či je normála otočená k svetlu
 float calculateSpecular(vec3 lightVector, vec3 cameraVector)
 {
-    // ❌ CHYBA: Vypočíta specular aj pre odvrátené strany!
+    // Vypočíta specular aj pre odvrátené strany!
     vec3 reflectDir = reflect(-lightVector, worldNormal);
     return pow(max(dot(reflectDir, cameraVector), 0.0), 16.0);
 }

@@ -3,13 +3,13 @@
 void TransformationComposite::addTransformation(TransformationComponent* t)
 {
     // Pridáme transformáciu do zoznamu
-    transformations.push_back(t);
+    componentCollection.push_back(t);
 }
 
 void TransformationComposite::removeTransformations()
 {
     // Vyprázdnime zoznam transformácií
-    transformations.clear();
+    componentCollection.clear();
 }
 
 void TransformationComposite::calculateTransformations()
@@ -18,7 +18,7 @@ void TransformationComposite::calculateTransformations()
     this->matrix = glm::mat4(1.0f);
 
     // Vynásobíme postupne všetkými transformáciami
-    for (auto t : transformations)
+    for (auto t : componentCollection)
     {
         matrix = matrix * t->resultMatrix();
     }
@@ -34,7 +34,7 @@ glm::mat4 TransformationComposite::resultMatrix()
     this->matrix = glm::mat4(1.0f);
 
     // Vynásobíme postupne všetkými transformáciami
-    for (auto t : transformations)
+    for (auto t : componentCollection)
     {
         this->matrix = this->matrix * t->resultMatrix();
     }

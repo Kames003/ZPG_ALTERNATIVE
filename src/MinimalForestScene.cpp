@@ -335,20 +335,20 @@ void MinimalForestScene::handleFlashlightInput()
 
 void MinimalForestScene::renderFrame()
 {
-    camera->checkChanges();
-    camera->controls();
+    camera->checkChanges(); // skontroluj či sa zmenila pozicia, rotacia, fov
+    camera->controls(); // spracuj wasd, myš, space/shift
 
-    handleFlashlightInput();
+    handleFlashlightInput(); // skontroluj klavesu f pre baterku
 
-    float time = static_cast<float>(glfwGetTime());
+    float time = static_cast<float>(glfwGetTime()); // ziskaj aktualny čas
     for (Firefly* firefly : fireflies)
     {
-        firefly->updateAnimation(time);
+        firefly->updateAnimation(time); // pohybuj svetluškami
     }
 
-    spm->updateLights();
-    om->drawObjects();
-}
+    spm->updateLights(); // pošli info o svetlach do shaderov
+    om->drawObjects(); // vykresli všetky objekty
+} // end :)
 
 void MinimalForestScene::renderScene()
 {

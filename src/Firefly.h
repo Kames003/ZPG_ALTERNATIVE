@@ -35,7 +35,7 @@ private:
     float maxIntensity;         // Maximální intenzita
     float blinkSpeed;           // Rychlost blikání
 
-    // ✅ NOVÉ: Uložený scale pro správnou animaci
+
     glm::vec3 visualScale;      // Scale vizualizace (podle typu světlušky)
 
 public:

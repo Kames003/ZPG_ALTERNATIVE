@@ -10,12 +10,12 @@ out vec4 out_Color;
 // ========================================
 // LIGHT STRUCTURES
 // ========================================
-#define MAX_LIGHTS 16  // ✅ Pre mesiac + 12 svetlušiek
+#define MAX_LIGHTS 16
 
 struct PointLight {
-    vec3 position;      // ✅ vec3 (nie vec4!)
-    vec3 color;         // ✅ Farba svetla
-    float constant;     // ✅ Útlum
+    vec3 position;
+    vec3 color;
+    float constant;
     float linear;
     float quadratic;
 };
@@ -49,14 +49,14 @@ void main()
     vec3 normal = normalize(worldNormal);
     vec3 viewDir = normalize(viewPosition - worldFragmentPosition);
 
-    // ✅ Globálne ambient pre minimálne osvetlenie (noč)
+    // Globálne ambient pre minimálne osvetlenie (noč)
     vec3 globalAmbient = objectColor * ambient;
 
     // Akumulácia diffuse a specular
     vec3 totalDiffuse = vec3(0.0);
     vec3 totalSpecular = vec3(0.0);
 
-    // ✅ CYKLUS CEZ VŠETKY SVETLÁ
+    // CYKLUS CEZ VŠETKY SVETLÁ
     for (int i = 0; i < numberOfPointLights; i++)
     {
         PointLight light = pointlights[i];
@@ -65,7 +65,7 @@ void main()
         vec3 lightDir = normalize(light.position - worldFragmentPosition);
         float distance = length(light.position - worldFragmentPosition);
 
-        // ✅ ÚTLUM (attenuation)
+        // ÚTLUM (attenuation)
         float attenuation = calculateAttenuation(distance,
                                                  light.constant, light.linear, light.quadratic);
 
@@ -74,10 +74,10 @@ void main()
 
         if (dotNL > 0.0)
         {
-            // ✅ DIFFUSE component
+            // DIFFUSE component
             vec3 diffuse = dotNL * objectColor * light.color;
 
-            // ✅ SPECULAR component (Phong reflection)
+            // SPECULAR component (Phong reflection)
             vec3 reflectDir = reflect(-lightDir, normal);
             float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
 
@@ -92,7 +92,7 @@ void main()
         // Ak dotNL <= 0 → odvrácená strana, žiadne osvetlenie
     }
 
-    // ✅ Finálna farba
+    // Finálna farba
     vec3 result = globalAmbient + totalDiffuse + totalSpecular;
     out_Color = vec4(result, 1.0);
 }

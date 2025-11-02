@@ -18,7 +18,7 @@ void main() {
     vec4 worldPos = modelMatrix * vec4(v_position, 1.0);
     worldFragmentPosition = worldPos.xyz / worldPos.w;
 
-    // ✅ NORMÁLOVÁ MATRICA - správná transformace normál (bod 5 zadání)
+    // NORMÁLOVÁ MATRICA - správná transformace normál (bod 5 zadání)
     worldNormal = normalize(mat3(transpose(inverse(modelMatrix))) * v_normal);
 
     // Finálna pozícia na obrazovke

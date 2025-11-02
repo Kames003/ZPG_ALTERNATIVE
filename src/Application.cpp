@@ -109,14 +109,15 @@ void Application::run()
     // Hlavný render loop
     while (!glfwWindowShouldClose(this->window->getWindow()))
     {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // vymaž predchádzajuci frame
 
         // SceneManager vykreslí aktívnu scénu
         sceneManager->renderActiveScene();
 
-        glfwSwapBuffers(this->window->getWindow());
-        glfwPollEvents();
+        glfwSwapBuffers(this->window->getWindow()); // zobraz frame na obrazovke
+        glfwPollEvents(); // spracuj eventy
     }
+    // vrati sa a opakuje cely proces
 
     // ========================================
     // CLEANUP

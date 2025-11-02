@@ -63,17 +63,17 @@ float calculateAttenuation(float distance, float constant, float linear, float q
     return 1.0 / ( constant + linear * distance + quadratic * distance * distance );
 }
 
-// ✅ SPRÁVNY DIFFUSE - používa max()
+// SPRÁVNY DIFFUSE - používa max()
 float calculateDiffuse(vec3 lightVector)
 {
-    // ✅ SPRÁVNE: max() zabezpečí, že záporné hodnoty = 0 (žiadne osvetlenie)
+    // max() zabezpečí, že záporné hodnoty = 0 (žiadne osvetlenie)
     return max(dot(lightVector, worldNormal), 0.0);
 }
 
-// ✅ SPRÁVNY SPECULAR - kontroluje, či normála smeruje k svetlu
+// SPRÁVNY SPECULAR - kontroluje, či normála smeruje k svetlu
 float calculateSpecular(vec3 lightVector, vec3 cameraVector)
 {
-    // ✅ KRITICKÁ KONTROLA: LEN ak normála smeruje k svetlu!
+    // LEN ak normála smeruje k svetlu
     if ( dot(lightVector, worldNormal) >= 0.0 )
     {
         vec3 reflectDir = reflect(-lightVector, worldNormal);
@@ -81,7 +81,7 @@ float calculateSpecular(vec3 lightVector, vec3 cameraVector)
     }
     else
     {
-        // ✅ Odvrátená strana = žiadny specular
+        // Odvrátená strana = žiadny specular
         return 0.0;
     }
 }
@@ -94,7 +94,6 @@ vec4 calcPointLight(PointLight l, vec3 cameraVector)
 {
     vec3 lightVector = normalize ( l.position - worldFragmentPosition );
 
-    // ✅ Používa správne funkcie
     float diffuse = calculateDiffuse(lightVector);
     float specular = calculateSpecular(lightVector, cameraVector);
 

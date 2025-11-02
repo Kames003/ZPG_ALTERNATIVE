@@ -65,12 +65,12 @@ void SceneManager::renderActiveScene()
         return;
     }
 
-    AbstractScene* scene = scenes[activeSceneIndex].scene;
+    AbstractScene* scene = scenes[activeSceneIndex].scene; // zisti aktivnu scenu
 
-    // Vykreslíme jeden frame aktívnej scény
-    scene->renderFrame();
+    // zavolam render frame na tej scene
+    scene->renderFrame(); // vykresli sa jeden render frame na tej scene
 
-    // Spracujeme vstup (prepínanie scén)
+    // skontroluj klavesy, či niekto nechce prepnuť scenu
     handleInput();
 
     // Help overlay

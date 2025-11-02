@@ -47,7 +47,7 @@ class TransformationComposite : public TransformationComponent
 private:
 
 	 // brief Zoznam transformácií
-	std::vector<TransformationComponent*> transformations;
+	std::vector<TransformationComponent*> componentCollection;
 
 public:
 
