@@ -1,6 +1,6 @@
-#include "TransformationRotate.h"
+#include "LeafRotate.h"
 
-TransformationRotate::TransformationRotate(float angle, glm::vec3 axis)
+LeafRotate::LeafRotate(float angle, glm::vec3 axis)
 {
     // Konverzia uhla zo stupňov na radiány
     float r = glm::radians(angle);
@@ -9,7 +9,7 @@ TransformationRotate::TransformationRotate(float angle, glm::vec3 axis)
     matrix = glm::rotate(glm::mat4(1.0f), r, axis);
 }
 
-glm::mat4 TransformationRotate::resultMatrix()
+glm::mat4 LeafRotate::resultMatrix()
 {
     return matrix;
 }

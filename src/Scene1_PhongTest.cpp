@@ -10,26 +10,24 @@ void Scene1_PhongTest::createShaders()
 
 void Scene1_PhongTest::createDrawableObjects()
 {
-    // ✅ ZMENA: Triangle namiesto Sphere
     TriangleModel* triangle = new TriangleModel();
 
     // Shader
     ShaderProgram* phongShader = spm->getShaderProgram(0);
 
-    // DrawableObject S FARBOU (červená)
     DrawableObject* obj = new DrawableObject(
         triangle,  // ✅ Triangle!
         phongShader,
         glm::vec3(0.8f, 0.2f, 0.2f)  // Červená farba
     );
 
-    // Základné transformácie (raz na začiatku)
+
     obj->translate(glm::vec3(0.0f, 0.0f, 0.0f));
     obj->scale(glm::vec3(1.0f, 1.0f, 1.0f));  // ✅ Väčší scale pre trojuholník
     obj->calculateModelMatrix();
     obj->updateModelMatrix();
 
-    // Pridaj do managera
+
     om->addDrawableObject(obj);
 
     printf("  Scene 1: Created 1 rotating TRIANGLE (Phong, red)\n");

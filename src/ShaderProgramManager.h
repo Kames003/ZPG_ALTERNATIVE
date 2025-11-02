@@ -7,15 +7,24 @@
 #include "ShaderProgram.h"
 #include "LightManager.h"
 
-// Manager pre správu všetkých shader programov
-// Vie updatovať všetky shadery naraz (svetlá, kameru, atď.)
+/*
+
+@brief
+
+Na čo slúži ?
+
+updatesvetla
+add shader
+get shader
+
+*/
 class ShaderProgramManager
 {
 private:
     std::vector<ShaderProgram*> shaderPrograms;
     LightManager* lm;  // Referencia na light manager
 
-    // Private metódy pre update svetiel
+    // light update
     void updateAmbient();
     void updatePointLights();
     void updateSpotlights();
@@ -25,13 +34,13 @@ private:
 public:
     ShaderProgramManager(LightManager* lm);
 
-    // Pridanie shader programu
+    // add
     void addShaderProgram(Camera* c, const char* vertexShaderFile,
                           const char* fragmentShaderFile);
 
-    // Získanie shader programu
+    // get
     ShaderProgram* getShaderProgram(int index);
 
-    // Update všetkých typov svetiel do všetkých shaderov
+    // upd lights
     void updateLights();
 };

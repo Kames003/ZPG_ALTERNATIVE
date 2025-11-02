@@ -5,7 +5,6 @@
 #include <iostream>
 
 // Singleton trieda pre čítanie súborov
-// Používa sa najmä pre čítanie shader súborov, ale aj pre iné účely
 class FileReader
 {
 private:

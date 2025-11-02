@@ -1,8 +1,5 @@
 #include "Application.h"
 
-// ========================================
-// TIETO METÓDY ZOSTÁVAJÚ BEZ ZMENY
-// ========================================
 
 void Application::initGLFW()
 {
@@ -87,8 +84,8 @@ void Application::initScene()
     sceneManager->registerScene(new Scene4_BackfaceTest(), "5. Backface Test");
     sceneManager->registerScene(new Scene5_LoadedModelTest(), "6. Loaded Model Test");
 
-
-     // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");
+    // thesting
+    // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");
     // sceneManager->registerScene(new Scene2_FourSpheres(), "3. Four Spheres");
 
     sceneManager->setActiveScene(0);
@@ -131,6 +128,6 @@ void Application::run()
     glfwDestroyWindow(this->window->getWindow());
     glfwTerminate();
 
-    printf("✅ Application terminated successfully.\n");
+    printf("Application terminated successfully.\n");
     exit(EXIT_SUCCESS);
 }

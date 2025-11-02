@@ -2,6 +2,7 @@
 
 void ShaderProgram::CheckErrors(const char* vertexShaderFile, const char* fragmentShaderFile)
 {
+	// nemec lms check
 	GLint status;
 	glGetProgramiv(ID, GL_LINK_STATUS, &status);
 	if (status == GL_FALSE)
@@ -19,42 +20,51 @@ void ShaderProgram::CheckErrors(const char* vertexShaderFile, const char* fragme
 
 ShaderProgram::ShaderProgram(Camera* c)
 {
-	this->camera = c;
+	this->camera = c; // neskôr potrebujeme ziskat cez to data kamery
 }
 
 void ShaderProgram::compileShaderProgram(const char* vertexShaderFile, const char* fragmentShaderFile)
 {
+	// vytvor objekty pre vert a frag
 	Shader* vertexShader = new VertexShader();
 	Shader* fragmentShader = new FragmentShader();
 
-	ID = glCreateProgram();
+	ID = glCreateProgram(); // create shaderprogram na gpučku
+
+	// pripoj fragmentShader
 	glAttachShader(ID, fragmentShader->compileShader(fragmentShaderFile));
+	// pripoj vertexShader
 	glAttachShader(ID, vertexShader->compileShader(vertexShaderFile));
+	// zlinkuj tieto dva ktoré sú v shaderprograme
+	// vertexS output + fragS input
 	glLinkProgram(ID);
 
+	// call debug machiny z lms
 	CheckErrors(vertexShaderFile, fragmentShaderFile);
 }
 
+
+// state machine fun
+// jeden moment jeden aktivny shader program
+// všetky OpenGl operácie ( glUniform.. ) sa vztahuju a aktivnemu programu
 void ShaderProgram::activateShaderProgram()
 {
 	glUseProgram(ID);
 }
 
+// !active :)
 void ShaderProgram::deactivateShaderProgram()
 {
 	glUseProgram(0);
 }
 
-// ========================================
-// ✅ VŠECHNY updateUniform metódy už NEVOLAJÍ activate/deactivate
-// Volá sa to zvonku v drawModel() alebo update()
-// ========================================
 
 void ShaderProgram::updateUniform(const char* variable, const GLfloat* value)
 {
+	// najdi pozíciu uniformu v sh
 	GLint location = glGetUniformLocation(ID, variable);
 
-	if (location >= 0)
+	if (location >= 0) // exists ?
 	{
 		glUniformMatrix4fv(location, 1, GL_FALSE, value);
 	}
@@ -62,9 +72,9 @@ void ShaderProgram::updateUniform(const char* variable, const GLfloat* value)
 
 void ShaderProgram::updateUniform(const char* variable, glm::vec3 value)
 {
-	GLint location = glGetUniformLocation(ID, variable);
+	GLint location = glGetUniformLocation(ID, variable); // toto vracia adresu uniformu v shadery
 
-	if (location >= 0)
+	if (location >= 0) // exists ?
 	{
 		glUniform3f(location, value.x, value.y, value.z);
 	}
@@ -105,12 +115,10 @@ void ShaderProgram::updateUniform(const char* variable, glm::vec4 value)
 	}
 }
 
-// ========================================
-// ✅ OPRAVENÉ: Observer pattern update
-// ========================================
+
 void ShaderProgram::notify(int message)
 {
-	if (message == VIEWMATRIX)
+	if (message == VIEWMATRIX) // reakcia a
 	{
 		activateShaderProgram();
 		updateUniform("viewMatrix", glm::value_ptr(camera->getViewMatrix()));
@@ -121,7 +129,7 @@ void ShaderProgram::notify(int message)
 		return;
 	}
 
-	if (message == PROJECTIONMATRIX)
+	if (message == PROJECTIONMATRIX) // reakcia b
 	{
 		activateShaderProgram();
 		updateUniform("projectionMatrix", glm::value_ptr(camera->getProjectionMatrix()));

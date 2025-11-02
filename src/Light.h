@@ -2,7 +2,6 @@
 
 #include <glm/glm.hpp>
 
-// Základná abstraktná trieda pre všetky typy svetiel
 class Light
 {
 public:

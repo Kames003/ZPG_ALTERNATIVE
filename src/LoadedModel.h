@@ -9,7 +9,7 @@
 #include "AbstractModel.h"
 
 // Model načítaný zo súboru (OBJ, FBX, atď.) pomocou knižnice ASSIMP
-// Podporuje normály, textúrové koordináty
+
 class LoadedModel : public AbstractModel
 {
 protected:
@@ -17,7 +17,6 @@ protected:
 
 public:
     // Konštruktor - načíta model zo súboru
-    // Podporované formáty: .obj, .fbx, .dae, .3ds, atď.
     LoadedModel(const char* path);
     
     void draw() override;

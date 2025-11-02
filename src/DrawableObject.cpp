@@ -21,42 +21,38 @@ DrawableObject::DrawableObject(AbstractModel* am, ShaderProgram* sp, glm::vec3 c
     color = c;  // Nastav farbu z parametra
 }
 
-// ========================================
-// ✅ SPRÁVNE: glUseProgram PRED glUniform a glDrawArrays
-// ========================================
+
 void DrawableObject::drawModel()
 {
-    // ✅ KROK 1: Aktivuj shader PRED všetkými operáciami
+
     shaderProgram->activateShaderProgram();
 
-    // ✅ KROK 2: Nastav uniformy (volá glUniform* interně)
     shaderProgram->updateUniform("objectColor", color);
     shaderProgram->updateUniform("modelMatrix",
         glm::value_ptr(tc->getResultMatrix()));
 
-    // ✅ KROK 3: Vykresli model (volá glDrawArrays)
+   // (volá glDrawArrays)
     abstractModel->draw();
 
-    // ✅ KROK 4: Deaktivuj shader PO všetkých operáciách
     shaderProgram->deactivateShaderProgram();
 }
 
 void DrawableObject::rotate(float angle, glm::vec3 axis)
 {
     // Pridáme rotáciu do transformation composite
-    tc->addTransformation(new TransformationRotate(angle, axis));
+    tc->addTransformation(new LeafRotate(angle, axis));
 }
 
 void DrawableObject::scale(glm::vec3 scale)
 {
     // Pridáme škálovanie do transformation composite
-    tc->addTransformation(new TransformationScale(scale));
+    tc->addTransformation(new LeafScale(scale));
 }
 
 void DrawableObject::translate(glm::vec3 translate)
 {
     // Pridáme posunutie do transformation composite
-    tc->addTransformation(new TransformationTranslate(translate));
+    tc->addTransformation(new LeafTranslate(translate));
 }
 
 void DrawableObject::calculateModelMatrix()
@@ -66,33 +62,19 @@ void DrawableObject::calculateModelMatrix()
     tc->calculateTransformations();
 }
 
-// ========================================
-// ✅ SPRÁVNE: glUseProgram okolo glUniform
-// ========================================
+
 void DrawableObject::updateModelMatrix()
 {
-    // ✅ Aktivujeme shader
     shaderProgram->activateShaderProgram();
-
-    // ✅ Pošleme model matrix do shadera
     shaderProgram->updateUniform("modelMatrix",
         glm::value_ptr(tc->getResultMatrix()));
-
-    // ✅ Deaktivujeme shader
     shaderProgram->deactivateShaderProgram();
 }
 
-// ========================================
-// ✅ SPRÁVNE: glUseProgram okolo glUniform
-// ========================================
+
 void DrawableObject::updateTexture(const char* variable, int texture)
 {
-    // ✅ Aktivujeme shader
     shaderProgram->activateShaderProgram();
-
-    // ✅ Pošleme textúru do shadera
     shaderProgram->updateUniform(variable, texture);
-
-    // ✅ Deaktivujeme shader
     shaderProgram->deactivateShaderProgram();
 }

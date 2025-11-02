@@ -11,6 +11,7 @@
 
 #include "Subject.h"
 
+// spravička pre notify
 #define VIEWMATRIX 0
 #define PROJECTIONMATRIX 1
 

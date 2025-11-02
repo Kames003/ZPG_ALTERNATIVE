@@ -22,6 +22,6 @@ BushModel::BushModel()
 void BushModel::draw()
 {
     vao->bind();
-    glDrawArrays(GL_TRIANGLES, 0, 8730);  // Krík má 8730 vrcholov
+    glDrawArrays(GL_TRIANGLES, 0, 8730);
     vao->unbind();
 }

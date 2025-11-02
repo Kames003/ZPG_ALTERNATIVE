@@ -6,9 +6,10 @@ bool Camera::checkViewMatrixChanges()
 {
 	if (previousCameraPosition != cameraPosition || previousTarget != target)
 	{
+		// zmena
 		previousCameraPosition = cameraPosition;
 		previousTarget = target;
-		calculateViewMatrix();
+		calculateViewMatrix(); // prepočítaj
 
 		return true;
 	}
@@ -32,11 +33,11 @@ bool Camera::checkProjectionMatrixChanges()
 	return false;
 }
 
-void Camera::notifyAll(int message)
+void Camera::notifyAll(int message) // message = VIEWMATRIX ( koštanta 0 )
 {
 	for (Observer* o : observerCollection)
 	{
-		o->notify(message);
+		o->notify(message); // buď 0 alebo 1 a podla toho rozhodneem
 	}
 }
 

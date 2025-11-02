@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AbstractModel.h"
-#include "models/bushes.h"  // Obsahuje pole bushes[] s vertex dátami
+#include "models/bushes.h"
 
 class BushModel : public AbstractModel
 {

@@ -113,18 +113,16 @@ set(SOURCES
         src/ShaderProgram.h
 
         # Models
-        src/Model.cpp
-        src/Model.h
 
         # Transformations
-        src/Transformation.cpp
-        src/Transformation.h
-        src/TransformationTranslate.cpp
-        src/TransformationTranslate.h
-        src/TransformationRotate.cpp
-        src/TransformationRotate.h
-        src/TransformationScale.cpp
-        src/TransformationScale.h
+        src/TransformationComponent.cpp
+        src/TransformationComponent.h
+        src/LeafTranslate.cpp
+        src/LeafTranslate.h
+        src/LeafRotate.cpp
+        src/LeafRotate.h
+        src/LeafScale.cpp
+        src/LeafScale.h
         src/TransformationComposite.cpp
         src/TransformationComposite.h
 

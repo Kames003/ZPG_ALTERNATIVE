@@ -1,6 +1,6 @@
 #include "TransformationComposite.h"
 
-void TransformationComposite::addTransformation(Transformation* t)
+void TransformationComposite::addTransformation(TransformationComponent* t)
 {
     // Pridáme transformáciu do zoznamu
     transformations.push_back(t);
@@ -23,8 +23,8 @@ void TransformationComposite::calculateTransformations()
         matrix = matrix * t->resultMatrix();
     }
 
-    // DÔLEŽITÉ: Vyprázdnime zoznam transformácií!
-    // Toto umožňuje animácie - každý frame pridáte nové transformácie
+    // Vyprázdnime zoznam transformácií
+    //  animácie - každý frame pridáme nové transformácie
     removeTransformations();
 }
 

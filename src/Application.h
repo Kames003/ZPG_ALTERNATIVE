@@ -14,7 +14,7 @@
 #include "Callback.h"
 #include "SceneManager.h"
 
-// ✅ Include konkrétnych scén
+
 #include "Scene5_LoadedModelTest.h"
 #include "MinimalForestScene.h"
 #include "Scene1_PhongTest.h"
@@ -25,7 +25,6 @@
 /**
  * @brief Hlavná aplikácia
  *
- * UPDATED: Teraz používa SceneManager pre prepínanie medzi scénami
  */
 class Application
 {
@@ -39,13 +38,7 @@ private:
 	void printVersionInfo();
 
 public:
-	/**
-	 * @brief Inicializuje scénu (teraz cez SceneManager)
-	 */
-	void initScene();
 
-	/**
-	 * @brief Spustí hlavný loop (teraz cez SceneManager)
-	 */
+	void initScene();
 	void run();
 };

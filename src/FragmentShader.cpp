@@ -1,5 +1,7 @@
 #include "FragmentShader.h"
 
+// same as vertex, jediny rozdiel vytvárame fragment object na gpu nie vertex
+
 GLuint FragmentShader::compileShader(const char* filename)
 {
     std::string fragmentShaderRead = FileReader::getInstance().readFile(filename);
@@ -9,15 +11,15 @@ GLuint FragmentShader::compileShader(const char* filename)
     glShaderSource(ID, 1, &shaderCode, NULL);
     glCompileShader(ID);
 
-    // ✅ PRIDAJ DEBUG
+
     GLint success;
     glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
     if (!success) {
         GLchar infoLog[512];
         glGetShaderInfoLog(ID, 512, NULL, infoLog);
-        printf("❌ FRAGMENT SHADER COMPILATION ERROR (%s):\n%s\n", filename, infoLog);
+        printf("FRAGMENT SHADER COMPILATION ERROR (%s):\n%s\n", filename, infoLog);
     } else {
-        printf("✅ Fragment shader compiled: %s\n", filename);
+        printf("Fragment shader compiled: %s\n", filename);
     }
 
     return ID;

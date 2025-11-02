@@ -12,11 +12,8 @@
 class SceneManager;
 
 /**
- * @brief Abstraktná základná trieda pre všetky scény
+ * @brief Abstraktná base classa pre všetky konkrétne scény ktore z nej maju dediť
  *
- * UPDATED: Teraz podporuje SceneManager
- * - Pridané: renderFrame() - vykreslí jeden frame
- * - Upravené: renderScene() - deprecated, ale funguje
  */
 class AbstractScene
 {
@@ -35,27 +32,11 @@ protected:
 	virtual void callbacks() = 0;
 
 public:
-	/**
-	 * @brief Vytvorí a inicializuje celú scénu
-	 */
+
+	// Vytvorí a inicializuje celú scénu
 	virtual void createScene(GLFWwindow* window) = 0;
-
-	/**
-	 * @brief Vykreslí JEDEN frame scény (pre SceneManager)
-	 *
-	 * ✅ NOVÉ: Táto metóda NEMÁ while loop!
-	 */
 	virtual void renderFrame() = 0;
-
-	/**
-	 * @brief Starý spôsob renderovania (s while loopom)
-	 *
-	 * ⚠️ DEPRECATED: Použite SceneManager namiesto tohto!
-	 */
 	virtual void renderScene() = 0;
 
-	/**
-	 * @brief Virtuálny destruktor
-	 */
 	virtual ~AbstractScene() = default;
 };

@@ -25,8 +25,8 @@ void MinimalForestScene::createShaders()
         "Shaders/VertexShaderConstant.glsl",
         "Shaders/FragmentShaderConstant.glsl");
 
-    printf("    ✅ Phong shader (index 0) - 16 lights + flashlight\n");
-    printf("    ✅ Constant shader (index 1) - fireflies\n");
+    printf("Phong shader (index 0) - 16 lights + flashlight\n");
+    printf("Constant shader (index 1) - fireflies\n");
 }
 
 void MinimalForestScene::createLights()
@@ -107,7 +107,7 @@ void MinimalForestScene::createDrawableObjects()
         tree->updateModelMatrix();
         om->addDrawableObject(tree);
     }
-    printf("      ✅ 70 trees\n");
+    printf("70 trees\n");
 
     // ========== LAVIČKY ==========
     BenchModel* benchModel = new BenchModel();
@@ -131,12 +131,12 @@ void MinimalForestScene::createDrawableObjects()
         bench->updateModelMatrix();
         om->addDrawableObject(bench);
     }
-    printf("      ✅ 4 benches\n");
+    printf("4 benches\n");
 
     // ========================================
-    // ✅ ZMENA 1: LAMPY S MENŠOU SVIETIVOSŤOU
+    // LAMPY
     // ========================================
-    printf("  Creating lamps (with reduced light intensity)...\n");
+    printf("  Creating lamps (with increased light intensity for screenshot)...\n");
     LoadedModel* lampModel = new LoadedModel("Models/lamp.obj");
 
     float lampPositions[][3] = {
@@ -156,7 +156,6 @@ void MinimalForestScene::createDrawableObjects()
 
     for (int i = 0; i < numLamps; i++)
     {
-        // Vytvor lampu (vizualizáciu)
         DrawableObject* lamp = new DrawableObject(lampModel, phongShader);
         lamp->setColor(glm::vec3(0.9f, 0.8f, 0.3f));
         lamp->translate(glm::vec3(lampPositions[i][0],
@@ -167,23 +166,22 @@ void MinimalForestScene::createDrawableObjects()
         lamp->updateModelMatrix();
         om->addDrawableObject(lamp);
 
-        // ✅ ZMENA: Slabšie svetlo - len pre efekt!
         PointLight* lampLight = new PointLight(
             glm::vec3(lampPositions[i][0],
                      lampPositions[i][1] + 1.5f,
                      lampPositions[i][2]),
-            1.0f,     // constant
-            0.7f,     // ✅ ZVÝŠENÝ linear útlum (bolo 0.3)
-            1.2f,     // ✅ ZVÝŠENÝ quadratic útlum (bolo 0.3) - dosah ~2-3m
-            glm::vec3(1.0f, 0.9f, 0.7f) * 0.4f  // ✅ Farebná intenzita znížená na 40%
+            1.0f,
+            0.35f,
+            0.8f,
+            glm::vec3(1.0f, 0.9f, 0.7f) * 0.8f
         );
         lm->addPointLight(lampLight);
     }
 
-    printf("      ✅ %d lamps with REDUCED light intensity (decorative)\n", numLamps);
+    printf("%d lamps with INCREASED light intensity (for screenshot)\n", numLamps);
 
     // ========================================
-    // ✅ ZMENA 2: PRIDANIE SHUTTLE MODELU (HAVARUJÚCA LOĎKA)
+    // SHUTTLE MODEL(HAVARUJÚCA LOĎKA)
     // ========================================
     printf("  Creating shuttle (crashing spaceship)...\n");
     LoadedModel* shuttleModel = new LoadedModel("Models/shuttle.obj");
@@ -191,10 +189,10 @@ void MinimalForestScene::createDrawableObjects()
     DrawableObject* shuttle = new DrawableObject(shuttleModel, phongShader);
     shuttle->setColor(glm::vec3(0.7f, 0.7f, 0.75f));  // Kovová sivá farba
 
-    // ✅ Umiestnenie nad scénou - havarujúca loďka!
+    // umiestnenie
     shuttle->translate(glm::vec3(-15.0f, 25.0f, 10.0f));  // Vľavo, vysoko, vpredu
 
-    // ✅ Sklony pre efekt havarie
+    // Sklony pre efekt havarie
     shuttle->rotate(-25.0f, glm::vec3(1.0f, 0.0f, 0.0f));  // Sklon dopredu (nos dole)
     shuttle->rotate(15.0f, glm::vec3(0.0f, 0.0f, 1.0f));   // Mierne naklopenie do strany
     shuttle->rotate(30.0f, glm::vec3(0.0f, 1.0f, 0.0f));   // Rotácia okolo Y (smer letu)
@@ -205,7 +203,7 @@ void MinimalForestScene::createDrawableObjects()
     shuttle->updateModelMatrix();
     om->addDrawableObject(shuttle);
 
-    printf("      ✅ Shuttle loaded - crashing above forest!\n");
+    printf("Shuttle loaded - crashing above forest!\n");
 
     // ========== KRÍKY ==========
     BushModel* bushModel = new BushModel();
@@ -230,10 +228,10 @@ void MinimalForestScene::createDrawableObjects()
         bush->updateModelMatrix();
         om->addDrawableObject(bush);
     }
-    printf("      ✅ 15 bushes\n");
+    printf("15 bushes\n");
 
     // ========== SVETLUŠKY ==========
-    printf("  Creating fireflies...\n");
+    printf("Creating fireflies...\n");
     SphereModel* sphereModel = new SphereModel();
 
     for (int i = 0; i < 12; i++)
@@ -268,8 +266,8 @@ void MinimalForestScene::createDrawableObjects()
         fireflies.push_back(firefly);
     }
 
-    printf("      ✅ 12 fireflies\n");
-    printf("    ✅ Total: %d objects\n", om->getObjectCount());
+    printf("12 fireflies\n");
+    printf("Total: %d objects\n", om->getObjectCount());
 }
 
 void MinimalForestScene::callbacks()
@@ -317,12 +315,12 @@ void MinimalForestScene::handleFlashlightInput()
             if (flashlightEnabled)
             {
                 lm->addSpotlightCamera(flashlight);
-                printf("\n🔦 Flashlight ON\n");
+                printf("\nFlashlight ON\n");
             }
             else
             {
                 lm->removeSpotlightCamera();
-                printf("\n🔦 Flashlight OFF\n");
+                printf("\nFlashlight OFF\n");
             }
 
             spm->updateLights();
@@ -366,9 +364,7 @@ void MinimalForestScene::renderScene()
     printf("║ F           - Flashlight ON/OFF       ║\n");
     printf("║ ESC         - Exit                    ║\n");
     printf("╠═════════════════════════════════════════╣\n");
-    printf("║ ✅ Lamps: Reduced intensity (deco)    ║\n");
-    printf("║ 🚀 Shuttle: Crashing above forest!    ║\n");
-    printf("╚═════════════════════════════════════════╝\n\n");
+
 
     while (!glfwWindowShouldClose(window))
     {

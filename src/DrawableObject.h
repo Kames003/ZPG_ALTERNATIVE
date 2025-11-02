@@ -3,9 +3,9 @@
 #include "AbstractModel.h"
 #include "ShaderProgram.h"
 #include "TransformationComposite.h"
-#include "TransformationRotate.h"
-#include "TransformationScale.h"
-#include "TransformationTranslate.h"
+#include "LeafRotate.h"
+#include "LeafScale.h"
+#include "LeafTranslate.h"
 #include <vector>
 
 /**
@@ -23,8 +23,6 @@ private:
 	AbstractModel* abstractModel;
 	ShaderProgram* shaderProgram;
 	TransformationComposite* tc;
-
-	// ✅ PRIDANÉ: Farba objektu
 	glm::vec3 color;
 
 public:
@@ -44,7 +42,6 @@ public:
 	void updateModelMatrix();
 	void updateTexture(const char* variable, int texture);
 
-	// ✅ NOVÉ METÓDY
 	void setColor(glm::vec3 c) { color = c; }
 	glm::vec3 getColor() { return color; }
 

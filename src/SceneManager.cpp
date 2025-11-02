@@ -15,7 +15,7 @@ SceneManager::SceneManager(GLFWwindow* window)
 
 void SceneManager::registerScene(AbstractScene* scene, const std::string& name)
 {
-    printf("  ✅ Registering scene: %s\n", name.c_str());
+    printf("Registering scene: %s\n", name.c_str());
 
     SceneEntry entry;
     entry.scene = scene;
@@ -29,7 +29,7 @@ void SceneManager::setActiveScene(int index)
 {
     if (index < 0 || index >= static_cast<int>(scenes.size()))
     {
-        printf("❌ ERROR: Invalid scene index %d (available: 0-%d)\n",
+        printf("ERROR: Invalid scene index %d (available: 0-%d)\n",
                index, static_cast<int>(scenes.size()) - 1);
         return;
     }
@@ -44,14 +44,14 @@ void SceneManager::setActiveScene(int index)
     // Lazy initialization
     if (!scenes[index].initialized)
     {
-        printf("  ⏳ First time loading - initializing...\n\n");
+        printf("First time loading - initializing...\n\n");
         scenes[index].scene->createScene(window);
         scenes[index].initialized = true;
-        printf("\n  ✅ Scene initialized successfully!\n");
+        printf("\nScene initialized successfully!\n");
     }
     else
     {
-        printf("  ✅ Scene already initialized - switching...\n");
+        printf("Scene already initialized - switching...\n");
     }
 
     printf("\n");
@@ -61,7 +61,7 @@ void SceneManager::renderActiveScene()
 {
     if (activeSceneIndex < 0 || activeSceneIndex >= static_cast<int>(scenes.size()))
     {
-        printf("❌ ERROR: No active scene set!\n");
+        printf("ERROR: No active scene set!\n");
         return;
     }
 
@@ -271,11 +271,11 @@ SceneManager::~SceneManager()
     {
         if (entry.scene)
         {
-            printf("  🗑️  Deleting scene: %s\n", entry.name.c_str());
+            printf("Deleting scene: %s\n", entry.name.c_str());
             delete entry.scene;
         }
     }
 
     scenes.clear();
-    printf("  ✅ All scenes deleted\n\n");
+    printf("All scenes deleted\n\n");
 }

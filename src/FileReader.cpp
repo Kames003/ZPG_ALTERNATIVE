@@ -3,14 +3,13 @@
 
 FileReader& FileReader::getInstance()
 {
-    // C++11 garantuje thread-safety pri inicializácii static premenných
     static FileReader* f = new FileReader();
     return *f;
 }
 
 std::string FileReader::readFile(const char* filename)
 {
-    // Otvorenie súboru v binárnom móde
+    // open súboru
     std::ifstream file(filename, std::ios::binary);
 
     if (file)
@@ -30,7 +29,7 @@ std::string FileReader::readFile(const char* filename)
     }
     else 
     {
-        // Súbor sa nepodarilo otvoriť
+        // mision failed
         printf("Cannot open a file: %s\n", filename);
         exit(EXIT_FAILURE);
     }

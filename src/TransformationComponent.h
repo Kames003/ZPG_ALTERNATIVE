@@ -19,30 +19,14 @@
  * ├── TransformationTranslate
  * └── TransformationComposite
  */
-class Transformation
+class TransformationComponent
 {
 protected:
-    /**
-     * @brief Výsledná transformačná matica
-     *
-     * Inicializovaná ako identita (žiadna transformácia)
-     */
+
     glm::mat4 matrix = glm::mat4(1.0f);
 
 public:
-    /**
-     * @brief Vráti transformačnú maticu
-     *
-     * Táto metóda musí byť implementovaná v každej konkrétnej triede.
-     *
-     * @return glm::mat4 Výsledná transformačná matica
-     */
-    virtual glm::mat4 resultMatrix() = 0;
 
-    /**
-     * @brief Virtuálny destruktor
-     *
-     * Umožňuje správne mazanie objektov cez pointer na Transformation
-     */
-    virtual ~Transformation() = default;
+    virtual glm::mat4 resultMatrix() = 0;
+    virtual ~TransformationComponent() = default;
 };

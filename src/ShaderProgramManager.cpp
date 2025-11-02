@@ -12,7 +12,7 @@ void ShaderProgramManager::addShaderProgram(Camera* c, const char* vertexShaderF
 	ShaderProgram* sp = new ShaderProgram(c);
 	sp->compileShaderProgram(vertexShaderFile, fragmentShaderFile);
 	
-	// Pridaj do zoznamu
+	// Pridaj do zoznamu shaderu
 	shaderPrograms.push_back(sp);
 	
 	// Pripoj kameru ako observer

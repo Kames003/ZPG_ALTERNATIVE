@@ -4,7 +4,7 @@
 
 void Scene5_LoadedModelTest::createShaders()
 {
-    // ✅ POUŽIJ PHONG SHADER
+
     spm->addShaderProgram(camera,
         "Shaders/VertexShaderPhong.glsl",
         "Shaders/FragmentShaderPhong.glsl");
@@ -34,7 +34,7 @@ void Scene5_LoadedModelTest::createDrawableObjects()
     teapot->updateModelMatrix();
     om->addDrawableObject(teapot);
 
-    printf("    ✅ Teapot loaded (left)\n");
+    printf("Teapot loaded (left)\n");
 
     // ========================================
     // MODEL 2: LAMP (stred)
@@ -48,13 +48,13 @@ void Scene5_LoadedModelTest::createDrawableObjects()
        glm::vec3(0.9f, 0.8f, 0.3f)  // Zlatá farba
     );
 
-    lamp->translate(glm::vec3(10.0f, 0.0f, 0.0f));  // ✅ V strede
+    lamp->translate(glm::vec3(10.0f, 0.0f, 0.0f));
     lamp->scale(glm::vec3(0.2f));  // Trochu menšia
     lamp->calculateModelMatrix();
     lamp->updateModelMatrix();
     om->addDrawableObject(lamp);
 
-    printf("    ✅ Lamp loaded (center)\n");
+    printf("Lamp loaded (center)\n");
 
 
 }
@@ -112,7 +112,7 @@ void Scene5_LoadedModelTest::createScene(GLFWwindow* window)
     printf("\n╔═══════════════════════════════════════╗\n");
     printf("║         SCENE READY                   ║\n");
     printf("║                                       ║\n");
-    printf("║  🫖 Teapot (left)  🔺 Pyramid (right) ║\n");
+    printf("║  Teapot (left) Pyramid (right) ║\n");
     printf("║                                       ║\n");
     printf("║  W/S/A/D - Move camera                ║\n");
     printf("║  Right Mouse - Look around            ║\n");
