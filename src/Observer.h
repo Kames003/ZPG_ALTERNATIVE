@@ -3,5 +3,5 @@
 class Observer
 {
 public:
-    virtual void update(int message) = 0;
+    virtual void notify(int message) = 0;
 };

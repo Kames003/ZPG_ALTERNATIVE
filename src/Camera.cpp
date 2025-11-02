@@ -32,11 +32,11 @@ bool Camera::checkProjectionMatrixChanges()
 	return false;
 }
 
-void Camera::notify(int message)
+void Camera::notifyAll(int message)
 {
-	for (Observer* o : observers)
+	for (Observer* o : observerCollection)
 	{
-		o->update(message);
+		o->notify(message);
 	}
 }
 
@@ -47,6 +47,7 @@ Camera::Camera(GLFWwindow* w, float fov, float near, float far)
 	this->near = near;
 	this->far = far;
 }
+
 
 void Camera::calculateViewMatrix()
 {
@@ -62,12 +63,12 @@ void Camera::checkChanges()
 {
 	if (checkViewMatrixChanges())
 	{
-		notify(VIEWMATRIX);
+		notifyAll(VIEWMATRIX);
 	}
 
 	if (checkProjectionMatrixChanges())
 	{
-		notify(PROJECTIONMATRIX);
+		notifyAll(PROJECTIONMATRIX);
 	}
 }
 
@@ -171,7 +172,7 @@ void Camera::setFOV(float newFOV)
 {
 	this->fov = newFOV;
 	calculateProjectionMatrix();  // Prepočítaj projection matrix
-	notify(PROJECTIONMATRIX);     // Notifikuj observerov (shadery)
+	notifyAll(PROJECTIONMATRIX);     // Notifikuj observerov (shadery)
 }
 
 //int Camera::getWidth()

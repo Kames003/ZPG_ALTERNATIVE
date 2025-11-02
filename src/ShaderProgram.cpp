@@ -108,24 +108,24 @@ void ShaderProgram::updateUniform(const char* variable, glm::vec4 value)
 // ========================================
 // ✅ OPRAVENÉ: Observer pattern update
 // ========================================
-void ShaderProgram::update(int message)
+void ShaderProgram::notify(int message)
 {
 	if (message == VIEWMATRIX)
 	{
-		activateShaderProgram();  // ✅ Aktivuj PRED updatemi
+		activateShaderProgram();
 		updateUniform("viewMatrix", glm::value_ptr(camera->getViewMatrix()));
 		updateUniform("viewPosition", camera->getCameraPosition());
 		updateUniform("cameraDirection", camera->getCameraDirection());
-		deactivateShaderProgram();  // ✅ Deaktivuj PO updatech
+		deactivateShaderProgram();
 
 		return;
 	}
 
 	if (message == PROJECTIONMATRIX)
 	{
-		activateShaderProgram();  // ✅ Aktivuj PRED updatemi
+		activateShaderProgram();
 		updateUniform("projectionMatrix", glm::value_ptr(camera->getProjectionMatrix()));
-		deactivateShaderProgram();  // ✅ Deaktivuj PO updatech
+		deactivateShaderProgram();
 
 		return;
 	}

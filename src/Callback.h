@@ -18,6 +18,7 @@
 
 class Callback
 {
+private:
 public:
     static glm::vec3 position;
     static int clicked;

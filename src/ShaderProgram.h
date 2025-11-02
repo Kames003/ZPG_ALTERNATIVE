@@ -116,7 +116,7 @@ public:
 	 * Keď sa zmení projection matrix:
 	 * - Updatuje projectionMatrix uniform
 	 */
-	void update(int message);
+	void notify(int message);
 
 
 

@@ -1,14 +1,15 @@
 #version 330
 
+// in z vertexshadera
 in vec3 worldFragmentPosition;
 in vec3 worldNormal;
 
-out vec4 outColor;
+out vec4 outColor; // out farba pixelu
 
 // ========================================
 // LIGHT STRUCTURES
 // ========================================
-#define MAX_POINT_LIGHTS 16  // ✅ Zvýšené z 3 na 16
+#define MAX_POINT_LIGHTS 24   // See you MACBOOK on the other side :)
 
 struct PointLight {
     vec3 color;
@@ -47,11 +48,10 @@ struct DirectionalLight {
 uniform vec3 viewPosition;
 uniform vec3 cameraDirection;
 uniform vec3 objectColor;
-
 uniform float ambient;
 
 uniform int numberOfPointLights;
-uniform PointLight pointlights[MAX_POINT_LIGHTS];  // ✅ Používa MAX_POINT_LIGHTS
+uniform PointLight pointlights[MAX_POINT_LIGHTS];
 
 uniform int numberOfSpotlights;
 uniform Spotlight spotlights[3];

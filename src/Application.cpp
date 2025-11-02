@@ -66,10 +66,6 @@ void Application::printVersionInfo()
     printf("\n");
 }
 
-// ========================================
-// ✅ OPRAVENÉ METÓDY
-// ========================================
-
 void Application::initScene()
 {
     printf("\n╔══════════════════════════════════════════════════════════════╗\n");
@@ -81,10 +77,9 @@ void Application::initScene()
     initGLEW();
     printVersionInfo();
 
-    // ✅ Vytvorte SceneManager
+
     sceneManager = new SceneManager(this->window->getWindow());
 
-    // ✅ ZAREGISTRUJTE VŠETKY SCÉNY
     sceneManager->registerScene(new MinimalForestScene(), "1. Minimal Forest");
     sceneManager->registerScene(new Scene1_PhongTest(), "2. Minimal Forest");
     sceneManager->registerScene(new Scene2_SolarSystem(), "3. Minimal Forest");
@@ -93,10 +88,9 @@ void Application::initScene()
     sceneManager->registerScene(new Scene5_LoadedModelTest(), "6. Loaded Model Test");
 
 
-   // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");
+     // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");
     // sceneManager->registerScene(new Scene2_FourSpheres(), "3. Four Spheres");
 
-    // Nastavíme prvú scénu ako aktívnu
     sceneManager->setActiveScene(0);
 
     printf("\n╔══════════════════════════════════════════════════════════════╗\n");

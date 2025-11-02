@@ -2,32 +2,39 @@
 
 SphereModel::SphereModel()
 {
-    // 1. Vytvor VBO a naplň ho dátami
+
+    // - Na GPU sa vytvoril buffer s ID (napr. 42)
+    // - Do neho sa skopírovalo 69,120 bytov (2880 vrcholov × 24 bytov)
+
     vbo = new VBO();
     vbo->generateVBO(sphere, sizeof(sphere));
-    
-    // 2. Vytvor VAO - definuje ako čítať VBO
+
+    // - Na GPU sa vytvoril prázdny VAO s ID (napr. 7)
+    // - Je to zatiaľ prázdna škatuľa, musíme ju naplniť návodo
+
     vao = new VAO();
     vao->generateVAO();
     
-    // 3. Nastavenie vertexových atribútov
-    vao->bind();
-    vbo->bind();
+
+    vao->bind(); // otvor / aktivuj vao s číslom 7
+    vbo->bind(); // vao s číslom 7 bude čítať z vbo 42
+
+    // vao 7 je spojené s vbo 42
     
-    // Atribút 0: pozícia (x, y, z) - 3 floaty
+
     vao->vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), NULL);
     
-    // Atribút 1: normála (nx, ny, nz) - 3 floaty, offset 3*sizeof(float)
+
     vao->vertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 
                             (void*)(3 * sizeof(float)));
     
     vbo->unbind();
-    vao->unbind();
+    vao->unbind(); // zatvor vao navod je  uložený
 }
 
 void SphereModel::draw()
 {
-    vao->bind();
-    glDrawArrays(GL_TRIANGLES, 0, 2880);  // 2880 vrcholov pre sféru
+    vao->bind(); // použi návod zo z vao 7
+    glDrawArrays(GL_TRIANGLES, 0, 2880);  // nakresli 2880 vrcholov
     vao->unbind();
 }

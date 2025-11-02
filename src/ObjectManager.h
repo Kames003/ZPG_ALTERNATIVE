@@ -6,14 +6,6 @@
 
 class DrawableObject;
 
-/**
- * Manager pre správu všetkých vykresľovaných objektov
- *
- * UPRAVENÉ pre Cvičenie 7:
- * - Odstránená funkcionalita Skybox
- * - Odstránená podpora textúr
- * - Jednoduchšie vykresľovanie
- */
 class ObjectManager
 {
 private:

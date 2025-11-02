@@ -61,7 +61,7 @@ private:
     bool checkViewMatrixChanges();
     bool checkProjectionMatrixChanges();
 
-    void notify(int message);
+    void notifyAll(int message);
 
 public:
     Camera(GLFWwindow* w, float fov, float near, float far);

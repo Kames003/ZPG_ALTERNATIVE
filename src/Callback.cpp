@@ -5,6 +5,7 @@ glm::vec3 Callback::position = glm::vec3(0.0f, 0.0f, 0.0f);
 int Callback::clicked = 0;
 int Callback::stencil_id;
 
+
 Callback& Callback::GetInstance()
 {
 	static Callback* c = new Callback();

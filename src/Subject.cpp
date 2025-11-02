@@ -2,5 +2,5 @@
 
 void Subject::attach(Observer* o)
 {
-    observers.push_back(o);
+    observerCollection.push_back(o);
 }
