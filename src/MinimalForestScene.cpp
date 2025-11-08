@@ -365,6 +365,7 @@ void MinimalForestScene::renderScene()
     printf("║ ESC         - Exit                    ║\n");
     printf("╠═════════════════════════════════════════╣\n");
 
+    // už prakticky nepouzivame delegovali sme to do application loopy
 
     while (!glfwWindowShouldClose(window))
     {

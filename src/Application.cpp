@@ -90,6 +90,11 @@ void Application::initScene()
 
     sceneManager->setActiveScene(0);
 
+    Callback::GetInstance().setSceneManager(sceneManager);
+
+    glfwSetKeyCallback(this->window->getWindow(), Callback::key_callback);
+    printf("\nCallback key handler registered for scene switching\n");
+
     printf("\n╔══════════════════════════════════════════════════════════════╗\n");
     printf("║           INITIALIZATION COMPLETE - READY TO RENDER          ║\n");
     printf("╠══════════════════════════════════════════════════════════════╣\n");

@@ -1,30 +1,46 @@
 #pragma once
 
 #include <GL/glew.h>
-#include <GLFW/glfw3.h> 
-
+#include <GLFW/glfw3.h>
 #include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
-#include <glm/ext/matrix_projection.hpp>
-
-#include <stdlib.h>
-#include <stdio.h>
-
 #include "Camera.h"
-#include "AbstractModel.h"
-#include "ShaderProgram.h"
-#include "ObjectManager.h"
 
+// Forward declaration
+class SceneManager;
 
 class Callback
 {
 private:
+    // Scene switching
+    SceneManager* sceneManager = nullptr;
+
+    // Debouncing pre scene switching klávesy
+    bool key1WasPressed = false;
+    bool key2WasPressed = false;
+    bool key3WasPressed = false;
+    bool key4WasPressed = false;
+    bool key5WasPressed = false;
+    bool key6WasPressed = false;
+    bool key7WasPressed = false;
+    bool key8WasPressed = false;
+    bool key9WasPressed = false;
+    bool keyHWasPressed = false;
+
 public:
     static glm::vec3 position;
     static int clicked;
     static int stencil_id;
+
     static Callback& GetInstance();
 
+    // ========================================
+    // SCENE MANAGER INJECTION
+    // ========================================
+    void setSceneManager(SceneManager* sm);
+
+    // ========================================
+    // CALLBACK METHODS
+    // ========================================
     static void window_size_callback(GLFWwindow* window, int width, int height);
     void windowSizeCallback(GLFWwindow* window, int width, int height);
 
@@ -45,5 +61,10 @@ public:
 
     static void error_callback(int error, const char* description);
     void errorCallback(int error, const char* description);
-};
 
+private:
+    // ========================================
+    // SCENE SWITCHING LOGIC
+    // ========================================
+    void handleSceneSwitching(int key, int action);
+};

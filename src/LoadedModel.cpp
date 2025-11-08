@@ -8,6 +8,8 @@ LoadedModel::LoadedModel(const char* path)
     // VYTVOR ASSIMP IMPORTER
     Assimp::Importer importer;
 
+
+    // TODO
     //  IMPORT FLAGS
     unsigned int importOptions =
         aiProcess_Triangulate |              // Konvertuj všetko na trojuholníky
