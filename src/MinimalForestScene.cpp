@@ -62,8 +62,20 @@ void MinimalForestScene::createTextures()
     // Grass textúra (index 1)
     tm->addTexture(new Texture2D("Textures/Grass/grass.png"));
     
+    // Shrek textúra (index 2)
+    tm->addTexture(new Texture2D("Textures/Shrek/shrek.png"));
+    
+    // Fiona textúra (index 3)
+    tm->addTexture(new Texture2D("Textures/Fiona/fiona.png"));
+    
+    // Toilet textúra (index 4)
+    tm->addTexture(new Texture2D("Textures/Toilet/toiled.jpg"));
+    
     printf("Skybox cubemap loaded (texture 0)\n");
     printf("Grass texture loaded (texture 1)\n");
+    printf("Shrek texture loaded (texture 2)\n");
+    printf("Fiona texture loaded (texture 3)\n");
+    printf("Toilet texture loaded (texture 4)\n");
 }
 
 void MinimalForestScene::createLights()
@@ -258,6 +270,66 @@ void MinimalForestScene::createDrawableObjects()
     om->addDrawableObject(shuttle);
 
     printf("Shuttle loaded - crashing above forest!\n");
+
+    // ========================================
+    // SHREK MODEL
+    // ========================================
+    printf("  Creating Shrek...\n");
+    LoadedModel* shrekModel = new LoadedModel("models/shrek.obj");
+    
+    DrawableObject* shrek = new DrawableObject(shrekModel, phongTextureShader);
+    shrek->addTexture(tm->getTexture(2)); // Shrek textúra
+    
+    // Umiestnenie Shreka - vľavo od cesty, bližšie ku kamere
+    shrek->translate(glm::vec3(-6.0f, -0.5f, -5.0f));
+    shrek->rotate(30.0f, glm::vec3(0.0f, 1.0f, 0.0f)); // Mierne otočený
+    shrek->scale(glm::vec3(0.8f)); // Menší, primeraný
+    
+    shrek->calculateModelMatrix();
+    shrek->updateModelMatrix();
+    om->addDrawableObject(shrek);
+    
+    printf("Shrek loaded - standing near the path!\n");
+
+    // ========================================
+    // FIONA MODEL
+    // ========================================
+    printf("  Creating Fiona...\n");
+    LoadedModel* fionaModel = new LoadedModel("models/fiona.obj");
+    
+    DrawableObject* fiona = new DrawableObject(fionaModel, phongTextureShader);
+    fiona->addTexture(tm->getTexture(3)); // Fiona textúra
+    
+    // Umiestnenie Fiony - vpravo od cesty, oproti Shrekovi
+    fiona->translate(glm::vec3(6.0f, -0.5f, -5.0f));
+    fiona->rotate(-30.0f, glm::vec3(0.0f, 1.0f, 0.0f)); // Otočená k Shrekovi
+    fiona->scale(glm::vec3(0.75f)); // Trochu menšia ako Shrek
+    
+    fiona->calculateModelMatrix();
+    fiona->updateModelMatrix();
+    om->addDrawableObject(fiona);
+    
+    printf("Fiona loaded - standing opposite to Shrek!\n");
+
+    // ========================================
+    // TOILET MODEL
+    // ========================================
+    printf("  Creating Toilet...\n");
+    LoadedModel* toiletModel = new LoadedModel("models/toiled.obj");
+    
+    DrawableObject* toilet = new DrawableObject(toiletModel, phongTextureShader);
+    toilet->addTexture(tm->getTexture(4)); // Toilet textúra
+    
+    // Umiestnenie toalety - v lese vľavo vzadu, vtipná pozícia
+    toilet->translate(glm::vec3(-12.0f, -0.5f, -18.0f));
+    toilet->rotate(45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    toilet->scale(glm::vec3(0.5f)); // Podstatne menšia
+    
+    toilet->calculateModelMatrix();
+    toilet->updateModelMatrix();
+    om->addDrawableObject(toilet);
+    
+    printf("Toilet loaded - hidden in the forest!\n");
 
     // ========== KRÍKY ==========
     BushModel* bushModel = new BushModel();
