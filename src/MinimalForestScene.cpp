@@ -137,7 +137,7 @@ void MinimalForestScene::createDrawableObjects()
     // LAMPY
     // ========================================
     printf("  Creating lamps (with increased light intensity for screenshot)...\n");
-    LoadedModel* lampModel = new LoadedModel("Models/lamp.obj");
+    LoadedModel* lampModel = new LoadedModel("models/lamp.obj");
 
     float lampPositions[][3] = {
         {-2.5f, 0.32f, -20.0f},
@@ -184,7 +184,7 @@ void MinimalForestScene::createDrawableObjects()
     // SHUTTLE MODEL(HAVARUJÚCA LOĎKA)
     // ========================================
     printf("  Creating shuttle (crashing spaceship)...\n");
-    LoadedModel* shuttleModel = new LoadedModel("Models/shuttle.obj");
+    LoadedModel* shuttleModel = new LoadedModel("models/shuttle.obj");
 
     DrawableObject* shuttle = new DrawableObject(shuttleModel, phongShader);
     shuttle->setColor(glm::vec3(0.7f, 0.7f, 0.75f));  // Kovová sivá farba

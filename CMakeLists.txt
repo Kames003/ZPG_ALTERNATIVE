@@ -253,3 +253,18 @@ add_custom_command(TARGET untitled2 POST_BUILD
 # Alternatívne: Skopíruj pri konfigurácii (raz)
 file(COPY ${CMAKE_SOURCE_DIR}/src/Shaders
         DESTINATION ${CMAKE_BINARY_DIR})
+
+# ========================================
+# COPY MODELS TO BUILD DIRECTORY
+# ========================================
+# Skopíruje models priečinok do build priečinka pri každom buildu
+add_custom_command(TARGET untitled2 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/src/models
+        $<TARGET_FILE_DIR:untitled2>/models
+        COMMENT "📦 Copying models to build directory..."
+)
+
+# Alternatívne: Skopíruj pri konfigurácii (raz)
+file(COPY ${CMAKE_SOURCE_DIR}/src/models
+        DESTINATION ${CMAKE_BINARY_DIR})
