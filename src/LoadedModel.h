@@ -5,10 +5,16 @@
 #include <assimp/postprocess.h>
 
 #include <vector>
+#include <string>
 
 #include "AbstractModel.h"
 
-// Model načítaný zo súboru (OBJ, FBX, atď.) pomocou knižnice ASSIMP
+/**
+ * @brief Model načítaný zo súboru (OBJ, FBX, atď.) pomocou knižnice ASSIMP
+ *
+ * Načíta geometriu (pozície, normály, UV) zo súboru.
+ * Pre materiály použite MaterialManager a MTLLoader samostatne.
+ */
 
 class LoadedModel : public AbstractModel
 {

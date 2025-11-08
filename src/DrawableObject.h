@@ -7,6 +7,7 @@
 #include "LeafScale.h"
 #include "LeafTranslate.h"
 #include "Texture.h"
+#include "Material.h"
 #include <vector>
 
 /**
@@ -25,6 +26,7 @@ private:
 	ShaderProgram* shaderProgram;
 	TransformationComposite* tc;
 	glm::vec3 color;
+	Material* material;  // Materiál objektu
 
 public:
 	bool visible = true;
@@ -46,6 +48,10 @@ public:
 
 	void setColor(glm::vec3 c) { color = c; }
 	glm::vec3 getColor() { return color; }
+	
+	// Material management
+	void setMaterial(Material* m) { material = m; }
+	Material* getMaterial() { return material; }
 	
 	// Textúry
 	void addTexture(Texture* t) { textures.push_back(t); }

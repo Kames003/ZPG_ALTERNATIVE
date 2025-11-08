@@ -11,6 +11,9 @@ DrawableObject::DrawableObject(AbstractModel* am, ShaderProgram* sp)
 
     // Defaultná farba
     color = glm::vec3(1.0f, 1.0f, 1.0f);
+    
+    // Default materiál (bude nahradený z MaterialManagera)
+    material = nullptr;
 }
 
 DrawableObject::DrawableObject(AbstractModel* am, ShaderProgram* sp, glm::vec3 c)
@@ -19,19 +22,26 @@ DrawableObject::DrawableObject(AbstractModel* am, ShaderProgram* sp, glm::vec3 c
     shaderProgram = sp;
     tc = new TransformationComposite();
     color = c;  // Nastav farbu z parametra
+    material = nullptr;
 }
 
 
 void DrawableObject::drawModel()
 {
-
     shaderProgram->activateShaderProgram();
 
+    // Pošli farbu (pre backward compatibility)
     shaderProgram->updateUniform("objectColor", color);
+    
+    // Pošli materiál do shaderu (ak existuje)
+    if (material != nullptr) {
+        material->sendToShader(shaderProgram);
+    }
+    
     shaderProgram->updateUniform("modelMatrix",
         glm::value_ptr(tc->getResultMatrix()));
 
-   // (volá glDrawArrays)
+    // (volá glDrawArrays)
     abstractModel->draw();
 
     shaderProgram->deactivateShaderProgram();

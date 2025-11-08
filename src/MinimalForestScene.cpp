@@ -14,6 +14,9 @@
 #include <cstdlib>
 #include "LoadedModel.h"
 #include <ctime>
+#include "MaterialManager.h"
+#include "MTLLoader.h"
+#include "Material.h"
 
 void MinimalForestScene::createShaders()
 {
@@ -39,10 +42,22 @@ void MinimalForestScene::createShaders()
         "Shaders/VertexShaderConstant.glsl",
         "Shaders/FragmentShaderConstant.glsl");
 
+    // Phong Texture + Material shader (index 4) - pre textúry s materiálmi
+    spm->addShaderProgram(camera,
+        "Shaders/VertexShaderPhongTexture.glsl",
+        "Shaders/FragmentShaderPhongTextureMaterial.glsl");
+
+    // Phong Material shader (index 5) - pre materiály BEZ textúry (ako Wolf)
+    spm->addShaderProgram(camera,
+        "Shaders/VertexShaderPhong.glsl",
+        "Shaders/FragmentShaderPhongMaterial.glsl");
+
     printf("Skybox shader (index 0)\n");
     printf("Phong shader (index 1) - 16 lights + flashlight\n");
     printf("Phong Texture shader (index 2) - textured ground\n");
     printf("Constant shader (index 3) - fireflies\n");
+    printf("Phong Texture + Material shader (index 4) - texture + materials\n");
+    printf("Phong Material shader (index 5) - materials without texture\n");
 }
 
 void MinimalForestScene::createTextures()
@@ -61,21 +76,38 @@ void MinimalForestScene::createTextures()
     
     // Grass textúra (index 1)
     tm->addTexture(new Texture2D("Textures/Grass/grass.png"));
-    
-    // Shrek textúra (index 2)
-    tm->addTexture(new Texture2D("Textures/Shrek/shrek.png"));
-    
-    // Fiona textúra (index 3)
-    tm->addTexture(new Texture2D("Textures/Fiona/fiona.png"));
-    
-    // Toilet textúra (index 4)
-    tm->addTexture(new Texture2D("Textures/Toilet/toiled.jpg"));
-    
+
+    // Shrek textúra (index 2) - PRESUNUŤ NA models/
+    tm->addTexture(new Texture2D("models/shrek.png"));
+
+    // Fiona textúra (index 3) - PRESUNUŤ NA models/
+    tm->addTexture(new Texture2D("models/fiona.png"));
+
+    // Toilet textúra (index 4) - PRESUNUŤ NA models/
+    tm->addTexture(new Texture2D("models/toiled.jpg"));
+
+    // Cat textúra (index 5)
+    tm->addTexture(new Texture2D("models/Cat_diffuse.jpg"));
+
     printf("Skybox cubemap loaded (texture 0)\n");
     printf("Grass texture loaded (texture 1)\n");
-    printf("Shrek texture loaded (texture 2)\n");
-    printf("Fiona texture loaded (texture 3)\n");
-    printf("Toilet texture loaded (texture 4)\n");
+    printf("Shrek texture loaded from models/ (texture 2)\n");
+    printf("Fiona texture loaded from models/ (texture 3)\n");
+    printf("Toilet texture loaded from models/ (texture 4)\n");
+    printf("Cat texture loaded (texture 5)\n");
+}
+
+void MinimalForestScene::createMaterials()
+{
+    printf("  Creating materials...\n");
+
+    // Načítaj materiály zo shrek.mtl
+    MTLLoader::loadMTL("models/shrek.mtl", mm);
+
+    // Načítaj materiály z Cat.mtl
+    MTLLoader::loadMTL("models/Cat.mtl", mm);
+
+    printf("Materials loaded successfully!\n");
 }
 
 void MinimalForestScene::createLights()
@@ -111,10 +143,12 @@ void MinimalForestScene::createDrawableObjects()
     printf("  Creating objects...\n");
     srand(static_cast<unsigned>(time(nullptr)));
 
-    ShaderProgram* skyboxShader = spm->getShaderProgram(0);      // SKYBOX
-    ShaderProgram* phongShader = spm->getShaderProgram(1);       // PHONG
-    ShaderProgram* phongTextureShader = spm->getShaderProgram(2); // PHONG TEXTURE
-    ShaderProgram* constantShader = spm->getShaderProgram(3);    // CONSTANT
+    ShaderProgram* skyboxShader = spm->getShaderProgram(0);            // SKYBOX
+    ShaderProgram* phongShader = spm->getShaderProgram(1);             // PHONG
+    ShaderProgram* phongTextureShader = spm->getShaderProgram(2);      // PHONG TEXTURE
+    ShaderProgram* constantShader = spm->getShaderProgram(3);          // CONSTANT
+    ShaderProgram* phongTextureMaterialShader = spm->getShaderProgram(4); // PHONG TEXTURE + MATERIAL
+    ShaderProgram* phongMaterialShader = spm->getShaderProgram(5);     // PHONG MATERIAL (bez textúry)
 
     // ========================================
     // SKYBOX (renderuje sa ako prvý)
@@ -272,24 +306,58 @@ void MinimalForestScene::createDrawableObjects()
     printf("Shuttle loaded - crashing above forest!\n");
 
     // ========================================
-    // SHREK MODEL
+    // SHREK MODEL - DVA SHRECI S RÔZNYMI MATERIÁLMI + TEXTÚROU
     // ========================================
-    printf("  Creating Shrek...\n");
+    printf("  Creating two Shreks with texture + different materials...\n");
     LoadedModel* shrekModel = new LoadedModel("models/shrek.obj");
-    
-    DrawableObject* shrek = new DrawableObject(shrekModel, phongTextureShader);
-    shrek->addTexture(tm->getTexture(2)); // Shrek textúra
-    
-    // Umiestnenie Shreka - vľavo od cesty, bližšie ku kamere
-    shrek->translate(glm::vec3(-6.0f, -0.5f, -5.0f));
-    shrek->rotate(30.0f, glm::vec3(0.0f, 1.0f, 0.0f)); // Mierne otočený
-    shrek->scale(glm::vec3(0.8f)); // Menší, primeraný
-    
-    shrek->calculateModelMatrix();
-    shrek->updateModelMatrix();
-    om->addDrawableObject(shrek);
-    
-    printf("Shrek loaded - standing near the path!\n");
+
+    // ========== SHREK 1: Matný (materiál z MTL) ==========
+    DrawableObject* shrek1 = new DrawableObject(shrekModel, phongTextureMaterialShader);
+    shrek1->addTexture(tm->getTexture(2)); // Shrek textúra
+
+    // Použij materiál z shrek.mtl a uprav ho na matný
+    Material* shrekMat1 = mm->getMaterialByName("Material.001");
+    shrekMat1->setAmbient(glm::vec3(0.3f, 0.3f, 0.3f));     // Znížený ambient
+    shrekMat1->setDiffuse(glm::vec3(1.0f, 1.0f, 1.0f));     // Plná textúra
+    shrekMat1->setSpecular(glm::vec3(0.0f, 0.0f, 0.0f));    // ŽIADNY lesk!
+    shrekMat1->setShininess(1.0f);                          // Minimálny
+    shrek1->setMaterial(shrekMat1);
+
+    // Umiestnenie - vľavo od cesty
+    shrek1->translate(glm::vec3(-6.0f, -0.5f, -5.0f));
+    shrek1->rotate(30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    shrek1->scale(glm::vec3(0.8f));
+
+    shrek1->calculateModelMatrix();
+    shrek1->updateModelMatrix();
+    om->addDrawableObject(shrek1);
+
+    printf("Shrek 1 - MATNÝ (z shrek.mtl, specular: 0.0)\n");
+
+    // ========== SHREK 2: BRUTÁLNE LESKLÝ BRONZ ==========
+    DrawableObject* shrek2 = new DrawableObject(shrekModel, phongTextureMaterialShader);
+    shrek2->addTexture(tm->getTexture(2)); // Rovnaká Shrek textúra
+
+    // Vytvor EXTRA lesklý materiál (viac ako bronze!)
+    Material* shrekBronze = new Material();
+    shrekBronze->setName("ShrekSuperShiny");
+    shrekBronze->setAmbient(glm::vec3(0.3f, 0.3f, 0.3f));   // Mierny ambient
+    shrekBronze->setDiffuse(glm::vec3(1.0f, 1.0f, 1.0f));   // Plná textúra
+    shrekBronze->setSpecular(glm::vec3(1.0f, 1.0f, 1.0f));  // MAXIMÁLNY biely lesk!
+    shrekBronze->setShininess(256.0f);                       // EXTRA vysoký (vs Bronze 25.6)
+    mm->addMaterial(shrekBronze);
+    shrek2->setMaterial(shrekBronze);
+
+    // Umiestnenie - vpravo od cesty, BEZ konfliktu s Fionou
+    shrek2->translate(glm::vec3(10.0f, -0.5f, -8.0f));  // Ďalej vpravo a vzadu
+    shrek2->rotate(-45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    shrek2->scale(glm::vec3(0.8f));
+
+    shrek2->calculateModelMatrix();
+    shrek2->updateModelMatrix();
+    om->addDrawableObject(shrek2);
+
+    printf("Shrek 2 - BRUTÁLNE LESKLÝ (specular: 1.0, shininess: 256) 💎✨\n");
 
     // ========================================
     // FIONA MODEL
@@ -324,12 +392,38 @@ void MinimalForestScene::createDrawableObjects()
     toilet->translate(glm::vec3(-12.0f, -0.5f, -18.0f));
     toilet->rotate(45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     toilet->scale(glm::vec3(0.5f)); // Podstatne menšia
-    
+
     toilet->calculateModelMatrix();
     toilet->updateModelMatrix();
     om->addDrawableObject(toilet);
-    
+
     printf("Toilet loaded - hidden in the forest!\n");
+
+    // ========================================
+    // CAT MODEL 🐱 - NA LAVIČKE
+    // ========================================
+    printf("  Creating Cat on bench...\n");
+    LoadedModel* catModel = new LoadedModel("models/Cat.obj");
+
+    DrawableObject* cat = new DrawableObject(catModel, phongTextureMaterialShader);
+    cat->addTexture(tm->getTexture(5)); // Cat textúra
+
+    // Získaj materiál z Cat.mtl
+    Material* catMat = mm->getMaterialByName("Cat");
+    cat->setMaterial(catMat);
+
+    // Pozícia - na prvej lavičke
+    // Y=-0.1 aby labky stáli presne na vrchu lavičky
+    cat->translate(glm::vec3(-5.0f, -0.06f, -10.0f));  // NA lavičke
+    cat->rotate(-90.0f, glm::vec3(1.0f, 0.0f, 0.0f)); // Postaviť do státia
+    cat->rotate(360.0f, glm::vec3(0.0f, 1.0f, 0.0f)); // 270° = -90° flipne to správne
+    cat->scale(glm::vec3(0.012f)); // Malá mačka
+
+    cat->calculateModelMatrix();
+    cat->updateModelMatrix();
+    om->addDrawableObject(cat);
+
+    printf("Cat loaded - sitting on bench! 🐱\n");
 
     // ========== KRÍKY ==========
     BushModel* bushModel = new BushModel();
@@ -419,16 +513,20 @@ void MinimalForestScene::createScene(GLFWwindow* window)
     this->lm = new LightManager();
     this->spm = new ShaderProgramManager(lm);
     this->om = new ObjectManager();
-    this->tm = new TextureManager();  // NOVÉ!
+    this->tm = new TextureManager();
+    this->mm = new MaterialManager();  // MaterialManager
 
     createShaders();
-    createTextures();  // NOVÉ!
+    createTextures();
+    createMaterials();  // Načítanie materiálov
     createLights();
     createDrawableObjects();
     callbacks();
 
     printf("\n╔═══════════════════════════════════════╗\n");
     printf("║         SCENE READY                   ║\n");
+    printf("║  Shrek 1: Normal shine (left)        ║\n");
+    printf("║  Shrek 2: BRUTAL SHINE (right) 💎     ║\n");
     printf("╚═══════════════════════════════════════╝\n\n");
 }
 

@@ -1,4 +1,4 @@
-// LoadedModel.cpp - COMPLETE FIXED VERSION with multi-mesh support
+// LoadedModel.cpp - Načítanie 3D modelu pomocou ASSIMP
 #include "LoadedModel.h"
 
 LoadedModel::LoadedModel(const char* path)
@@ -147,12 +147,12 @@ LoadedModel::LoadedModel(const char* path)
     vbo->unbind();
     vao->unbind();
 
-    printf("LoadedModel constructor finished!\n\n");
+    printf("✅ LoadedModel loaded successfully!\n\n");
 }
 
 void LoadedModel::draw()
 {
     vao->bind();
-    glDrawArrays(GL_TRIANGLES, 0, count); // : )
+    glDrawArrays(GL_TRIANGLES, 0, count);
     vao->unbind();
 }
