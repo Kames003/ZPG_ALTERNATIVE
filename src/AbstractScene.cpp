@@ -1,41 +1,7 @@
-#pragma once
+// Empty implementation file - all methods are pure virtual in AbstractScene.h
+// This file exists to satisfy CMake's source file requirements
 
-#include "ShaderProgramManager.h"
-#include "ObjectManager.h"
-#include "LightManager.h"
-#include "Callback.h"
-#include "Camera.h"
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "AbstractScene.h"
 
-
-class AbstractScene
-{
-protected:
-	// ========================================
-	// CORE KOMPONENTY SCÉNY
-	// ========================================
-
-	Camera* camera;
-	ShaderProgramManager* spm;
-	ObjectManager* om;
-	LightManager* lm;
-	GLFWwindow* window;
-
-	// ========================================
-	// ABSTRAKTNÉ METÓDY
-	// ========================================
-
-	virtual void createShaders() = 0;
-	virtual void createDrawableObjects() = 0;
-	virtual void callbacks() = 0;
-
-public:
-	// ========================================
-	// VEREJNÉ VIRTUÁLNE METÓDY
-	// ========================================
-
-	virtual void createScene(GLFWwindow* window) = 0;
-	virtual void renderScene() = 0;
-
-};
+// AbstractScene je abstraktná trieda - všetky metódy sú pure virtual
+// Implementácie sú v derived triedach (MinimalForestScene, Scene1_PhongTest, atď.)

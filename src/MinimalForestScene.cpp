@@ -1,6 +1,7 @@
 #include "MinimalForestScene.h"
 #include "TreeModel.h"
 #include "PlainModel.h"
+#include "PlainTextureModel.h"
 #include "DrawableObject.h"
 #include "PointLight.h"
 #include "DirectionalLight.h"
@@ -9,6 +10,7 @@
 #include "BushModel.h"
 #include "SphereModel.h"
 #include "Firefly.h"
+#include "SkyboxModel.h"
 #include <cstdlib>
 #include "LoadedModel.h"
 #include <ctime>
@@ -17,16 +19,51 @@ void MinimalForestScene::createShaders()
 {
     printf("  Creating shaders...\n");
 
+    // SKYBOX shader (index 0)
+    spm->addShaderProgram(camera,
+        "Shaders/VertexShaderSkybox.glsl",
+        "Shaders/FragmentShaderSkybox.glsl");
+
+    // Phong shader (index 1)
     spm->addShaderProgram(camera,
         "Shaders/VertexShaderPhong.glsl",
         "Shaders/FragmentShaderPhong.glsl");
 
+    // Phong Texture shader (index 2) - pre textúrovanú zem
+    spm->addShaderProgram(camera,
+        "Shaders/VertexShaderPhongTexture.glsl",
+        "Shaders/FragmentShaderPhongTexture.glsl");
+
+    // Constant shader pre fireflies (index 3)
     spm->addShaderProgram(camera,
         "Shaders/VertexShaderConstant.glsl",
         "Shaders/FragmentShaderConstant.glsl");
 
-    printf("Phong shader (index 0) - 16 lights + flashlight\n");
-    printf("Constant shader (index 1) - fireflies\n");
+    printf("Skybox shader (index 0)\n");
+    printf("Phong shader (index 1) - 16 lights + flashlight\n");
+    printf("Phong Texture shader (index 2) - textured ground\n");
+    printf("Constant shader (index 3) - fireflies\n");
+}
+
+void MinimalForestScene::createTextures()
+{
+    printf("  Creating textures...\n");
+    
+    // Cubemap pre skybox (index 0)
+    tm->addTexture(new TextureCubemap(
+        "Textures/Skybox/posx.jpg",
+        "Textures/Skybox/negx.jpg",
+        "Textures/Skybox/posy.jpg",
+        "Textures/Skybox/negy.jpg",
+        "Textures/Skybox/posz.jpg",
+        "Textures/Skybox/negz.jpg"
+    ));
+    
+    // Grass textúra (index 1)
+    tm->addTexture(new Texture2D("Textures/Grass/grass.png"));
+    
+    printf("Skybox cubemap loaded (texture 0)\n");
+    printf("Grass texture loaded (texture 1)\n");
 }
 
 void MinimalForestScene::createLights()
@@ -62,21 +99,38 @@ void MinimalForestScene::createDrawableObjects()
     printf("  Creating objects...\n");
     srand(static_cast<unsigned>(time(nullptr)));
 
-    ShaderProgram* phongShader = spm->getShaderProgram(0);
-    ShaderProgram* constantShader = spm->getShaderProgram(1);
+    ShaderProgram* skyboxShader = spm->getShaderProgram(0);      // SKYBOX
+    ShaderProgram* phongShader = spm->getShaderProgram(1);       // PHONG
+    ShaderProgram* phongTextureShader = spm->getShaderProgram(2); // PHONG TEXTURE
+    ShaderProgram* constantShader = spm->getShaderProgram(3);    // CONSTANT
 
-    // ========== ZEMA ==========
-    PlainModel* groundModel = new PlainModel();
-    DrawableObject* ground = new DrawableObject(groundModel, phongShader);
-    ground->setColor(glm::vec3(0.15f, 0.25f, 0.15f));
+    // ========================================
+    // SKYBOX (renderuje sa ako prvý)
+    // ========================================
+    printf("  Creating skybox...\n");
+    SkyboxModel* skyboxModel = new SkyboxModel();
+    DrawableObject* skybox = new DrawableObject(skyboxModel, skyboxShader);
+    skybox->addTexture(tm->getTexture(0)); // Cubemap texture
+    skybox->scale(glm::vec3(50.0f)); // Veľká kocka okolo scény
+    skybox->calculateModelMatrix();
+    skybox->updateModelMatrix();
+    om->addSkybox(skybox);
+    printf("Skybox created\n");
+
+    // ========== ZEMA S TEXTÚROU TRÁVY ==========
+    PlainTextureModel* groundTextureModel = new PlainTextureModel();
+    DrawableObject* ground = new DrawableObject(groundTextureModel, phongTextureShader);
+    ground->addTexture(tm->getTexture(1)); // Grass textúra
     ground->scale(glm::vec3(100.0f, 1.0f, 100.0f));
     ground->translate(glm::vec3(0.0f, -0.5f, 0.0f));
     ground->calculateModelMatrix();
     ground->updateModelMatrix();
     om->addDrawableObject(ground);
+    printf("Ground with grass texture created\n");
 
-    // ========== CESTA ==========
-    DrawableObject* path = new DrawableObject(groundModel, phongShader);
+    // ========== CESTA (bez textúry) ==========
+    PlainModel* pathModel = new PlainModel();
+    DrawableObject* path = new DrawableObject(pathModel, phongShader);
     path->setColor(glm::vec3(0.6f, 0.5f, 0.4f));
     path->scale(glm::vec3(3.0f, 1.0f, 100.0f));
     path->translate(glm::vec3(0.0f, -0.4f, 0.0f));
@@ -293,8 +347,10 @@ void MinimalForestScene::createScene(GLFWwindow* window)
     this->lm = new LightManager();
     this->spm = new ShaderProgramManager(lm);
     this->om = new ObjectManager();
+    this->tm = new TextureManager();  // NOVÉ!
 
     createShaders();
+    createTextures();  // NOVÉ!
     createLights();
     createDrawableObjects();
     callbacks();
@@ -347,7 +403,9 @@ void MinimalForestScene::renderFrame()
     }
 
     spm->updateLights(); // pošli info o svetlach do shaderov
-    om->drawObjects(); // vykresli všetky objekty
+    
+    om->drawSkybox();    // NOVÉ: vykreslí skybox NAJPRV
+    om->drawObjects();   // vykresli všetky objekty
 } // end :)
 
 void MinimalForestScene::renderScene()

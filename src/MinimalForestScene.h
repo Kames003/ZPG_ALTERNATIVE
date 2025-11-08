@@ -1,5 +1,6 @@
 #pragma once
 #include "AbstractScene.h"
+#include "TextureManager.h"
 #include <vector>
 
 // Forward declaration
@@ -19,6 +20,7 @@ private:
 
 protected:
     void createShaders() override;
+    void createTextures();  // NOVÉ: vytvorenie textúr
     void createDrawableObjects() override;
     void createLights();
     void callbacks() override;

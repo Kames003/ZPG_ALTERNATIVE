@@ -10,15 +10,26 @@ class ObjectManager
 {
 private:
     std::vector<DrawableObject*> objects;  // Všetky objekty v scéne
+    DrawableObject* skybox;                // Skybox (renderuje sa osobitne)
 
 public:
     /**
      * Pridá objekt do scény
      */
     void addDrawableObject(DrawableObject* d);
+    
+    /**
+     * Nastaví skybox (renderuje sa pred všetkým ostatným)
+     */
+    void addSkybox(DrawableObject* d);
 
     /**
-     * Vykreslí všetky objekty (bez textúr)
+     * Vykreslí skybox (volaj PRVÝ pred drawObjects)
+     */
+    void drawSkybox();
+    
+    /**
+     * Vykreslí všetky objekty (s podporou textúr)
      */
     void drawObjects();
 

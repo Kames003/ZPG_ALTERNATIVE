@@ -6,6 +6,7 @@
 #include "LeafRotate.h"
 #include "LeafScale.h"
 #include "LeafTranslate.h"
+#include "Texture.h"
 #include <vector>
 
 /**
@@ -27,6 +28,7 @@ private:
 
 public:
 	bool visible = true;
+	std::vector<Texture*> textures;  // Zoznam textúr pre tento objekt
 
 	DrawableObject(AbstractModel* am, ShaderProgram* sp);
 	DrawableObject(AbstractModel* am, ShaderProgram* sp, glm::vec3 color);
@@ -44,6 +46,9 @@ public:
 
 	void setColor(glm::vec3 c) { color = c; }
 	glm::vec3 getColor() { return color; }
+	
+	// Textúry
+	void addTexture(Texture* t) { textures.push_back(t); }
 
 	TransformationComposite* getTransformationComposite() { return tc; }
 	AbstractModel* getModel() { return abstractModel; }

@@ -203,6 +203,20 @@ set(SOURCES
         src/Scene4_BackfaceTest.h
         src/Scene5_LoadedModelTest.cpp
         src/Scene5_LoadedModelTest.h
+        
+        # Textures
+        src/Texture.h
+        src/Texture2D.cpp
+        src/Texture2D.h
+        src/TextureCubemap.cpp
+        src/TextureCubemap.h
+        src/TextureManager.cpp
+        src/TextureManager.h
+        src/SkyboxModel.cpp
+        src/SkyboxModel.h
+        src/PlainTextureModel.cpp
+        src/PlainTextureModel.h
+        src/external/stb_image.h
 )
 
 # ========================================
@@ -267,4 +281,19 @@ add_custom_command(TARGET untitled2 POST_BUILD
 
 # Alternatívne: Skopíruj pri konfigurácii (raz)
 file(COPY ${CMAKE_SOURCE_DIR}/src/models
+        DESTINATION ${CMAKE_BINARY_DIR})
+
+# ========================================
+# COPY TEXTURES TO BUILD DIRECTORY
+# ========================================
+# Skopíruje Textures priečinok do build priečinka pri každom buildu
+add_custom_command(TARGET untitled2 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/src/Textures
+        $<TARGET_FILE_DIR:untitled2>/Textures
+        COMMENT "🖼️ Copying textures to build directory..."
+)
+
+# Alternatívne: Skopíruj pri konfigurácii (raz)
+file(COPY ${CMAKE_SOURCE_DIR}/src/Textures
         DESTINATION ${CMAKE_BINARY_DIR})

@@ -3,6 +3,7 @@
 #include "ShaderProgramManager.h"
 #include "ObjectManager.h"
 #include "LightManager.h"
+#include "TextureManager.h"
 #include "Callback.h"
 #include "Camera.h"
 #include <GL/glew.h>
@@ -25,6 +26,7 @@ protected:
 	ShaderProgramManager* spm;
 	ObjectManager* om;
 	LightManager* lm;
+	TextureManager* tm;  // NOVÉ: Manažér textúr
 	GLFWwindow* window;
 
 	virtual void createShaders() = 0;
