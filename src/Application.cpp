@@ -15,7 +15,7 @@ void Application::initGLFW()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    printf("  GLFW initialized successfully\n");
+    printf("GLFW initialized successfully\n");
 }
 
 void Application::initWindow(int width, int height, const char* name)

@@ -22,7 +22,7 @@ class ShaderProgramManager
 {
 private:
     std::vector<ShaderProgram*> shaderPrograms;
-    LightManager* lm;  // Referencia na light manager
+    LightManager* lm;
 
     // light update
     void updateAmbient();

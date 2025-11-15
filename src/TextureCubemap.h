@@ -6,7 +6,7 @@
 /**
  * @brief Cubemap textúra pre skybox
  * 
- * Skladá sa zo 6 obrázkov: right, left, top, bottom, front, back
+ * Skladá sa zo 6 obrázkov: right, left, top, bottom, front, back = viac vo folder textures
  */
 class TextureCubemap : public Texture
 {

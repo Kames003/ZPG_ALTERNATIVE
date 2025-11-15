@@ -3,7 +3,7 @@
 
 LoadedModel::LoadedModel(const char* path)
 {
-    printf("🔄 Loading model: %s\n", path);
+    printf("Loading model: %s\n", path);
 
     // VYTVOR ASSIMP IMPORTER
     Assimp::Importer importer;
@@ -48,7 +48,7 @@ LoadedModel::LoadedModel(const char* path)
     int totalVertexCount = 0;
 
     // NAČÍTAJ VŠETKY MESHES (dôležité pre multi-mesh modely ako lamp.obj)
-    printf("   🔄 Processing %d meshes...\n", scene->mNumMeshes);
+    printf("Processing %d meshes...\n", scene->mNumMeshes);
 
     for (unsigned int meshIdx = 0; meshIdx < scene->mNumMeshes; meshIdx++)
     {
@@ -58,12 +58,12 @@ LoadedModel::LoadedModel(const char* path)
                meshIdx, mesh->mNumVertices, mesh->mNumFaces);
 
         if (!mesh->HasNormals()) {
-            printf("      ⚠️  Mesh %d has no normals, skipping...\n", meshIdx);
+            printf("Mesh %d has no normals, skipping...\n", meshIdx);
             continue;
         }
 
         if (mesh->mNumVertices == 0) {
-            printf("      ⚠️  Mesh %d has no vertices, skipping...\n", meshIdx);
+            printf("Mesh %d has no vertices, skipping...\n", meshIdx);
             continue;
         }
 
@@ -111,7 +111,7 @@ LoadedModel::LoadedModel(const char* path)
             }
         }
 
-        printf("      ✅ Mesh %d processed: %d vertices added\n",
+        printf("Mesh %d processed: %d vertices added\n",
                meshIdx, mesh->mNumFaces * 3);
     }
 
@@ -126,11 +126,11 @@ LoadedModel::LoadedModel(const char* path)
            data.size(), totalVertexCount);
 
     // VYTVORENIE VBO a VAO
-    printf("   🔄 Creating VBO...\n");
+    printf("Creating VBO...\n");
     vbo = new VBO();
     vbo->generateVBO(&data[0], data.size() * sizeof(float));
 
-    printf("   🔄 Creating VAO...\n");
+    printf("Creating VAO...\n");
     vao = new VAO();
     vao->generateVAO();
 
@@ -147,7 +147,7 @@ LoadedModel::LoadedModel(const char* path)
     vbo->unbind();
     vao->unbind();
 
-    printf("✅ LoadedModel loaded successfully!\n\n");
+    printf("LoadedModel loaded successfully!\n\n");
 }
 
 void LoadedModel::draw()

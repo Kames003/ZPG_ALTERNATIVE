@@ -68,7 +68,7 @@ void DrawableObject::translate(glm::vec3 translate)
 void DrawableObject::calculateModelMatrix()
 {
     // Vypočítame model matrix z všetkých transformácií
-    // POZOR: Táto metóda vyprázdni transformation composite!
+    // POZOR: Táto metóda vyprázdni transformation composite! ale vdaka tomu sme schopny realizovať našu animacie
     tc->calculateTransformations();
 }
 

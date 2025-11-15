@@ -4,7 +4,7 @@
 #include "MaterialManager.h"
 #include <vector>
 
-// Forward declaration
+
 class Firefly;
 class SpotlightCamera;
 
@@ -12,8 +12,8 @@ class SpotlightCamera;
 class MinimalForestScene : public AbstractScene
 {
 private:
-    std::vector<Firefly*> fireflies;  // Uložení světlušek pro animaci
-    MaterialManager* mm = nullptr;     // Material manager
+    std::vector<Firefly*> fireflies;
+    MaterialManager* mm = nullptr;
 
     SpotlightCamera* flashlight = nullptr;
     bool flashlightEnabled = false;
@@ -21,8 +21,8 @@ private:
 
 protected:
     void createShaders() override;
-    void createTextures();  // Vytvorenie textúr
-    void createMaterials(); // Vytvorenie materiálov
+    void createTextures();
+    void createMaterials();
     void createDrawableObjects() override;
     void createLights();
     void callbacks() override;

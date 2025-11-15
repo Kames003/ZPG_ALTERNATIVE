@@ -26,7 +26,7 @@ protected:
 	ShaderProgramManager* spm;
 	ObjectManager* om;
 	LightManager* lm;
-	TextureManager* tm;  // NOVÉ: Manažér textúr
+	TextureManager* tm;
 	GLFWwindow* window;
 
 	virtual void createShaders() = 0;

@@ -22,6 +22,6 @@ GiftModel::GiftModel()
 void GiftModel::draw()
 {
     vao->bind();
-    glDrawArrays(GL_TRIANGLES, 0, 66624);  // Darček má 66624 vrcholov
+    glDrawArrays(GL_TRIANGLES, 0, 66624);
     vao->unbind();
 }

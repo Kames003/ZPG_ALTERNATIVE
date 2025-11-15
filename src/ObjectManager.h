@@ -34,7 +34,7 @@ public:
     void drawObjects();
 
     /**
-     * Nastaví viditeľnosť objektu (pre budúce rozšírenia)
+     * Nastaví viditeľnosť objektu (pre budúce rozšírenie vraj to ma byt next week darček / zombos
      */
     void setObjectVisibility(int index, bool visible);
 

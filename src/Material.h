@@ -4,15 +4,6 @@
 #include <string>
 #include "ShaderProgram.h"
 
-/**
- * @brief Material class pre Phong/Blinn-Phong osvetľovací model
- * 
- * Mapovanie MTL vlastností:
- * - ra (ambient)  ← Ka (ambient coefficient)
- * - rd (diffuse)  ← Kd (diffuse coefficient)  
- * - rs (specular) ← Ks (specular coefficient)
- * - h (shininess) ← Ns (shininess exponent)
- */
 class Material {
 private:
     glm::vec3 ra;  // Ambient reflection coefficient (Ka)
@@ -56,9 +47,7 @@ public:
     void setShininess(float shininess) { h = shininess; }
     void setName(const std::string& materialName) { name = materialName; }
     
-    /**
-     * @brief Načíta materiál z MTL hodnôt
-     */
+
     void loadFromMTL(const glm::vec3& Ka, const glm::vec3& Kd, 
                      const glm::vec3& Ks, float Ns) {
         ra = Ka;
@@ -67,10 +56,7 @@ public:
         h = Ns;
     }
     
-    /**
-     * @brief Pošle materiálové vlastnosti do shaderu
-     * @param shaderProgram Ukazovateľ na ShaderProgram objekt
-     */
+
     void sendToShader(ShaderProgram* shaderProgram) const {
         if (shaderProgram == nullptr) return;
         
@@ -80,9 +66,7 @@ public:
         shaderProgram->updateUniform("material.shininess", h);
     }
     
-    /**
-     * @brief Debug výpis materiálu
-     */
+
     void print() const {
         printf("═══════════════════════════════\n");
         printf("Material: %s\n", name.c_str());

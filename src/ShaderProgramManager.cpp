@@ -29,18 +29,15 @@ ShaderProgram* ShaderProgramManager::getShaderProgram(int index)
 	return this->shaderPrograms[index];
 }
 
-// ========================================
-// ✅ OPRAVENÉ: Všetky update metódy
-// ========================================
 
 void ShaderProgramManager::updateAmbient()
 {
 	// Pošli ambient hodnotu do všetkých shaderov
 	for (ShaderProgram* s : shaderPrograms)
 	{
-		s->activateShaderProgram();  // ✅ Aktivuj
+		s->activateShaderProgram();
 		s->updateUniform("ambient", lm->ambient);
-		s->deactivateShaderProgram();  // ✅ Deaktivuj
+		s->deactivateShaderProgram();
 	}
 }
 
@@ -48,7 +45,7 @@ void ShaderProgramManager::updatePointLights()
 {
 	for (ShaderProgram* s : shaderPrograms)
 	{
-		s->activateShaderProgram();  // ✅ Aktivuj RAZ na začiatku
+		s->activateShaderProgram();
 
 		int size = lm->getPointLightsSize();
 		s->updateUniform("numberOfPointLights", size);
@@ -66,7 +63,7 @@ void ShaderProgramManager::updatePointLights()
 			s->updateUniform((base + "quadratic").c_str(), light->quadratic);
 		}
 
-		s->deactivateShaderProgram();  // ✅ Deaktivuj RAZ na konci
+		s->deactivateShaderProgram();
 	}
 }
 
@@ -74,7 +71,7 @@ void ShaderProgramManager::updateSpotlights()
 {
 	for (ShaderProgram* s : shaderPrograms)
 	{
-		s->activateShaderProgram();  // ✅ Aktivuj
+		s->activateShaderProgram();
 
 		int size = lm->getSpotlightsSize();
 		s->updateUniform("numberOfSpotlights", size);
@@ -93,7 +90,7 @@ void ShaderProgramManager::updateSpotlights()
 			s->updateUniform((base + "angle").c_str(), light->angle);
 		}
 
-		s->deactivateShaderProgram();  // ✅ Deaktivuj
+		s->deactivateShaderProgram();
 	}
 }
 
@@ -101,12 +98,12 @@ void ShaderProgramManager::updateSpotlightCamera()
 {
 	if (lm->getSpotlightCamera())
 	{
-		// ✅ Baterka je ZAPNUTÁ - pošli dáta
+
 		SpotlightCamera* light = lm->getSpotlightCamera();
 
 		for (ShaderProgram* s : shaderPrograms)
 		{
-			s->activateShaderProgram();  // ✅ Aktivuj
+			s->activateShaderProgram();
 
 			s->updateUniform("spotlightCamera_bool", true);
 			s->updateUniform("spotlightCamera.color", light->color);
@@ -115,17 +112,17 @@ void ShaderProgramManager::updateSpotlightCamera()
 			s->updateUniform("spotlightCamera.quadratic", light->quadratic);
 			s->updateUniform("spotlightCamera.angle", light->angle);
 
-			s->deactivateShaderProgram();  // ✅ Deaktivuj
+			s->deactivateShaderProgram();
 		}
 	}
 	else
 	{
-		// ✅ Baterka je VYPNUTÁ - pošli false
+
 		for (ShaderProgram* s : shaderPrograms)
 		{
-			s->activateShaderProgram();  // ✅ Aktivuj
+			s->activateShaderProgram();
 			s->updateUniform("spotlightCamera_bool", false);
-			s->deactivateShaderProgram();  // ✅ Deaktivuj
+			s->deactivateShaderProgram();
 		}
 	}
 }
@@ -138,13 +135,13 @@ void ShaderProgramManager::updateDirectionalLight()
 
 		for (ShaderProgram* s : shaderPrograms)
 		{
-			s->activateShaderProgram();  // ✅ Aktivuj
+			s->activateShaderProgram();
 
 			s->updateUniform("directional_bool", true);
 			s->updateUniform("directional.color", light->color);
 			s->updateUniform("directional.direction", light->direction);
 
-			s->deactivateShaderProgram();  // ✅ Deaktivuj
+			s->deactivateShaderProgram();
 		}
 	}
 }

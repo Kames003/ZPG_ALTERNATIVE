@@ -3,7 +3,7 @@
 // in z vertexshadera
 in vec3 worldFragmentPosition;
 in vec3 worldNormal;
-in vec2 textureCoords;  // NOVÉ: UV súradnice
+in vec2 textureCoords;
 
 out vec4 outColor; // out farba pixelu
 
@@ -46,7 +46,7 @@ struct DirectionalLight {
 // ========================================
 // UNIFORMS
 // ========================================
-uniform sampler2D tex;  // NOVÉ: Textúra
+uniform sampler2D tex;
 
 uniform vec3 viewPosition; 
 uniform vec3 cameraDirection;
@@ -180,6 +180,5 @@ void main(){
         directionalLight = calcDirectionalLight(directional, cameraVector);
     }
 
-    // HLAVNÝ ROZDIEL: Násobíme textúrou namiesto objectColor
     outColor = texture(tex, textureCoords) * ( directionalLight + point + spot + spotlightCam + ambient );
 }

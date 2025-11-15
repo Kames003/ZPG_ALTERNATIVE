@@ -39,8 +39,8 @@ void TextureCubemap::BindTexture(int n)
         unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &channels, 3); // 3 = RGB
         
         if (!data) {
-            std::cout << "❌ ERROR: Failed to load cubemap texture: " << faces[i] << std::endl;
-            std::cout << "   Reason: " << stbi_failure_reason() << std::endl;
+            std::cout << "ERROR: Failed to load cubemap texture: " << faces[i] << std::endl;
+            std::cout << "Reason: " << stbi_failure_reason() << std::endl;
             exit(EXIT_FAILURE);
         }
         
@@ -50,7 +50,7 @@ void TextureCubemap::BindTexture(int n)
         stbi_image_free(data);
     }
     
-    std::cout << "✅ Cubemap loaded successfully (6 faces)" << std::endl;
+    std::cout << "Cubemap loaded successfully (6 faces)" << std::endl;
     
     // Nastavenia cubemap textúry
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

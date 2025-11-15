@@ -16,7 +16,7 @@ Texture* TextureManager::getTexture(int index)
 {
     if (index < 0 || index >= textures.size())
     {
-        printf("❌ ERROR: Texture %d does not exist.\n", index);
+        printf("ERROR: Texture %d does not exist.\n", index);
         exit(EXIT_FAILURE);
     }
     

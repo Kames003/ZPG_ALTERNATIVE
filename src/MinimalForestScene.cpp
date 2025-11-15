@@ -311,19 +311,19 @@ void MinimalForestScene::createDrawableObjects()
     printf("  Creating two Shreks with texture + different materials...\n");
     LoadedModel* shrekModel = new LoadedModel("models/shrek.obj");
 
-    // ========== SHREK 1: Matný (materiál z MTL) ==========
+
     DrawableObject* shrek1 = new DrawableObject(shrekModel, phongTextureMaterialShader);
     shrek1->addTexture(tm->getTexture(2)); // Shrek textúra
 
-    // Použij materiál z shrek.mtl a uprav ho na matný
+
     Material* shrekMat1 = mm->getMaterialByName("Material.001");
-    shrekMat1->setAmbient(glm::vec3(0.3f, 0.3f, 0.3f));     // Znížený ambient
-    shrekMat1->setDiffuse(glm::vec3(1.0f, 1.0f, 1.0f));     // Plná textúra
-    shrekMat1->setSpecular(glm::vec3(0.0f, 0.0f, 0.0f));    // ŽIADNY lesk!
-    shrekMat1->setShininess(1.0f);                          // Minimálny
+    shrekMat1->setAmbient(glm::vec3(0.3f, 0.3f, 0.3f));
+    shrekMat1->setDiffuse(glm::vec3(1.0f, 1.0f, 1.0f));
+    shrekMat1->setSpecular(glm::vec3(0.0f, 0.0f, 0.0f));
+    shrekMat1->setShininess(1.0f);
     shrek1->setMaterial(shrekMat1);
 
-    // Umiestnenie - vľavo od cesty
+
     shrek1->translate(glm::vec3(-6.0f, -0.5f, -5.0f));
     shrek1->rotate(30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     shrek1->scale(glm::vec3(0.8f));
@@ -334,21 +334,19 @@ void MinimalForestScene::createDrawableObjects()
 
     printf("Shrek 1 - MATNÝ (z shrek.mtl, specular: 0.0)\n");
 
-    // ========== SHREK 2: BRUTÁLNE LESKLÝ BRONZ ==========
     DrawableObject* shrek2 = new DrawableObject(shrekModel, phongTextureMaterialShader);
-    shrek2->addTexture(tm->getTexture(2)); // Rovnaká Shrek textúra
+    shrek2->addTexture(tm->getTexture(2));
 
-    // Vytvor EXTRA lesklý materiál (viac ako bronze!)
+
     Material* shrekBronze = new Material();
     shrekBronze->setName("ShrekSuperShiny");
     shrekBronze->setAmbient(glm::vec3(0.3f, 0.3f, 0.3f));   // Mierny ambient
     shrekBronze->setDiffuse(glm::vec3(1.0f, 1.0f, 1.0f));   // Plná textúra
     shrekBronze->setSpecular(glm::vec3(1.0f, 1.0f, 1.0f));  // MAXIMÁLNY biely lesk!
-    shrekBronze->setShininess(256.0f);                       // EXTRA vysoký (vs Bronze 25.6)
+    shrekBronze->setShininess(256.0f);
     mm->addMaterial(shrekBronze);
     shrek2->setMaterial(shrekBronze);
 
-    // Umiestnenie - vpravo od cesty, BEZ konfliktu s Fionou
     shrek2->translate(glm::vec3(10.0f, -0.5f, -8.0f));  // Ďalej vpravo a vzadu
     shrek2->rotate(-45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     shrek2->scale(glm::vec3(0.8f));
@@ -359,9 +357,7 @@ void MinimalForestScene::createDrawableObjects()
 
     printf("Shrek 2 - BRUTÁLNE LESKLÝ (specular: 1.0, shininess: 256) 💎✨\n");
 
-    // ========================================
-    // FIONA MODEL
-    // ========================================
+
     printf("  Creating Fiona...\n");
     LoadedModel* fionaModel = new LoadedModel("models/fiona.obj");
     
@@ -399,9 +395,6 @@ void MinimalForestScene::createDrawableObjects()
 
     printf("Toilet loaded - hidden in the forest!\n");
 
-    // ========================================
-    // CAT MODEL 🐱 - NA LAVIČKE
-    // ========================================
     printf("  Creating Cat on bench...\n");
     LoadedModel* catModel = new LoadedModel("models/Cat.obj");
 
@@ -412,18 +405,15 @@ void MinimalForestScene::createDrawableObjects()
     Material* catMat = mm->getMaterialByName("Cat");
     cat->setMaterial(catMat);
 
-    // Pozícia - na prvej lavičke
-    // Y=-0.1 aby labky stáli presne na vrchu lavičky
-    cat->translate(glm::vec3(-5.0f, -0.06f, -10.0f));  // NA lavičke
-    cat->rotate(-90.0f, glm::vec3(1.0f, 0.0f, 0.0f)); // Postaviť do státia
-    cat->rotate(360.0f, glm::vec3(0.0f, 1.0f, 0.0f)); // 270° = -90° flipne to správne
-    cat->scale(glm::vec3(0.012f)); // Malá mačka
-
+    cat->translate(glm::vec3(-5.0f, -0.06f, -10.0f));
+    cat->rotate(-90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+    cat->rotate(360.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    cat->scale(glm::vec3(0.012f));
     cat->calculateModelMatrix();
     cat->updateModelMatrix();
     om->addDrawableObject(cat);
 
-    printf("Cat loaded - sitting on bench! 🐱\n");
+    printf("Cat loaded - sitting on bench\n");
 
     // ========== KRÍKY ==========
     BushModel* bushModel = new BushModel();

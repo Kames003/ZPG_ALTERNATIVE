@@ -13,9 +13,9 @@
 const float plain_texture[48] = {
     // position          normal              UV coords
     // Prvý trojuholník
-     1.0f, 0.0f,  1.0f,  0.0f, 1.0f, 0.0f,   30.0f, 30.0f,  // pravý horný
-     1.0f, 0.0f, -1.0f,  0.0f, 1.0f, 0.0f,   30.0f,  0.0f,  // pravý dolný
-    -1.0f, 0.0f, -1.0f,  0.0f, 1.0f, 0.0f,    0.0f,  0.0f,  // ľavý dolný
+     1.0f, 0.0f,  1.0f,  0.0f, 1.0f, 0.0f,   30.0f, 30.0f,
+     1.0f, 0.0f, -1.0f,  0.0f, 1.0f, 0.0f,   30.0f,  0.0f,
+    -1.0f, 0.0f, -1.0f,  0.0f, 1.0f, 0.0f,    0.0f,  0.0f,
 
     // Druhý trojuholník
     -1.0f, 0.0f,  1.0f,  0.0f, 1.0f, 0.0f,    0.0f, 30.0f,  // ľavý horný

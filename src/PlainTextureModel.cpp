@@ -14,15 +14,12 @@ PlainTextureModel::PlainTextureModel()
     vao->bind();
     vbo->bind();
     
-    // Layout location 0: Pozícia (3 floaty)
     vao->vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), NULL);
     
-    // Layout location 1: Normála (3 floaty)
-    vao->vertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 
+    vao->vertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
                             (void*)(3 * sizeof(float)));
     
-    // Layout location 2: UV textúrové súradnice (2 floaty)
-    vao->vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 
+    vao->vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
                             (void*)(6 * sizeof(float)));
     
     vbo->unbind();

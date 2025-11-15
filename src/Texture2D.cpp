@@ -22,12 +22,12 @@ void Texture2D::BindTexture(int n)
     unsigned char* data = stbi_load(path.c_str(), &width, &height, &channels, 4); // 4 = RGBA
     
     if (!data) {
-        std::cout << "❌ ERROR: Failed to load texture: " << path << std::endl;
-        std::cout << "   Reason: " << stbi_failure_reason() << std::endl;
+        std::cout << "ERROR: Failed to load texture: " << path << std::endl;
+        std::cout << "Reason: " << stbi_failure_reason() << std::endl;
         exit(EXIT_FAILURE);
     }
     
-    std::cout << "✅ Texture loaded: " << path << " (" << width << "x" << height << ", " << channels << " channels)" << std::endl;
+    std::cout << "Texture loaded: " << path << " (" << width << "x" << height << ", " << channels << " channels)" << std::endl;
     
     // Vytvor OpenGL textúru
     glGenTextures(1, &this->ID);
