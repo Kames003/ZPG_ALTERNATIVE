@@ -173,6 +173,8 @@ set(SOURCES
         src/LightManager.h
         src/ObjectManager.cpp
         src/ObjectManager.h
+        src/ObjectInteractionManager.cpp
+        src/ObjectInteractionManager.h
         src/ShaderProgramManager.cpp
         src/ShaderProgramManager.h
         src/AbstractScene.cpp
@@ -217,6 +219,11 @@ set(SOURCES
         src/PlainTextureModel.cpp
         src/PlainTextureModel.h
         src/external/stb_image.h
+
+        # Materials
+        src/Material.h
+        src/MaterialManager.h
+        src/MTLLoader.h
 )
 
 # ========================================

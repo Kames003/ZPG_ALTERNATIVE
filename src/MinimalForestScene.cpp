@@ -489,6 +489,15 @@ void MinimalForestScene::callbacks()
     glfwSetWindowSizeCallback(window, [](GLFWwindow* w, int width, int height) {
         Callback::GetInstance().windowSizeCallback(w, width, height);
     });
+
+    // NOVÉ - registrácia mouse button callback pre picking
+    glfwSetMouseButtonCallback(window, [](GLFWwindow* w, int button, int action, int mods) {
+        Callback::GetInstance().mouseButtonCallback(w, button, action, mods);
+    });
+
+    printf("Mouse callbacks registered:\n");
+    printf("  - LEFT CLICK: Place tree at cursor position\n");
+    printf("  - MIDDLE CLICK: Remove clicked object\n");
 }
 
 void MinimalForestScene::createScene(GLFWwindow* window)
@@ -505,6 +514,9 @@ void MinimalForestScene::createScene(GLFWwindow* window)
     this->om = new ObjectManager();
     this->tm = new TextureManager();
     this->mm = new MaterialManager();  // MaterialManager
+
+    // Initialize ObjectInteractionManager for object manipulation
+    this->interactionManager = new ObjectInteractionManager(om, camera, window);
 
     createShaders();
     createTextures();
@@ -556,6 +568,9 @@ void MinimalForestScene::renderFrame()
 
     handleFlashlightInput(); // skontroluj klavesu f pre baterku
 
+    // Spracuj mouse input (picking, placing) cez Callback API
+    handleMouseInput();
+
     float time = static_cast<float>(glfwGetTime()); // ziskaj aktualny čas
     for (Firefly* firefly : fireflies)
     {
@@ -563,7 +578,7 @@ void MinimalForestScene::renderFrame()
     }
 
     spm->updateLights(); // pošli info o svetlach do shaderov
-    
+
     om->drawSkybox();    // NOVÉ: vykreslí skybox NAJPRV
     om->drawObjects();   // vykresli všetky objekty
 } // end :)
@@ -573,6 +588,10 @@ void MinimalForestScene::renderScene()
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.02f, 0.02f, 0.05f, 1.0f);
 
+    // NOVÉ - enable stencil buffer pre picking
+    glEnable(GL_STENCIL_TEST);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
     printf("╔═════════════════════════════════════════╗\n");
     printf("║       RENDER LOOP                     ║\n");
     printf("╠═════════════════════════════════════════╣\n");
@@ -580,6 +599,8 @@ void MinimalForestScene::renderScene()
     printf("║ Space/Shift - Up/Down                 ║\n");
     printf("║ Right Mouse - Look                    ║\n");
     printf("║ F           - Flashlight ON/OFF       ║\n");
+    printf("║ LEFT CLICK  - Place tree              ║\n");
+    printf("║ MIDDLE CLICK- Remove object           ║\n");
     printf("║ ESC         - Exit                    ║\n");
     printf("╠═════════════════════════════════════════╣\n");
 
@@ -587,7 +608,7 @@ void MinimalForestScene::renderScene()
 
     while (!glfwWindowShouldClose(window))
     {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         renderFrame();
         glfwPollEvents();
         glfwSwapBuffers(window);
@@ -596,4 +617,54 @@ void MinimalForestScene::renderScene()
     glfwDestroyWindow(window);
     glfwTerminate();
     exit(EXIT_SUCCESS);
+}
+
+// ========================================
+// MOUSE INTERACTION - PICKING & PLACING
+// ========================================
+
+void MinimalForestScene::handleMouseInput()
+{
+    // Ľavé tlačidlo - umiestni strom (cez ObjectInteractionManager)
+    if (Callback::hasLeftClick())
+    {
+        glm::vec3 screenPos = Callback::position;
+        glm::vec3 worldPos = interactionManager->screenToWorld(screenPos);
+        placeTreeAt(worldPos);
+        Callback::clearClicks();
+    }
+
+    // Stredné tlačidlo - zmaž objekt (cez ObjectInteractionManager)
+    if (Callback::hasMiddleClick())
+    {
+        int stencilID = Callback::getClickedObjectID();
+        removeObjectAt(stencilID);
+        Callback::clearClicks();
+    }
+}
+
+void MinimalForestScene::placeTreeAt(glm::vec3 worldPos)
+{
+    printf("\n[MinimalForestScene] LEFT CLICK - Placing tree\n");
+    printf("  World position: (%.2f, %.2f, %.2f)\n", worldPos.x, worldPos.y, worldPos.z);
+
+    TreeModel* newTreeModel = new TreeModel();
+    ShaderProgram* phongShader = spm->getShaderProgram(1);
+
+    DrawableObject* newTree = new DrawableObject(newTreeModel, phongShader);
+    newTree->setColor(glm::vec3(0.1f, 0.3f, 0.05f));
+
+    // Deleguj umiestnenie na ObjectInteractionManager
+    interactionManager->placeObject(newTree, worldPos);
+
+    printf("  ✓ Tree placed! Total objects: %d\n", om->getObjectCount());
+}
+
+void MinimalForestScene::removeObjectAt(int stencilID)
+{
+    printf("\n[MinimalForestScene] MIDDLE CLICK - Object picking\n");
+    printf("  Stencil ID: %d\n", stencilID);
+
+    // Deleguj mazanie na ObjectInteractionManager
+    interactionManager->removeObject(stencilID);
 }

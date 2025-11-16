@@ -15,7 +15,11 @@ void Application::initGLFW()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    // DÔLEŽITÉ: Požiadaj o stencil buffer (8 bitov) pre object picking
+    glfwWindowHint(GLFW_STENCIL_BITS, 8);
+
     printf("GLFW initialized successfully\n");
+    printf("  Stencil buffer: 8 bits (for object picking)\n");
 }
 
 void Application::initWindow(int width, int height, const char* name)
@@ -84,7 +88,7 @@ void Application::initScene()
     sceneManager->registerScene(new Scene4_BackfaceTest(), "5. Backface Test");
     sceneManager->registerScene(new Scene5_LoadedModelTest(), "6. Loaded Model Test");
 
-    // thesting
+    // thesting :(
     // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");
     // sceneManager->registerScene(new Scene2_FourSpheres(), "3. Four Spheres");
 
@@ -111,10 +115,15 @@ void Application::run()
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
+    // Enable stencil buffer pre object picking
+    glEnable(GL_STENCIL_TEST);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
     // Hlavný render loop
     while (!glfwWindowShouldClose(this->window->getWindow()))
     {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // vymaž predchádzajuci frame
+        // Vymaž všetky buffery vrátane stencil buffera
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         // SceneManager vykreslí aktívnu scénu
         sceneManager->renderActiveScene();

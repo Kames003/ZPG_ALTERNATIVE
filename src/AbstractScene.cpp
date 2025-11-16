@@ -1,6 +1,4 @@
-// Empty implementation file - all methods are pure virtual in AbstractScene.h
-// This file exists to satisfy CMake's source file requirements
-
+// AbstractScene implementation
 #include "AbstractScene.h"
 
 // AbstractScene je abstraktná trieda - všetky metódy sú pure virtual

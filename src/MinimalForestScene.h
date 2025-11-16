@@ -2,6 +2,7 @@
 #include "AbstractScene.h"
 #include "TextureManager.h"
 #include "MaterialManager.h"
+#include "ObjectInteractionManager.h"
 #include <vector>
 
 
@@ -14,6 +15,7 @@ class MinimalForestScene : public AbstractScene
 private:
     std::vector<Firefly*> fireflies;
     MaterialManager* mm = nullptr;
+    ObjectInteractionManager* interactionManager = nullptr;
 
     SpotlightCamera* flashlight = nullptr;
     bool flashlightEnabled = false;
@@ -27,8 +29,12 @@ protected:
     void createLights();
     void callbacks() override;
 
-
     void handleFlashlightInput();
+
+    // Mouse interaction - deleguje na ObjectInteractionManager
+    void handleMouseInput();
+    void placeTreeAt(glm::vec3 worldPos);
+    void removeObjectAt(int stencilID);
 
 public:
     void createScene(GLFWwindow* window) override;

@@ -14,6 +14,46 @@ Callback& Callback::GetInstance()
 }
 
 // ========================================
+// HELPER METÓDY PRE MOUSE INTERAKCIU
+// ========================================
+
+bool Callback::hasLeftClick()
+{
+    return clicked == 1;
+}
+
+bool Callback::hasMiddleClick()
+{
+    return clicked == 2;
+}
+
+int Callback::getClickedObjectID()
+{
+    return stencil_id;
+}
+
+glm::vec3 Callback::getWorldPosition(GLFWwindow* window, Camera* camera)
+{
+    // Získaj rozmery okna
+    int width, height;
+    glfwGetWindowSize(window, &width, &height);
+    glm::vec4 viewport = glm::vec4(0, 0, width, height);
+
+    // Konvertuj screen space -> world space pomocou unProject
+    return glm::unProject(
+        position,
+        camera->getViewMatrix(),
+        camera->getProjectionMatrix(),
+        viewport
+    );
+}
+
+void Callback::clearClicks()
+{
+    clicked = 0;
+}
+
+// ========================================
 // SCENE MANAGER INJECTION
 // ========================================
 void Callback::setSceneManager(SceneManager* sm)

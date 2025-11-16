@@ -34,6 +34,16 @@ public:
     static Callback& GetInstance();
 
     // ========================================
+    // HELPER METÓDY PRE MOUSE INTERAKCIU
+    // ========================================
+
+    static bool hasLeftClick();
+    static bool hasMiddleClick();
+    static int getClickedObjectID();
+    static glm::vec3 getWorldPosition(GLFWwindow* window, Camera* camera);
+    static void clearClicks();
+
+    // ========================================
     // SCENE MANAGER INJECTION
     // ========================================
     void setSceneManager(SceneManager* sm);
