@@ -36,17 +36,14 @@ void ObjectManager::drawSkybox()
 
 void ObjectManager::drawObjects()
 {
-    // Vykresli všetky objekty (s podporou textúr)
     for (int i = 0; i < objects.size(); i++)
     {
         DrawableObject* obj = objects[i];
 
         if (!obj || !obj->visible) continue;
 
-        // Zapíš stencil ID pre tento objekt (index + 1, lebo 0 je skybox)
         glStencilFunc(GL_ALWAYS, i + 1, 0xFF);
 
-        // Podľa počtu textúr rozlišujeme rendering
         switch (obj->textures.size())
         {
             case 0:
