@@ -270,26 +270,65 @@ void Callback::mouseButtonCallback(GLFWwindow* window, int button, int action, i
 {
     if (action == GLFW_PRESS && button == GLFW_MOUSE_BUTTON_LEFT)
     {
-        int width, height;
-        glfwGetFramebufferSize(window, &width, &height);
-        GLfloat depth;
-        int newy = height - y - 10;
-        glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+        // Získaj window size (pre výpočet pozície)
+        int winWidth, winHeight;
+        glfwGetWindowSize(window, &winWidth, &winHeight);
 
-        position = glm::vec3(x, newy, depth);
+        // Získaj framebuffer size (pre glReadPixels)
+        int fbWidth, fbHeight;
+        glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
+
+        // Vypočítaj scale factor (pre Retina displeje)
+        float scaleX = (float)fbWidth / (float)winWidth;
+        float scaleY = (float)fbHeight / (float)winHeight;
+
+        // Škáluj cursor position na framebuffer coordinates
+        int fbX = (int)(x * scaleX);
+        int fbY = (int)(y * scaleY);
+
+        // Prepočítaj Y (OpenGL má origin dole-vľavo)
+        int newy = fbHeight - fbY - 1;
+
+        GLfloat depth;
+        glReadPixels(fbX, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+
+        // Ulož pozíciu v WINDOW coordinates (pre glm::unProject)
+        int winNewY = winHeight - y - 1;
+        position = glm::vec3(x, winNewY, depth);
         clicked = 1;
+
+        printf("[Callback] LEFT CLICK: window(%d,%d) fb(%d,%d) depth=%.4f\n",
+               (int)x, winNewY, fbX, newy, depth);
     }
 
     if (action == GLFW_PRESS && button == GLFW_MOUSE_BUTTON_MIDDLE)
     {
-        int width, height;
-        glfwGetFramebufferSize(window, &width, &height);
+        // Získaj window size
+        int winWidth, winHeight;
+        glfwGetWindowSize(window, &winWidth, &winHeight);
+
+        // Získaj framebuffer size (pre glReadPixels)
+        int fbWidth, fbHeight;
+        glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
+
+        // Vypočítaj scale factor (pre Retina displeje)
+        float scaleX = (float)fbWidth / (float)winWidth;
+        float scaleY = (float)fbHeight / (float)winHeight;
+
+        // Škáluj cursor position na framebuffer coordinates
+        int fbX = (int)(x * scaleX);
+        int fbY = (int)(y * scaleY);
+
+        // Prepočítaj Y (OpenGL má origin dole-vľavo)
+        int newy = fbHeight - fbY - 1;
+
         GLuint index;
-        int newy = height - y - 10;
-        glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+        glReadPixels(fbX, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
 
         stencil_id = index;
         clicked = 2;
+
+        printf("[Callback] MIDDLE CLICK: fb(%d,%d) stencil_id=%d\n", fbX, newy, index);
     }
 }
 

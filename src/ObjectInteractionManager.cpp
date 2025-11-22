@@ -52,5 +52,8 @@ glm::vec3 ObjectInteractionManager::screenToWorld(glm::vec3 screenPos)
         viewport
     );
 
+    printf("[screenToWorld] screen(%.1f, %.1f, %.4f) -> world(%.2f, %.2f, %.2f)\n",
+           screenPos.x, screenPos.y, screenPos.z, worldPos.x, worldPos.y, worldPos.z);
+
     return worldPos;
 }
