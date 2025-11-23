@@ -6,6 +6,8 @@
 #include "LeafRotate.h"
 #include "LeafScale.h"
 #include "LeafTranslate.h"
+#include "LeafCustomW.h"
+#include "LeafMatrix.h"
 #include "Texture.h"
 #include "Material.h"
 #include <vector>
@@ -41,6 +43,8 @@ public:
 	void rotate(float angle, glm::vec3 axis);
 	void scale(glm::vec3 scale);
 	void translate(glm::vec3 translate);
+	void customW(float w);  // Vlastna transformacia s homogennou zlozkou w (legacy)
+	void customMatrix(const glm::mat4& m);  // Vseobecna custom matica
 
 	void calculateModelMatrix();
 	void updateModelMatrix();

@@ -185,3 +185,19 @@ void Camera::setFOV(float newFOV)
 //{
 //	return this->currentHeight;
 //}
+
+void Camera::setPosition(glm::vec3 pos)
+{
+    this->cameraPosition = pos;
+    calculateViewMatrix();
+    notifyAll(VIEWMATRIX);
+}
+
+void Camera::setTarget(glm::vec3 tgt)
+{
+    // Target je smer kamery, nie bod
+    // Vypocitaj smer z pozicie ku cielu
+    this->target = glm::normalize(tgt - cameraPosition);
+    calculateViewMatrix();
+    notifyAll(VIEWMATRIX);
+}

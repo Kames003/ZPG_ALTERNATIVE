@@ -21,6 +21,7 @@
 #include "Scene2_SolarSystem.h"
 #include "Scene3_LightingDemo.h"
 #include "Scene4_BackfaceTest.h"
+#include "ArcadeScene.h"
 
 /**
  * @brief Hlavná aplikácia

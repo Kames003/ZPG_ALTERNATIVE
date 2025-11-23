@@ -81,11 +81,12 @@ void Application::initScene()
     sceneManager = new SceneManager(this->window->getWindow());
 
     sceneManager->registerScene(new MinimalForestScene(), "1. Minimal Forest");
-    sceneManager->registerScene(new Scene1_PhongTest(), "2. Minimal Forest");
-    sceneManager->registerScene(new Scene2_SolarSystem(), "3. Minimal Forest");
-    sceneManager->registerScene(new Scene3_LightingDemo(), "4. Minimal Forest");
+    sceneManager->registerScene(new Scene1_PhongTest(), "2. Phong Test");
+    sceneManager->registerScene(new Scene2_SolarSystem(), "3. Solar System");
+    sceneManager->registerScene(new Scene3_LightingDemo(), "4. Lighting Demo");
     sceneManager->registerScene(new Scene4_BackfaceTest(), "5. Backface Test");
     sceneManager->registerScene(new Scene5_LoadedModelTest(), "6. Loaded Model Test");
+    sceneManager->registerScene(new ArcadeScene(), "7. ARCADE GAME!");
 
     // thesting :(
     // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");

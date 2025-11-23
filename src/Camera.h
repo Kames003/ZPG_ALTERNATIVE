@@ -80,6 +80,8 @@ public:
     void setFOV(float newFOV); // for homework
     float getFOV() const { return fov; }
 
-
+    // Nastavenie pozicie a ciela kamery (pre fixnu kameru v hrach)
+    void setPosition(glm::vec3 pos);
+    void setTarget(glm::vec3 tgt);
 };
 
