@@ -123,8 +123,24 @@ set(SOURCES
         src/LeafRotate.h
         src/LeafScale.cpp
         src/LeafScale.h
+        src/LeafCustomW.cpp
+        src/LeafCustomW.h
+        src/LeafMatrix.cpp
+        src/LeafMatrix.h
+        src/LeafPathMovement.cpp
+        src/LeafPathMovement.h
         src/TransformationComposite.cpp
         src/TransformationComposite.h
+
+        # Arcade Game (Whac-A-Mole)
+        src/Target.cpp
+        src/Target.h
+        src/Mole.cpp
+        src/Mole.h
+        src/Hammer.cpp
+        src/Hammer.h
+        src/ArcadeScene.cpp
+        src/ArcadeScene.h
 
         # Objects & Scenes
         src/DrawableObject.cpp

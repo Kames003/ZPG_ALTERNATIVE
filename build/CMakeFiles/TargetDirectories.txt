@@ -1,0 +1,3 @@
+/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles/untitled2.dir
+/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles/edit_cache.dir
+/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles/rebuild_cache.dir

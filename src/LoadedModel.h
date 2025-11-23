@@ -24,6 +24,6 @@ protected:
 public:
     // Konštruktor - načíta model zo súboru
     LoadedModel(const char* path);
-    
+
     void draw() override;
 };

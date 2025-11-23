@@ -52,12 +52,24 @@ void MinimalForestScene::createShaders()
         "Shaders/VertexShaderPhong.glsl",
         "Shaders/FragmentShaderPhongMaterial.glsl");
 
+    // === TEST SHADER (index 6) - Overenie homogennej zlozky w (s texturou) ===
+    spm->addShaderProgram(camera,
+        "Shaders/VertexShaderPhongTextureWTest.glsl",
+        "Shaders/FragmentShaderPhongTextureMaterial.glsl");
+
+    // === TEST SHADER (index 7) - Overenie homogennej zlozky w (BEZ textury) ===
+    spm->addShaderProgram(camera,
+        "Shaders/VertexShaderPhongWTest.glsl",
+        "Shaders/FragmentShaderPhong.glsl");
+
     printf("Skybox shader (index 0)\n");
     printf("Phong shader (index 1) - 16 lights + flashlight\n");
     printf("Phong Texture shader (index 2) - textured ground\n");
     printf("Constant shader (index 3) - fireflies\n");
     printf("Phong Texture + Material shader (index 4) - texture + materials\n");
     printf("Phong Material shader (index 5) - materials without texture\n");
+    printf("W-TEST Texture shader (index 6) - w=500 s texturou\n");
+    printf("W-TEST shader (index 7) - w=500 BEZ textury\n");
 }
 
 void MinimalForestScene::createTextures()
@@ -149,6 +161,8 @@ void MinimalForestScene::createDrawableObjects()
     ShaderProgram* constantShader = spm->getShaderProgram(3);          // CONSTANT
     ShaderProgram* phongTextureMaterialShader = spm->getShaderProgram(4); // PHONG TEXTURE + MATERIAL
     ShaderProgram* phongMaterialShader = spm->getShaderProgram(5);     // PHONG MATERIAL (bez textúry)
+    ShaderProgram* wTestTextureShader = spm->getShaderProgram(6);      // W-TEST s texturou
+    ShaderProgram* wTestShader = spm->getShaderProgram(7);             // W-TEST BEZ textury
 
     // ========================================
     // SKYBOX (renderuje sa ako prvý)
@@ -312,7 +326,8 @@ void MinimalForestScene::createDrawableObjects()
     LoadedModel* shrekModel = new LoadedModel("models/shrek.obj");
 
 
-    DrawableObject* shrek1 = new DrawableObject(shrekModel, phongTextureMaterialShader);
+    // === SHREK 1 - TESTOVACI s W=500 (s texturou) ===
+    DrawableObject* shrek1 = new DrawableObject(shrekModel, wTestTextureShader);  // W-TEST TEXTURE SHADER!
     shrek1->addTexture(tm->getTexture(2)); // Shrek textúra
 
 
@@ -332,7 +347,38 @@ void MinimalForestScene::createDrawableObjects()
     shrek1->updateModelMatrix();
     om->addDrawableObject(shrek1);
 
-    printf("Shrek 1 - MATNÝ (z shrek.mtl, specular: 0.0)\n");
+    printf("Shrek 1 - W-TEST TEXTURE (w=500 v shaderi, ocakavany vysledok: NORMALNA VELKOST)\n");
+
+    // === SHREK 3 - TEST s LeafCustomW(20) cez Composite pattern ===
+    DrawableObject* shrek3 = new DrawableObject(shrekModel, phongTextureMaterialShader);
+    shrek3->addTexture(tm->getTexture(2)); // Shrek textura
+
+    Material* shrekMat3 = new Material();
+    shrekMat3->setName("ShrekCustomW");
+    shrekMat3->setAmbient(glm::vec3(0.3f, 0.3f, 0.3f));
+    shrekMat3->setDiffuse(glm::vec3(1.0f, 1.0f, 1.0f));
+    shrekMat3->setSpecular(glm::vec3(0.2f, 0.2f, 0.2f));
+    shrekMat3->setShininess(32.0f);
+    mm->addMaterial(shrekMat3);
+    shrek3->setMaterial(shrekMat3);
+
+    // Vytvor custom maticu s [3][3] = 20 (objekt bude 20x mensi)
+    glm::mat4 customIdentity = glm::mat4(1.0f);
+    customIdentity[3][3] = 20.0f;
+
+    // Umiestnenie - vedla Shrek1 (vlavo)
+    // PORADIE JE DOLEZITE! customMatrix musi byt POSLEDNA (aplikuje sa na vertex PRVA)
+    // Scale 20.0f -> efektivna velkost = 20/20 = 1.0 (normalna velkost pre test)
+    shrek3->translate(glm::vec3(-8.0f, -0.5f, -5.0f));  // Tesne vlavo od Shrek1 (-6)
+    shrek3->rotate(30.0f, glm::vec3(0.0f, 1.0f, 0.0f));  // Rovnaka rotacia ako Shrek1
+    shrek3->scale(glm::vec3(0.8f));
+    shrek3->customMatrix(customIdentity);  // VLASTNA TRANSFORMACIA - POSLEDNA!
+
+    shrek3->calculateModelMatrix();
+    shrek3->updateModelMatrix();
+    om->addDrawableObject(shrek3);
+
+    printf("Shrek 3 - CUSTOM MATRIX (LeafMatrix s [3][3]=20, ocakavany vysledok: 20x MENSI!)\n");
 
     DrawableObject* shrek2 = new DrawableObject(shrekModel, phongTextureMaterialShader);
     shrek2->addTexture(tm->getTexture(2));
