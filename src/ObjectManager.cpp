@@ -51,24 +51,33 @@ void ObjectManager::drawObjects()
                 obj->updateModelMatrix();
                 obj->drawModel();
                 break;
-                
+
             case 1:
                 // Jedna textúra (diffuse/albedo)
+                // REBIND textúru pred vykreslením (fix pre prepínanie scén)
+                glActiveTexture(GL_TEXTURE0 + obj->textures[0]->position);
+                glBindTexture(GL_TEXTURE_2D, obj->textures[0]->getID());
                 obj->updateTexture("tex", obj->textures[0]->position);
                 obj->updateModelMatrix();
                 obj->drawModel();
                 break;
-                
+
             case 2:
                 // Dve textúry (albedo + normal map)
+                glActiveTexture(GL_TEXTURE0 + obj->textures[0]->position);
+                glBindTexture(GL_TEXTURE_2D, obj->textures[0]->getID());
+                glActiveTexture(GL_TEXTURE0 + obj->textures[1]->position);
+                glBindTexture(GL_TEXTURE_2D, obj->textures[1]->getID());
                 obj->updateTexture("tex", obj->textures[0]->position);
                 obj->updateTexture("normalMap", obj->textures[1]->position);
                 obj->updateModelMatrix();
                 obj->drawModel();
                 break;
-                
+
             default:
                 // Viac textúr - zatiaľ len prvú použijeme
+                glActiveTexture(GL_TEXTURE0 + obj->textures[0]->position);
+                glBindTexture(GL_TEXTURE_2D, obj->textures[0]->getID());
                 obj->updateTexture("tex", obj->textures[0]->position);
                 obj->updateModelMatrix();
                 obj->drawModel();
