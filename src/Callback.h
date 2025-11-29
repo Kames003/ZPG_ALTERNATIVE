@@ -33,9 +33,9 @@ public:
 
     static Callback& GetInstance();
 
-    // ========================================
+
     // HELPER METÓDY PRE MOUSE INTERAKCIU
-    // ========================================
+
 
     static bool hasLeftClick();
     static bool hasMiddleClick();
@@ -43,14 +43,14 @@ public:
     static glm::vec3 getWorldPosition(GLFWwindow* window, Camera* camera);
     static void clearClicks();
 
-    // ========================================
+
     // SCENE MANAGER INJECTION
-    // ========================================
+
     void setSceneManager(SceneManager* sm);
 
-    // ========================================
+
     // CALLBACK METHODS
-    // ========================================
+
     static void window_size_callback(GLFWwindow* window, int width, int height);
     void windowSizeCallback(GLFWwindow* window, int width, int height);
 
@@ -73,8 +73,8 @@ public:
     void errorCallback(int error, const char* description);
 
 private:
-    // ========================================
+
     // SCENE SWITCHING LOGIC
-    // ========================================
+
     void handleSceneSwitching(int key, int action);
 };

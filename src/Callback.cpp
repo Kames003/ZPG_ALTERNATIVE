@@ -13,9 +13,9 @@ Callback& Callback::GetInstance()
     return *c;
 }
 
-// ========================================
+
 // HELPER METÓDY PRE MOUSE INTERAKCIU
-// ========================================
+
 
 bool Callback::hasLeftClick()
 {
@@ -53,18 +53,18 @@ void Callback::clearClicks()
     clicked = 0;
 }
 
-// ========================================
+
 // SCENE MANAGER INJECTION
-// ========================================
+
 void Callback::setSceneManager(SceneManager* sm)
 {
     this->sceneManager = sm;
     printf("Callback: SceneManager injected\n");
 }
 
-// ========================================
+
 // KEY CALLBACK - DELEGUJE NA handleSceneSwitching
-// ========================================
+
 void Callback::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     GetInstance().keyCallback(window, key, scancode, action, mods);
@@ -86,9 +86,9 @@ void Callback::keyCallback(GLFWwindow* window, int key, int scancode, int action
     printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
 }
 
-// ========================================
+
 // SCENE SWITCHING LOGIC
-// ========================================
+
 void Callback::handleSceneSwitching(int key, int action)
 {
     if (!sceneManager)
@@ -99,9 +99,9 @@ void Callback::handleSceneSwitching(int key, int action)
 
     int sceneCount = sceneManager->getSceneCount();
 
-    // ========================================
+
     // KLÁVESY 1-9 - PREPNI NA SCÉNU
-    // ========================================
+
 
     // Klávesa 1
     if (key == GLFW_KEY_1 && action == GLFW_PRESS)
@@ -229,9 +229,9 @@ void Callback::handleSceneSwitching(int key, int action)
         key9WasPressed = false;
     }
 
-    // ========================================
+
     // KLÁVESA H - TOGGLE HELP
-    // ========================================
+
     if (key == GLFW_KEY_H && action == GLFW_PRESS)
     {
         if (!keyHWasPressed)
@@ -246,9 +246,9 @@ void Callback::handleSceneSwitching(int key, int action)
     }
 }
 
-// ========================================
-// OSTATNÉ CALLBACKS (NEZMENENÉ)
-// ========================================
+
+// OSTATNÉ CALLBACKS
+
 
 void Callback::window_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -311,7 +311,7 @@ void Callback::mouseButtonCallback(GLFWwindow* window, int button, int action, i
         int fbWidth, fbHeight;
         glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
 
-        // Vypočítaj scale factor (pre Retina displeje)
+        // Vypočítaj scale factor (pre Retina displeje) shitty mac proste xd
         float scaleX = (float)fbWidth / (float)winWidth;
         float scaleY = (float)fbHeight / (float)winHeight;
 

@@ -6,7 +6,7 @@
 /**
  * @brief 2D textúra (PNG, JPG, atď.)
  * 
- * Používa stb_image na načítanie obrázkov
+ * Používa stb_image na načítanie obrázkov sadly som k tomu rozhodnutiu prišiel az po par hodinach boja
  */
 class Texture2D : public Texture
 {

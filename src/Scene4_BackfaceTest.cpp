@@ -5,12 +5,12 @@ void Scene4_BackfaceTest::createShaders()
     // Shader 0: Phong SPRÁVNY (max, kontrola if)
     spm->addShaderProgram(camera,
         "Shaders/VertexShaderPhong.glsl",
-        "Shaders/FragmentShaderPhongCorrect.glsl");  // ✅ Správny
+        "Shaders/FragmentShaderPhongCorrect.glsl");
 
     // Shader 1: Phong ZLÝ (abs, bez kontroly)
     spm->addShaderProgram(camera,
         "Shaders/VertexShaderPhong.glsl",
-        "Shaders/FragmentShaderPhongWrong.glsl");    // ❌ Zlý
+        "Shaders/FragmentShaderPhongWrong.glsl");
 }
 
 void Scene4_BackfaceTest::createDrawableObjects()

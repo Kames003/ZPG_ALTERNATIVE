@@ -8,7 +8,7 @@
 class FileReader
 {
 private:
-    // Singleton pattern - private konštruktor
+
     FileReader() = default;
     
     // Zakázané kopírovanie

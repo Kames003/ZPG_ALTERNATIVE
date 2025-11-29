@@ -6,54 +6,40 @@
 #include "LeafPathMovement.h"
 #include <glm/glm.hpp>
 
-/**
- * @brief WHAC-A-MOLE - Postava ktora sa pohybuje medzi podstavcami
- *
- * Mole reprezentuje postavu (Shrek, Fiona, WC, Cat) ktora sa objavi
- * na podstavci a pohybuje sa po trajektorii k cielu.
- * Hrac ju musi "udriet" kliknutim.
- *
- * Typy postav:
- * - SHREK     - 10 bodov, pomaly
- * - FIONA     - 25 bodov, stredna rychlost
- * - TOILET    - 50 bodov, rychly (vzacny!)
- * - CAT       - -20 bodov (nebit macku!)
- *
- * POHYB: Parametricky pohyb po lomenej ciare (LeafPathMovement)
- */
+
 class Mole
 {
 public:
     enum class Type
     {
-        SHREK,      // Zeleny ogre, 10 bodov
-        FIONA,      // Princezna, 25 bodov
-        TOILET,     // WC, 50 bodov (vzacne!)
-        CAT         // Macka, -20 bodov (nebit!)
+        SHREK,
+        FIONA,
+        TOILET,
+        CAT
     };
 
 private:
     DrawableObject* visual;
     Type type;
     int points;
-    float lifetime;         // Kolko sekund je viditelny
+    float lifetime;
     float maxLifetime;
     bool active;
     int stencilID;
-    int pedestalIndex;      // Startovaci podstavec (0-5)
-    int targetPedestalIndex; // Cielovy podstavec
+    int pedestalIndex;
+    int targetPedestalIndex;
 
     // Animacia vyskakovania
-    float popProgress;      // 0.0 = skryty, 1.0 = plne viditelny
-    float popSpeed;         // Rychlost animacie
-    bool popping;           // Ci prave vyskakuje alebo sa skryva
-    glm::vec3 basePosition; // Pozicia startovacie podstavca
-    glm::vec3 endPosition;  // Pozicia cieloveho podstavca
+    float popProgress;
+    float popSpeed;
+    bool popping;
+    glm::vec3 basePosition;
+    glm::vec3 endPosition;
 
-    // NOVE: Pohyb po trajektorii
-    LeafPathMovement* pathMovement;  // Parametricky pohyb po lomenej ciare
-    bool moving;                      // Ci sa pohybuje po drahe
-    bool reachedTarget;               // Ci dosiahol ciel
+
+    LeafPathMovement* pathMovement;
+    bool moving;
+    bool reachedTarget;
 
 public:
     Mole(AbstractModel* model, ShaderProgram* shader, Type moleType);

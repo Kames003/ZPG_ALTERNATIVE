@@ -16,14 +16,14 @@ void Scene1_PhongTest::createDrawableObjects()
     ShaderProgram* phongShader = spm->getShaderProgram(0);
 
     DrawableObject* obj = new DrawableObject(
-        triangle,  // ✅ Triangle!
+        triangle,
         phongShader,
         glm::vec3(0.8f, 0.2f, 0.2f)  // Červená farba
     );
 
 
     obj->translate(glm::vec3(0.0f, 0.0f, 0.0f));
-    obj->scale(glm::vec3(1.0f, 1.0f, 1.0f));  // ✅ Väčší scale pre trojuholník
+    obj->scale(glm::vec3(1.0f, 1.0f, 1.0f));
     obj->calculateModelMatrix();
     obj->updateModelMatrix();
 
@@ -106,9 +106,9 @@ void Scene1_PhongTest::renderFrame()
     // KĽÚČOVÉ: Pridaj transformácie ZNOVA každý frame
     obj->translate(glm::vec3(0.0f, 0.0f, 0.0f));
     obj->scale(glm::vec3(1.0f, 1.0f, 1.0f));
-    obj->rotate(rotationAngle, glm::vec3(0.0f, 0.0f, 1.0f));  // ✅ Rotácia okolo Z (v rovine obrazovky)
+    obj->rotate(rotationAngle, glm::vec3(0.0f, 0.0f, 1.0f));
     
-    // Vypočítaj (VYPRÁZDNI Composite!) a pošli do shadera
+    
     obj->calculateModelMatrix();
     obj->updateModelMatrix();
 

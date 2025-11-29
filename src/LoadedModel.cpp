@@ -12,17 +12,17 @@ LoadedModel::LoadedModel(const char* path)
     // TODO
     //  IMPORT FLAGS
     unsigned int importOptions =
-        aiProcess_Triangulate |              // Konvertuj všetko na trojuholníky
-        aiProcess_OptimizeMeshes |           // Optimalizuj
-        aiProcess_JoinIdenticalVertices |    // Spoj identické vrcholy
-        aiProcess_CalcTangentSpace |         // Vypočítaj tangenty
-        aiProcess_GenNormals |               // Generuj normály ak chýbajú
-        aiProcess_ValidateDataStructure |    // Validuj dáta
-        aiProcess_FindInvalidData |          // Nájdi invalidné dáta
-        aiProcess_FixInfacingNormals |       // Oprav otočené normály
-        aiProcess_SortByPType;               // Zoraď podľa typu primitív
+        aiProcess_Triangulate |
+        aiProcess_OptimizeMeshes |
+        aiProcess_JoinIdenticalVertices |
+        aiProcess_CalcTangentSpace |
+        aiProcess_GenNormals |
+        aiProcess_ValidateDataStructure |
+        aiProcess_FindInvalidData |
+        aiProcess_FixInfacingNormals |
+        aiProcess_SortByPType;
 
-    printf("🔄 Calling ASSIMP ReadFile...\n");
+    printf("Calling ASSIMP ReadFile...\n");
     const aiScene* scene = importer.ReadFile(path, importOptions);
 
     if (!scene) {

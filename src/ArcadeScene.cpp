@@ -8,14 +8,14 @@
 #include <ctime>
 #include <cstdio>
 
-// Texture indices (poradie podla pridavania v kode)
+// Texture indices
 #define TEX_SHREK 0
 #define TEX_FIONA 1
 #define TEX_TOILET 2
 #define TEX_CAT 3
 #define TEX_HAMMER 4
-#define TEX_DESK 5   // desk.jpg sa pridava prvy v createPedestals
-#define TEX_MAP 6    // mapa.jpg sa pridava druhy
+#define TEX_DESK 5
+#define TEX_MAP 6
 
 ArcadeScene::ArcadeScene()
     : score(0), hits(0), misses(0), gameTime(0.0f), maxGameTime(60.0f),
@@ -39,7 +39,6 @@ ArcadeScene::~ArcadeScene()
         delete m;
     }
     moles.clear();
-
     if (hammer) delete hammer;
 }
 
@@ -52,13 +51,12 @@ void ArcadeScene::createScene(GLFWwindow* window)
 
     this->window = window;
 
-    // Nahodne seedovanie
+    // Random seed
     srand(static_cast<unsigned>(time(nullptr)));
 
-    // Vytvor kameru - FIXNY POHLAD ZHORA
+    // Fixed top-down camera
     this->camera = new Camera(window, 60.0f, 0.1f, 200.0f);
 
-    // Managery
     this->lm = new LightManager();
     this->spm = new ShaderProgramManager(lm);
     this->om = new ObjectManager();
@@ -70,7 +68,6 @@ void ArcadeScene::createScene(GLFWwindow* window)
     createPedestals();
     callbacks();
 
-    // Nastav fixnu kameru - pohlad zhora na podstavce (vyssia pre vacsie hrisko)
     camera->setPosition(glm::vec3(0.0f, 15.0f, 10.0f));
     camera->setTarget(glm::vec3(0.0f, 0.0f, 0.0f));
 
@@ -94,12 +91,12 @@ void ArcadeScene::createShaders()
 {
     printf("Creating shaders...\n");
 
-    // Phong shader s texturami (index 0)
+    // Phong with textures (index 0)
     spm->addShaderProgram(camera,
         "Shaders/VertexShaderPhongTexture.glsl",
         "Shaders/FragmentShaderPhongTexture.glsl");
 
-    // Phong shader bez textury (index 1) - pre podstavce
+    // Phong without texture (index 1)
     spm->addShaderProgram(camera,
         "Shaders/VertexShaderPhong.glsl",
         "Shaders/FragmentShaderPhong.glsl");
@@ -109,24 +106,23 @@ void ArcadeScene::createShaders()
 
 void ArcadeScene::createDrawableObjects()
 {
-    // Objekty sa vytvaraju v createPedestals() a spawnMole()
+    // Objects created in createPedestals() and spawnMole()
 }
 
 void ArcadeScene::createLights()
 {
     printf("Creating lights...\n");
 
-    // Silnejsie ambient svetlo
     lm->ambient = 0.5f;
 
-    // Hlavne svetlo zhora
+    // Main directional light from above
     DirectionalLight* mainLight = new DirectionalLight(
         glm::normalize(glm::vec3(0.0f, -1.0f, 0.3f)),
         glm::vec3(0.8f, 0.8f, 0.8f)
     );
     lm->addDirectionalLight(mainLight);
 
-    // Bodove svetlo nad hraco plochou
+    // Point light above play area
     PointLight* topLight = new PointLight(
         glm::vec3(0.0f, 8.0f, 0.0f),
         0.8f, 0.09f, 0.032f,
@@ -142,38 +138,32 @@ void ArcadeScene::loadCharacterModels()
 {
     printf("Loading character models...\n");
 
-    // Shrek (index 0)
     shrekModel = new LoadedModel("models/shrek.obj");
     tm->addTexture(new Texture2D("models/shrek.png"));
     printf("  Shrek loaded\n");
 
-    // Fiona (index 1)
     fionaModel = new LoadedModel("models/fiona.obj");
     tm->addTexture(new Texture2D("models/fiona.png"));
     printf("  Fiona loaded\n");
 
-    // Toilet (WC) (index 2)
     toiletModel = new LoadedModel("models/toiled.obj");
     tm->addTexture(new Texture2D("models/toiled.jpg"));
     printf("  Toilet loaded\n");
 
-    // Cat (index 3)
     catModel = new LoadedModel("models/Cat.obj");
     tm->addTexture(new Texture2D("models/Cat_diffuse.jpg"));
     printf("  Cat loaded\n");
 
-    // Hammer (index 4)
     hammerModel = new LoadedModel("models/kladivo.obj");
     tm->addTexture(new Texture2D("models/kladivo.jpg"));
     printf("  Hammer loaded\n");
 
-    // Vytvor hammer controller
+    // Create hammer controller
     ShaderProgram* textureShader = spm->getShaderProgram(0);
     hammer = new Hammer(hammerModel, textureShader);
-    hammer->setScale(0.08f);  // Velkost kladiva - mensie
-    hammer->setVisibleDuration(0.4f);  // Ako dlho zostane viditelne po udere
+    hammer->setScale(0.08f);
+    hammer->setVisibleDuration(0.4f);
 
-    // Pridaj texturu a do object managera
     Texture* hammerTex = tm->getTexture(TEX_HAMMER);
     if (hammerTex)
     {
@@ -188,40 +178,40 @@ void ArcadeScene::createPedestals()
 {
     printf("Creating desk with map...\n");
 
-    ShaderProgram* textureShader = spm->getShaderProgram(0);  // Shader s texturou
+    ShaderProgram* textureShader = spm->getShaderProgram(0);
 
-    // === STOL (desk) - pod mapou ===
+    // Desk - under the map
     LoadedModel* deskModel = new LoadedModel("models/desk.obj");
-    tm->addTexture(new Texture2D("models/desk.jpg"));  // TEX_DESK = 5
+    tm->addTexture(new Texture2D("models/desk.jpg"));
 
     DrawableObject* desk = new DrawableObject(deskModel, textureShader);
     desk->addTexture(tm->getTexture(TEX_DESK));
-    desk->rotate(-90.0f, glm::vec3(1.0f, 0.0f, 0.0f));  // Uplne naležato - vidime vrch
-    desk->scale(glm::vec3(0.08f, 0.08f, 0.08f));  // Vacsie
-    desk->translate(glm::vec3(0.0f, -2.0f, 0.0f));  // Pod mapou
+    desk->rotate(-90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+    desk->scale(glm::vec3(0.08f, 0.08f, 0.08f));
+    desk->translate(glm::vec3(0.0f, -2.0f, 0.0f));
     desk->calculateModelMatrix();
     desk->updateModelMatrix();
     om->addDrawableObject(desk);
     printf("  Desk loaded\n");
 
-    // === MAPA - horizontalne na urovni Y=0 ===
+    // Map - horizontal at Y=0
     LoadedModel* mapModel = new LoadedModel("models/mapa.obj");
-    tm->addTexture(new Texture2D("models/mapa.jpg"));  // TEX_MAP = 6
+    tm->addTexture(new Texture2D("models/mapa.jpg"));
 
     DrawableObject* mapFloor = new DrawableObject(mapModel, textureShader);
     mapFloor->addTexture(tm->getTexture(TEX_MAP));
-    mapFloor->rotate(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));   // Poloz horizontalne
-    mapFloor->rotate(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));  // Otoc
-    mapFloor->scale(glm::vec3(0.4f, 0.4f, 0.4f));  // Mensie aby sa zmestila na stol
-    mapFloor->translate(glm::vec3(0.0f, 1.0f, 16.0f));  // Povodna pozicia
+    mapFloor->rotate(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+    mapFloor->rotate(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    mapFloor->scale(glm::vec3(0.4f, 0.4f, 0.4f));
+    mapFloor->translate(glm::vec3(0.0f, 1.0f, 16.0f));
     mapFloor->calculateModelMatrix();
     mapFloor->updateModelMatrix();
     om->addDrawableObject(mapFloor);
     printf("  Map loaded (horizontal at Y=0)\n");
 
-    // Pozicie kde postavy vyskakuju - MENSIE SPACING pre mapu na stole
-    float spacingX = 1.25f;  // Znizene z 4.0
-    float spacingZ = 1.25f;  // Znizene z 4.0
+    // Spawn positions - 2x3 grid
+    float spacingX = 1.25f;
+    float spacingZ = 1.25f;
     float startX = -spacingX;
     float startZ = -spacingZ / 1.25f;
 
@@ -233,9 +223,8 @@ void ArcadeScene::createPedestals()
             float x = startX + col * spacingX;
             float z = startZ + row * spacingZ;
 
-            // Uloz poziciu (pre spawn logiku) - ale NEVYTVARAJ vizualne diery
-            pedestalPositions[index] = glm::vec3(x, 6.5f, z + 1.0f);  // Na mape - viditelna vyska
-            pedestals[index] = nullptr;  // Ziadne vizualne pedestaly
+            pedestalPositions[index] = glm::vec3(x, 6.5f, z + 1.0f);
+            pedestals[index] = nullptr;
 
             printf("  Spawn point %d at (%.1f, 0, %.1f)\n", index, x, z);
             index++;
@@ -247,37 +236,34 @@ void ArcadeScene::createPedestals()
 
 Mole* ArcadeScene::spawnMole()
 {
-    // Najdi DVA volne podstavce - start a ciel
+    // Find two free pedestals - start and target
     int startPedestal = getFreePedestal();
     if (startPedestal < 0)
     {
-        return nullptr;  // Vsetky obsadene
+        return nullptr;
     }
-    pedestalOccupied[startPedestal] = true;  // Docasne obsad
+    pedestalOccupied[startPedestal] = true;
 
-    // Najdi cielovy podstavec (rozny od startovacieh)
     int endPedestal = getFreePedestal();
     if (endPedestal < 0)
     {
-        // Len jeden volny - pouzi staticku poziciu
         endPedestal = startPedestal;
     }
 
-    // Nahodny typ postavy
     Mole::Type type = getRandomMoleType();
 
-    // === OBJECT POOLING: Skus najst existujuci neaktivny mole rovnakeho typu ===
+    // OBJECT POOLING: Try to find existing inactive mole of same type
     Mole* mole = nullptr;
     for (Mole* m : moles)
     {
         if (!m->isActive() && m->getType() == type)
         {
-            mole = m;  // Znovupouzi existujuci!
+            mole = m;
             break;
         }
     }
 
-    // Ak sme nenasli, vytvor novy
+    // Create new if not found
     if (mole == nullptr)
     {
         AbstractModel* model = nullptr;
@@ -306,14 +292,12 @@ Mole* ArcadeScene::spawnMole()
         ShaderProgram* textureShader = spm->getShaderProgram(0);
         mole = new Mole(model, textureShader, type);
 
-        // Nastav texturu
         Texture* texture = tm->getTexture(textureIndex);
         if (texture)
         {
             mole->getVisual()->addTexture(texture);
         }
 
-        // Pridaj vizual do object managera (len pre NOVE moles)
         om->addDrawableObject(mole->getVisual());
         mole->setStencilID(om->getObjectCount());
 
@@ -325,19 +309,17 @@ Mole* ArcadeScene::spawnMole()
         printf("[POOL] Reused existing %s\n", Mole::getNameForType(type));
     }
 
-    // Spawn s trajektoriou medzi podstavcami
+    // Spawn with path between pedestals
     glm::vec3 startPos = pedestalPositions[startPedestal];
     glm::vec3 endPos = pedestalPositions[endPedestal];
 
     if (startPedestal != endPedestal)
     {
-        // Pohyb medzi dvoma podstavcami - rezervuj OBA podstavce
         pedestalOccupied[endPedestal] = true;
         mole->spawnWithPath(startPos, endPos, startPedestal, endPedestal);
     }
     else
     {
-        // Staticka pozicia (len jeden volny podstavec)
         mole->spawn(startPos, startPedestal);
     }
 
@@ -348,15 +330,15 @@ Mole::Type ArcadeScene::getRandomMoleType()
 {
     int roll = rand() % 100;
 
-    if (roll < 14)  // 14% sanca - WC
+    if (roll < 14)       // 14% chance - Toilet
     {
         return Mole::Type::TOILET;
     }
-    else if (roll < 39)  // 25% sanca - Fiona
+    else if (roll < 39)  // 25% chance - Fiona
     {
         return Mole::Type::FIONA;
     }
-    else  // 65% sanca - Shrek
+    else                 // 65% chance - Shrek
     {
         return Mole::Type::SHREK;
     }
@@ -364,7 +346,6 @@ Mole::Type ArcadeScene::getRandomMoleType()
 
 int ArcadeScene::getFreePedestal()
 {
-    // Najdi volne podstavce
     std::vector<int> free;
     for (int i = 0; i < NUM_PEDESTALS; i++)
     {
@@ -379,42 +360,37 @@ int ArcadeScene::getFreePedestal()
         return -1;
     }
 
-    // Nahodny vyber
     return free[rand() % free.size()];
 }
 
 void ArcadeScene::updateMoles(float deltaTime)
 {
-    // Spawn novych postav
     spawnTimer += deltaTime;
 
-    // DYNAMICKA OBTIAZNOST - rychlejsie spawny casom
-    // Start: 1.5s interval, po 30s: 0.8s interval
+    // DYNAMIC DIFFICULTY - faster spawns over time (1.5s -> 0.8s)
     float difficultyFactor = glm::clamp(gameTime / 30.0f, 0.0f, 1.0f);
     float currentSpawnInterval = glm::mix(1.5f, 0.8f, difficultyFactor);
 
-    // Zvys max aktivnych molov casom (3 -> 5)
+    // Increase max active moles over time (3 -> 5)
     int currentMaxMoles = 3 + static_cast<int>(difficultyFactor * 2);
 
     if (spawnTimer >= currentSpawnInterval)
     {
         spawnTimer = 0.0f;
 
-        // Spocitaj aktivne
         int activeCount = 0;
         for (Mole* m : moles)
         {
             if (m->isActive()) activeCount++;
         }
 
-        // Spawn ak je miesto
         if (activeCount < currentMaxMoles)
         {
             spawnMole();
         }
     }
 
-    // Update existujucich
+    // Update existing moles
     for (Mole* m : moles)
     {
         if (m->isActive())
@@ -424,7 +400,7 @@ void ArcadeScene::updateMoles(float deltaTime)
 
             m->update(deltaTime);
 
-            // Ak uz nie je aktivny, uvolni OBA podstavce
+            // Release both pedestals when mole becomes inactive
             if (!m->isActive())
             {
                 if (startPedestal >= 0 && startPedestal < NUM_PEDESTALS)
@@ -445,7 +421,6 @@ void ArcadeScene::updateMoles(float deltaTime)
 
 void ArcadeScene::handleInput()
 {
-    // Restart (R)
     if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
     {
         if (!keyRWasPressed)
@@ -462,10 +437,9 @@ void ArcadeScene::handleInput()
 
 void ArcadeScene::handleWhacking()
 {
-    // Pouzivame MIDDLE CLICK na whacking (ma stencil picking)
     if (Callback::hasMiddleClick())
     {
-        // Vypocitaj 3D poziciu kliknutia pre kladivo
+        // Calculate 3D click position for hammer (ray-plane intersection)
         if (hammer)
         {
             double mouseX, mouseY;
@@ -489,24 +463,24 @@ void ArcadeScene::handleWhacking()
             glm::vec3 rayDir = glm::normalize(glm::vec3(rayEnd - rayStart));
             glm::vec3 rayOrigin = glm::vec3(rayStart);
 
-            float planeY = 6.5f;  // Viditelna vyska mapy
+            float planeY = 6.5f;
             if (rayDir.y != 0.0f)
             {
                 float t = (planeY - rayOrigin.y) / rayDir.y;
                 glm::vec3 hitPoint = rayOrigin + t * rayDir;
                 hitPoint.x = glm::clamp(hitPoint.x, -6.0f, 6.0f);
-                hitPoint.z = glm::clamp(hitPoint.z, -6.0f, 6.0f);  // Vacsie limity pre mapu
+                hitPoint.z = glm::clamp(hitPoint.z, -6.0f, 6.0f);
 
                 hammer->strike(hitPoint);
             }
         }
 
+        // Stencil picking - find clicked mole
         int clickedID = Callback::getClickedObjectID();
         printf("[CLICK] Stencil ID: %d\n", clickedID);
 
         bool hitSomething = false;
 
-        // Hladaj mole s danym ID
         for (Mole* m : moles)
         {
             if (m->isActive() && m->getStencilID() == clickedID)
@@ -520,7 +494,6 @@ void ArcadeScene::handleWhacking()
                     score += points;
                     hits++;
 
-                    // Uvolni OBA podstavce (start aj ciel)
                     if (startPedestal >= 0 && startPedestal < NUM_PEDESTALS)
                     {
                         pedestalOccupied[startPedestal] = false;
@@ -582,7 +555,6 @@ void ArcadeScene::restartGame()
 {
     printf("\n[NEW GAME] Starting new round...\n\n");
 
-    // Reset skore
     score = 0;
     hits = 0;
     misses = 0;
@@ -590,7 +562,6 @@ void ArcadeScene::restartGame()
     gameOver = false;
     spawnTimer = 0.0f;
 
-    // Skry vsetky moles a uvolni podstavce
     for (Mole* m : moles)
     {
         m->hide();
@@ -601,13 +572,13 @@ void ArcadeScene::restartGame()
         pedestalOccupied[i] = false;
     }
 
-    // Novy seed
+    // New random seed
     srand(static_cast<unsigned>(time(nullptr)));
 }
 
 void ArcadeScene::displayHUD()
 {
-    // Konzolovy HUD (kazdu sekundu)
+    // Console HUD (every second)
     static float hudTimer = 0.0f;
     hudTimer += 0.016f;
 
@@ -642,7 +613,7 @@ void ArcadeScene::callbacks()
 
 void ArcadeScene::renderFrame()
 {
-    // Delta time
+    // Delta time from glfwGetTime()
     static float lastTime = 0.0f;
     float currentTime = static_cast<float>(glfwGetTime());
     float deltaTime = currentTime - lastTime;
@@ -650,19 +621,15 @@ void ArcadeScene::renderFrame()
 
     if (deltaTime > 0.1f) deltaTime = 0.1f;
 
-    // Kamera - checkChanges ale nie controls (fixna kamera)
     camera->checkChanges();
 
-    // Aktualizuj kladivo (timer pre skrytie)
     if (hammer)
     {
         hammer->update(deltaTime);
     }
 
-    // Input
     handleInput();
 
-    // Hra
     if (!gameOver)
     {
         gameTime += deltaTime;
@@ -672,25 +639,21 @@ void ArcadeScene::renderFrame()
     }
     else
     {
-        handleWhacking();  // Clear clicks
+        handleWhacking();
     }
 
-    // HUD
     displayHUD();
 
-    // Svetla
     spm->updateLights();
-
-    // Renderovanie
     om->drawObjects();
 }
 
 void ArcadeScene::renderScene()
 {
     glEnable(GL_DEPTH_TEST);
-    glClearColor(0.1f, 0.1f, 0.15f, 1.0f);  // Tmave pozadie
+    glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 
-    // Stencil buffer pre picking
+    // Stencil buffer for picking
     glEnable(GL_STENCIL_TEST);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 

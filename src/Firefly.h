@@ -6,37 +6,29 @@
 #include "ShaderProgram.h"
 #include <glm/glm.hpp>
 
-/**
- * @brief Světluška = Bodové světlo + Vizuální reprezentace
- *
- * - Obsahuje PointLight (pro osvětlení)
- * - Obsahuje DrawableObject (pro zobrazení)
- *
- * 
- *
- */
+
 class Firefly
 {
 private:
-    PointLight* light;          // Světlo (pro osvětlení scény)
-    DrawableObject* visual;     // Vizualizace (malá kulička)
+    PointLight* light;
+    DrawableObject* visual;
 
     // Animace
-    glm::vec3 centerPosition;   // Střed orbitu
-    float orbitRadius;          // Poloměr orbitu
-    float orbitSpeed;           // Rychlost pohybu
-    float verticalSpeed;        // Rychlost vertikálního pohybu
-    float phase;                // Fázový posun (pro různorodost)
+    glm::vec3 centerPosition;
+    float orbitRadius;
+    float orbitSpeed;
+    float verticalSpeed;
+    float phase;
 
     // Vlastnosti
-    glm::vec3 color;            // Barva světla
-    float intensity;            // Intenzita (pro blikání)
-    float minIntensity;         // Minimální intenzita
-    float maxIntensity;         // Maximální intenzita
-    float blinkSpeed;           // Rychlost blikání
+    glm::vec3 color;
+    float intensity;
+    float minIntensity;
+    float maxIntensity;
+    float blinkSpeed;
 
 
-    glm::vec3 visualScale;      // Scale vizualizace (podle typu světlušky)
+    glm::vec3 visualScale;
 
 public:
 

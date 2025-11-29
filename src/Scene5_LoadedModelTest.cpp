@@ -19,7 +19,7 @@ void Scene5_LoadedModelTest::createDrawableObjects()
     // ========================================
     // MODEL 1: TEAPOT (vľavo)
     // ========================================
-    printf("  🫖 Loading teapot...\n");
+    printf("Loading teapot...\n");
     LoadedModel* teapotModel = new LoadedModel("Models/teapot.obj");
 
     DrawableObject* teapot = new DrawableObject(

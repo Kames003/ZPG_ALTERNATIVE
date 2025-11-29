@@ -10,9 +10,9 @@ Firefly::Firefly(glm::vec3 position,
     this->centerPosition = position;
     this->color = lightColor;
     
-    // ========================================
+
     // NÁHODNÉ PARAMETRY PRO KAŽDOU SVĚTLUŠKU
-    // ========================================
+
     // Orbit radius: 0.5 - 1.5 metrů
     this->orbitRadius = 0.5f + static_cast<float>(rand() % 100) / 100.0f;
     
@@ -28,16 +28,16 @@ Firefly::Firefly(glm::vec3 position,
     // Blink speed: 2.0 - 4.0 Hz
     this->blinkSpeed = 2.0f + static_cast<float>(rand() % 100) / 50.0f;
     
-    // ========================================
+
     // INTENZITA BLIKÁNÍ (ZVÝŠENÁ PRE LEPŠÍ VIDITEĽNOSŤ)
-    // ========================================
+
     this->minIntensity = 0.6f;  // Zvýšené z 0.3f
     this->maxIntensity = 1.5f;  // Zvýšené z 1.0f
     this->intensity = maxIntensity;
     
-    // ========================================
+
     // VARIACE TYPU SVĚTLUŠKY
-    // ========================================
+
     // Každá světluška má náhodný typ (0-2)
     int fireflyType = rand() % 3;
 
@@ -48,27 +48,27 @@ Firefly::Firefly(glm::vec3 position,
     {
         case 0: // SILNÁ světluška - dosvit ~4-5 metrů (ZVÝŠENÉ)
             constant = 1.0f;
-            linear = 0.35f;     // Ešte slabší útlum (bolo 0.5f)
-            quadratic = 0.8f;   // Ešte slabší útlum (bolo 1.2f)
-            visualScale = glm::vec3(0.10f, 0.10f, 0.10f);  // Větší kulička
+            linear = 0.35f;
+            quadratic = 0.8f;
+            visualScale = glm::vec3(0.10f, 0.10f, 0.10f);
             // Vizualizace: trochu světlejší/žlutavější
             visual = new DrawableObject(model, shader, glm::vec3(1.0f, 1.0f, 0.9f));
             break;
 
         case 1: // NORMÁLNÍ světluška - dosvit ~3-4 metry (ZVÝŠENÉ)
             constant = 1.0f;
-            linear = 0.5f;      // Slabší útlum (bolo 0.7f)
-            quadratic = 1.2f;   // Slabší útlum (bolo 1.8f)
-            visualScale = glm::vec3(0.08f, 0.08f, 0.08f);  // Normální
+            linear = 0.5f;
+            quadratic = 1.2f;
+            visualScale = glm::vec3(0.08f, 0.08f, 0.08f);
             // Vizualizace: bílá
             visual = new DrawableObject(model, shader, glm::vec3(1.0f, 1.0f, 1.0f));
             break;
 
-        case 2: // SLABÁ světluška - dosvit ~2-3 metry (ZVÝŠENÉ)
+        case 2:
             constant = 1.0f;
-            linear = 0.7f;      // Slabší útlum (bolo 0.9f)
-            quadratic = 1.8f;   // Slabší útlum (bolo 2.5f)
-            visualScale = glm::vec3(0.06f, 0.06f, 0.06f);  // Menší kulička
+            linear = 0.7f;
+            quadratic = 1.8f;
+            visualScale = glm::vec3(0.06f, 0.06f, 0.06f);
             // Vizualizace: slabší/namodralejší
             visual = new DrawableObject(model, shader, glm::vec3(0.9f, 0.9f, 0.7f));
             break;
@@ -77,9 +77,9 @@ Firefly::Firefly(glm::vec3 position,
 
     this->visualScale = visualScale;
 
-    // ========================================
+
     // SVĚTLO - NASTAVENÍ PRO SVĚTLUŠKY
-    // ========================================
+
     this->light = new PointLight(
         position,
         constant,
@@ -88,9 +88,9 @@ Firefly::Firefly(glm::vec3 position,
         lightColor
     );
 
-    // ========================================
+
     // DOKONČENÍ VIZUALIZACE
-    // ========================================
+
     visual->translate(position);
     visual->scale(visualScale);
     visual->calculateModelMatrix();
@@ -102,9 +102,9 @@ void Firefly::updateAnimation(float time)
     // Aplikace fázového posunu
     float t = time + phase;
 
-    // ========================================
+
     // VÝPOČET NOVÉ POZICE
-    // ========================================
+
     // Kruhový pohyb v XZ rovině
     float angle = t * orbitSpeed;
     float x = centerPosition.x + orbitRadius * cos(angle);
@@ -115,28 +115,28 @@ void Firefly::updateAnimation(float time)
 
     glm::vec3 newPosition(x, y, z);
 
-    // ========================================
+
     // BLIKÁNÍ - SINUSOVÝ PŘECHOD INTENZITY
-    // ========================================
+
     // Intenzita osciluje mezi minIntensity a maxIntensity
     intensity = minIntensity +
                (maxIntensity - minIntensity) *
                (0.5f + 0.5f * sin(t * blinkSpeed));
 
-    // ========================================
+
     // AKTUALIZACE SVĚTLA
-    // ========================================
+
     // Barva světla = základní barva × aktuální intenzita
     light->color = color * intensity;
 
     // Pozice světla
     light->position = newPosition;
 
-    // ========================================
+
     // AKTUALIZACE VIZUALIZACE
-    // ========================================
+
     // DŮLEŽITÉ: Musíme znovu přidat transformace každý frame!
-    // (TransformationComposite se vyprázdní po calculateModelMatrix)
+
     visual->translate(newPosition);
     visual->scale(this->visualScale);
 

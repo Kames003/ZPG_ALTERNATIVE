@@ -337,7 +337,8 @@ void Scene2_SolarSystem::renderFrame()
     moonOrbit = fmod(time * MOON_ORBIT_SPEED * SPEED_MULT, 360.0f);
     moon->rotate(earthOrbit, glm::vec3(0.0f, 1.0f, 0.0f));         // 5. Zem okolo Slnka
     moon->translate(glm::vec3(EARTH_DIST, 0.0f, 0.0f));             // 4. posun na orbit Zeme
-    moon->rotate(moonOrbit, glm::vec3(0.0f, 1.0f, 0.0f));           // 3. Mesiac okolo Zeme
+    moon->rotate(moonOrbit, glm::vec3(0.0f, 1.0f, 0.0f));           // 3. Mesiac okolo Zeme (ORIGINAL - horizontalna)
+    //moon->rotate(moonOrbit, glm::vec3(0.0f, 0.0f, 1.0f));           // 3. Mesiac okolo Zeme (TEST - cez vrch/spodok, Z os)
     moon->translate(glm::vec3(MOON_DIST, 0.0f, 0.0f));              // 2. posun od Zeme
     moon->scale(glm::vec3(MOON_SIZE));                               // 1. scale
     moon->calculateModelMatrix();

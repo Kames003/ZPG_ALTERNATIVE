@@ -14,18 +14,9 @@ uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
 void main () {
-    // === TEST HOMOGENNEJ SURADNICE ===
-    float w = 500.0;  // LOKALNA premenna
-
-    // World space pozicia pre osvetlenie
+    float w = 500.0;
     vec4 worldPos = modelMatrix * vec4(v_position, 1.0);
     worldFragmentPosition = worldPos.xyz / worldPos.w;
-
-    // Normala
     worldNormal = normalize(transpose(inverse(mat3(modelMatrix))) * v_normal);
-
-    // === TEST W = 500 ===
-    // vec4(pos * w, w) = (x*500, y*500, z*500, 500)
-    // Pri perspektivnom deleni sa vsetko vykrati
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(v_position * w, w);
 }

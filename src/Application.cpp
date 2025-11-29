@@ -131,9 +131,8 @@ void Application::run()
     }
     // vrati sa a opakuje cely proces
 
-    // ========================================
     // CLEANUP
-    // ========================================
+
     printf("\n=== Shutting down ===\n");
 
     delete sceneManager;

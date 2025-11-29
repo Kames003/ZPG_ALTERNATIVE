@@ -7,28 +7,27 @@ Mole::Mole(AbstractModel* model, ShaderProgram* shader, Type moleType)
       popProgress(0.0f), popSpeed(6.0f), popping(true),
       pathMovement(nullptr), moving(false), reachedTarget(false)
 {
-    // Vytvor vizualny objekt
+
     visual = new DrawableObject(model, shader);
 
-    // Nastav body a zivotnost podla typu
+
     points = getPointsForType(moleType);
     maxLifetime = getLifetimeForType(moleType);
     lifetime = maxLifetime;
 
-    // Nastav velkost podla typu
+
     float scale = getScaleForType(moleType);
     visual->scale(glm::vec3(scale));
 
-    // Vytvor path movement
+
     pathMovement = new LeafPathMovement();
 
-    // Zaciatok skryty
+
     visual->visible = false;
 }
 
 Mole::~Mole()
 {
-    // visual sa maze cez ObjectManager
     if (pathMovement) delete pathMovement;
 }
 
@@ -39,7 +38,7 @@ void Mole::update(float deltaTime)
         return;
     }
 
-    // FAZA 1: Pop-up animacia na starte
+
     if (popping)
     {
         popProgress += popSpeed * deltaTime;
@@ -48,33 +47,33 @@ void Mole::update(float deltaTime)
             popProgress = 1.0f;
             popping = false;
 
-            // Zacni pohyb len ak mame validnu cestu (min 2 waypoints)
+
             if (pathMovement && pathMovement->hasValidPath())
             {
                 moving = true;
             }
             else
             {
-                // Staticka pozicia - preskoc rovno na reachedTarget
+
                 reachedTarget = true;
-                lifetime = maxLifetime;  // Pouzi plny lifetime pre staticke
+                lifetime = maxLifetime;
             }
         }
     }
-    // FAZA 2: Pohyb po drahe (parametricky po lomenej ciare)
+
     else if (moving && pathMovement)
     {
         pathMovement->update(deltaTime);
 
-        // Ked dojde na koniec trajektorie
+
         if (pathMovement->isFinished())
         {
             moving = false;
             reachedTarget = true;
-            lifetime = 0.8f;  // Zostan na cieli kratku chvilu
+            lifetime = 0.8f;
         }
     }
-    // FAZA 3: Cakanie na cieli + pop-down
+
     else if (reachedTarget)
     {
         lifetime -= deltaTime;
@@ -93,7 +92,6 @@ void Mole::update(float deltaTime)
         }
     }
 
-    // === AKTUALIZUJ POZICIU ===
     visual->getTransformationComposite()->removeTransformations();
 
     float scale = getScaleForType(type);
@@ -102,21 +100,17 @@ void Mole::update(float deltaTime)
 
     if (moving && pathMovement)
     {
-        // Pocas pohybu - pozicia z parametrickej drahy
         pos = pathMovement->getCurrentPosition();
     }
     else if (reachedTarget)
     {
-        // Po dosiahnuti ciela - zostan na CIELOVEJ pozicii
         pos = endPosition;
     }
     else
     {
-        // Pop-up faza - startova pozicia
         pos = basePosition;
     }
 
-    // Y offset pre pop animaciu (vyskakovanie/skryvanie)
     float yOffset = popProgress * 0.6f;
     pos += glm::vec3(0.0f, yOffset, 0.0f) + offset;
 
@@ -153,17 +147,15 @@ void Mole::spawn(glm::vec3 position, int pedestal)
     moving = false;
     reachedTarget = false;
     basePosition = position;
-    endPosition = position;  // Staticka pozicia - start = ciel
+    endPosition = position;
     pedestalIndex = pedestal;
     targetPedestalIndex = pedestal;
 
-    // DOLEZITE: Vycisti stare waypoints (pre object pooling)
     if (pathMovement)
     {
         pathMovement->clearWaypoints();
     }
 
-    // Reset transformacie
     visual->getTransformationComposite()->removeTransformations();
 
     float scale = getScaleForType(type);
@@ -200,10 +192,10 @@ float Mole::getLifetimeForType(Type t)
 {
     switch (t)
     {
-        case Type::SHREK:   return 3.5f;   // Pomaly, dlho viditelny
-        case Type::FIONA:   return 2.5f;   // Stredna rychlost
-        case Type::TOILET:  return 1.5f;   // Rychly, kratko viditelny
-        case Type::CAT:     return 3.0f;   // Stredna (ale nebit!)
+        case Type::SHREK:   return 3.5f;
+        case Type::FIONA:   return 2.5f;
+        case Type::TOILET:  return 1.5f;
+        case Type::CAT:     return 3.0f;
         default:            return 3.0f;
     }
 }
@@ -212,22 +204,21 @@ float Mole::getScaleForType(Type t)
 {
     switch (t)
     {
-        case Type::SHREK:   return 0.52f;    // +16% +12% zvacsenie
-        case Type::FIONA:   return 0.455f;   // +16% +12% zvacsenie
-        case Type::TOILET:  return 0.26f;    // +16% +12% zvacsenie
-        case Type::CAT:     return 0.0065f;  // +16% +12% zvacsenie
+        case Type::SHREK:   return 0.52f;
+        case Type::FIONA:   return 0.455f;
+        case Type::TOILET:  return 0.26f;
+        case Type::CAT:     return 0.0065f;
         default:            return 0.26f;
     }
 }
 
 glm::vec3 Mole::getOffsetForType(Type t)
 {
-    // Kompenzacia origin pointu modelov - mensie offsety pre mensie modely
     switch (t)
     {
-        case Type::SHREK:   return glm::vec3(-0.4f, 0.1f, 0.4f);   // Mensie offsety
-        case Type::FIONA:   return glm::vec3(-0.3f, 0.1f, 0.3f);   // Mensie offsety
-        case Type::TOILET:  return glm::vec3(-0.15f, 0.05f, 0.2f); // Mensie offsety
+        case Type::SHREK:   return glm::vec3(-0.4f, 0.1f, 0.4f);
+        case Type::FIONA:   return glm::vec3(-0.3f, 0.1f, 0.3f);
+        case Type::TOILET:  return glm::vec3(-0.15f, 0.05f, 0.2f);
         case Type::CAT:     return glm::vec3(0.0f, 0.1f, 0.0f);
         default:            return glm::vec3(0.0f, 0.1f, 0.0f);
     }
@@ -245,9 +236,6 @@ const char* Mole::getNameForType(Type t)
     }
 }
 
-// ========================================
-// NOVE: Pohyb po parametrickej trajektorii
-// ========================================
 
 void Mole::spawnWithPath(glm::vec3 startPos, glm::vec3 endPos, int startPedestal, int endPedestal)
 {
@@ -257,34 +245,34 @@ void Mole::spawnWithPath(glm::vec3 startPos, glm::vec3 endPos, int startPedestal
     popProgress = 0.0f;
     popping = true;
     moving = false;
-    reachedTarget = false;  // Reset!
+    reachedTarget = false;
 
     basePosition = startPos;
-    endPosition = endPos;   // ULOZ CIELOVU POZICIU!
+    endPosition = endPos;
     pedestalIndex = startPedestal;
     targetPedestalIndex = endPedestal;
 
-    // Vytvor trajektoriu - lomena ciara s miernym oblucikom
+
     pathMovement->clearWaypoints();
 
-    // Start pozicia
+
     pathMovement->addWaypoint(startPos);
 
-    // Stredny bod - mierne vyzdvihnuti pre oblucik (skok)
+
     glm::vec3 midPoint = (startPos + endPos) * 0.5f;
-    midPoint.y += 0.8f;  // Vyssi skok pre lepsiu viditelnost
+    midPoint.y += 0.8f;
     pathMovement->addWaypoint(midPoint);
 
-    // Cielova pozicia
+
     pathMovement->addWaypoint(endPos);
 
-    // VYSOKA RYCHLOST - presun trva cca 0.5-1 sekundu
+
     float moveSpeed = 8.0f;  // Zakladna rychlost
     switch (type)
     {
-        case Type::SHREK:   moveSpeed = 6.0f;   break;  // Pomaly ale stale rychly
-        case Type::FIONA:   moveSpeed = 8.0f;   break;  // Stredna
-        case Type::TOILET:  moveSpeed = 12.0f;  break;  // Velmi rychly (50 bodov!)
+        case Type::SHREK:   moveSpeed = 6.0f;   break;
+        case Type::FIONA:   moveSpeed = 8.0f;   break;
+        case Type::TOILET:  moveSpeed = 12.0f;  break;
         case Type::CAT:     moveSpeed = 7.0f;   break;
         default:            moveSpeed = 8.0f;
     }
@@ -293,7 +281,7 @@ void Mole::spawnWithPath(glm::vec3 startPos, glm::vec3 endPos, int startPedestal
     pathMovement->setPingPong(false);
     pathMovement->setT(0.0f);
 
-    // Reset transformacie
+
     visual->getTransformationComposite()->removeTransformations();
 
     float scale = getScaleForType(type);

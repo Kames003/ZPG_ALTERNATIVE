@@ -133,8 +133,6 @@ set(SOURCES
         src/TransformationComposite.h
 
         # Arcade Game (Whac-A-Mole)
-        src/Target.cpp
-        src/Target.h
         src/Mole.cpp
         src/Mole.h
         src/Hammer.cpp

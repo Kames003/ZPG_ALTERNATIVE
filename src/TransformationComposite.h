@@ -4,6 +4,9 @@
 #include <vector>
 
 /**
+ *
+ * !!!! na pripomenutie daj si na to pozor !!!!!!
+ *
  * @brief Composite transformácií (Composite pattern)
  *
 

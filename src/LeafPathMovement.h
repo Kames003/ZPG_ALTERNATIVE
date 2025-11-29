@@ -3,37 +3,17 @@
 #include "TransformationComponent.h"
 #include <vector>
 
-/**
- * @brief Pohyb po usecke alebo lomenej ciare (polyline)
- *
- * Transformacia pre parametricky pohyb objektu po definovanej drahe.
- * Draha je zadana ako zoznam waypointov (bodov).
- * Parameter t urcuje poziciu na drahe (0.0 = zaciatok, 1.0 = koniec).
- *
- * Pouzitie:
- * @code
- * LeafPathMovement* path = new LeafPathMovement();
- * path->addWaypoint(glm::vec3(0, 0, 0));   // Start
- * path->addWaypoint(glm::vec3(10, 5, 0));  // Bod 1
- * path->addWaypoint(glm::vec3(20, 0, 0));  // Koniec
- * path->setSpeed(0.5f);
- * path->setLoop(true);
- *
- * // V renderFrame():
- * path->update(deltaTime);
- * object->getTransformationComposite()->addTransformation(path);
- * @endcode
- */
+
 class LeafPathMovement : public TransformationComponent
 {
 private:
-    std::vector<glm::vec3> waypoints;  // Body drahy
-    float t;                            // Parameter 0.0 - 1.0
-    float speed;                        // Rychlost pohybu (jednotky za sekundu)
-    bool loop;                          // Opakovat drahu?
-    bool pingPong;                      // Tam a spat?
-    bool forward;                       // Smer pohybu (pre pingPong)
-    float totalLength;                  // Celkova dlzka drahy
+    std::vector<glm::vec3> waypoints;
+    float t;
+    float speed;
+    bool loop;
+    bool pingPong;
+    bool forward;
+    float totalLength;
 
     void calculateTotalLength();
     glm::vec3 calculatePosition();
