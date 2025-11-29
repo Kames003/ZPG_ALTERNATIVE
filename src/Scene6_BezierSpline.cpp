@@ -232,7 +232,7 @@ void Scene6_BezierSpline::handleSplineInput()
 	{
 		glm::vec3 screenPos = Callback::position;
 		glm::vec3 worldPos = interactionManager->screenToWorld(screenPos);
-		
+
 		// ✅ OPRAVA: Nastav Y na úroveň plainu (-0.5)
 		worldPos.y = -0.5f;
 
@@ -259,12 +259,12 @@ void Scene6_BezierSpline::handleSplineInput()
 			printf("║  Press E to exit Edit Mode                    ║\n");
 			printf("╚════════════════════════════════════════════════╝\n");
 			printf("\n");
-			
+
 			// ✅ KRITICKÉ: Re-inicializuj LeafBezierMovement TERAZ keď máme validnú spline!
 			if (bezierMovement && bezierSpline->isValid()) {
 				glm::vec3 position = bezierSpline->calculatePoint();
 				glm::vec3 tangent = bezierSpline->calculateTangent();
-				
+
 				printf("[BEZIER] Initializing movement at position (%.2f, %.2f, %.2f)\n",
 					position.x, position.y, position.z);
 				printf("[BEZIER] Tangent vector: (%.2f, %.2f, %.2f)\n",
@@ -397,7 +397,7 @@ void Scene6_BezierSpline::renderFrame()
 	if (shrekMoving && bezierMovement && bezierSpline->isValid())
 	{
 		float deltaTime = 0.016f; // ~60 FPS
-		
+
 		// ✅ DEBUG: Výpis aktuálneho parametra PRED update
 		static int frameCount = 0;
 		if (frameCount % 60 == 0) {  // Každú sekundu
@@ -406,11 +406,11 @@ void Scene6_BezierSpline::renderFrame()
 			printf("[ANIM] t=%.3f, pos=(%.2f, %.2f, %.2f)\n", t, pos.x, pos.y, pos.z);
 		}
 		frameCount++;
-		
+
 		// Update Bezier movement (aktualizuje vnútornú maticu)
 		bezierMovement->update(deltaTime);
 	}
-	
+
 	// ✅ VŽDY prepočítaj a aktualizuj maticu (aj keď sa nepohýba)
 	shrekObject->getTransformationComposite()->resultMatrix();
 	shrekObject->updateModelMatrix();

@@ -46,11 +46,11 @@ glm::mat4 LeafBezierMovement::calculateRotationMatrix(const glm::vec3& tangent)
 	glm::vec3 up = glm::normalize(glm::cross(forward, right));
 
 	// Vytvor rotačnú maticu (column-major!)
-	// V OpenGL defaultne model pozerá v -Z, takže forward = -Z osa
+	// Shrek model pozerá v +Z smere (nie -Z ako OpenGL default)
 	glm::mat4 rotation = glm::mat4(1.0f);
-	rotation[0] = glm::vec4(right, 0.0f);      // X osa
-	rotation[1] = glm::vec4(up, 0.0f);         // Y osa
-	rotation[2] = glm::vec4(forward, 0.0f);    // Z osa (BEZ negácie - TEST!)
+	rotation[0] = glm::vec4(right, 0.0f);       // X osa = right
+	rotation[1] = glm::vec4(up, 0.0f);          // Y osa = up
+	rotation[2] = glm::vec4(forward, 0.0f);     // Z osa = forward (BEZ negácie)
 
 	return rotation;
 }
