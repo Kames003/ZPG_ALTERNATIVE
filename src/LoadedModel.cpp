@@ -107,6 +107,28 @@ LoadedModel::LoadedModel(const char* path)
                     data.push_back(0.0f);
                 }
 
+                // Tangenty (tx, ty, tz)
+                if (mesh->HasTangentsAndBitangents()) {
+                    data.push_back(mesh->mTangents[vertexIndex].x);
+                    data.push_back(mesh->mTangents[vertexIndex].y);
+                    data.push_back(mesh->mTangents[vertexIndex].z);
+                } else {
+                    data.push_back(0.0f);
+                    data.push_back(0.0f);
+                    data.push_back(0.0f);
+                }
+
+                // Bitangenty (bx, by, bz)
+                if (mesh->HasTangentsAndBitangents()) {
+                    data.push_back(mesh->mBitangents[vertexIndex].x);
+                    data.push_back(mesh->mBitangents[vertexIndex].y);
+                    data.push_back(mesh->mBitangents[vertexIndex].z);
+                } else {
+                    data.push_back(0.0f);
+                    data.push_back(0.0f);
+                    data.push_back(0.0f);
+                }
+
                 totalVertexCount++;
             }
         }
@@ -137,12 +159,16 @@ LoadedModel::LoadedModel(const char* path)
     vao->bind();
     vbo->bind();
 
-    // Vertex attributes: [x,y,z, nx,ny,nz, u,v]
-    vao->vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)0);
-    vao->vertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+    // Vertex attributes: [x,y,z, nx,ny,nz, u,v, tx,ty,tz, bx,by,bz]
+    vao->vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(float), (GLvoid*)0);
+    vao->vertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(float),
                             (GLvoid*)(sizeof(float) * 3));
-    vao->vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+    vao->vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 14 * sizeof(float),
                             (GLvoid*)(sizeof(float) * 6));
+    vao->vertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(float),
+                            (GLvoid*)(sizeof(float) * 8));
+    vao->vertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(float),
+                            (GLvoid*)(sizeof(float) * 11));
 
     vbo->unbind();
     vao->unbind();

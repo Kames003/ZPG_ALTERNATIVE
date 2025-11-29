@@ -86,7 +86,9 @@ void Application::initScene()
     sceneManager->registerScene(new Scene3_LightingDemo(), "4. Lighting Demo");
     sceneManager->registerScene(new Scene4_BackfaceTest(), "5. Backface Test");
     sceneManager->registerScene(new Scene5_LoadedModelTest(), "6. Loaded Model Test");
-    sceneManager->registerScene(new ArcadeScene(), "7. ARCADE GAME!");
+    sceneManager->registerScene(new Scene6_BezierSpline(), "7. BEZIER SPLINE - Shrek");
+    sceneManager->registerScene(new Scene7_NormalMapTest(), "8. NORMAL MAP TEST");
+    sceneManager->registerScene(new ArcadeScene(), "9. ARCADE GAME!");
 
     // thesting :(
     // sceneManager->registerScene(new Scene1_RotatingTriangle(), "2. Rotating Triangle");

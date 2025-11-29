@@ -240,24 +240,52 @@ CMakeFiles/untitled2.dir/src/TransformationComposite.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled2.dir/src/TransformationComposite.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TransformationComposite.cpp -o CMakeFiles/untitled2.dir/src/TransformationComposite.cpp.s
 
-CMakeFiles/untitled2.dir/src/Target.cpp.o: CMakeFiles/untitled2.dir/flags.make
-CMakeFiles/untitled2.dir/src/Target.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Target.cpp
-CMakeFiles/untitled2.dir/src/Target.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/untitled2.dir/src/Target.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Target.cpp.o -MF CMakeFiles/untitled2.dir/src/Target.cpp.o.d -o CMakeFiles/untitled2.dir/src/Target.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Target.cpp
+CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o: CMakeFiles/untitled2.dir/flags.make
+CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierCurve.cpp
+CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o -MF CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o.d -o CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierCurve.cpp
 
-CMakeFiles/untitled2.dir/src/Target.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled2.dir/src/Target.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Target.cpp > CMakeFiles/untitled2.dir/src/Target.cpp.i
+CMakeFiles/untitled2.dir/src/BezierCurve.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled2.dir/src/BezierCurve.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierCurve.cpp > CMakeFiles/untitled2.dir/src/BezierCurve.cpp.i
 
-CMakeFiles/untitled2.dir/src/Target.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled2.dir/src/Target.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Target.cpp -o CMakeFiles/untitled2.dir/src/Target.cpp.s
+CMakeFiles/untitled2.dir/src/BezierCurve.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled2.dir/src/BezierCurve.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierCurve.cpp -o CMakeFiles/untitled2.dir/src/BezierCurve.cpp.s
+
+CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o: CMakeFiles/untitled2.dir/flags.make
+CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierSpline.cpp
+CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o -MF CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o.d -o CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierSpline.cpp
+
+CMakeFiles/untitled2.dir/src/BezierSpline.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled2.dir/src/BezierSpline.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierSpline.cpp > CMakeFiles/untitled2.dir/src/BezierSpline.cpp.i
+
+CMakeFiles/untitled2.dir/src/BezierSpline.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled2.dir/src/BezierSpline.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierSpline.cpp -o CMakeFiles/untitled2.dir/src/BezierSpline.cpp.s
+
+CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o: CMakeFiles/untitled2.dir/flags.make
+CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafBezierMovement.cpp
+CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o -MF CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o.d -o CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafBezierMovement.cpp
+
+CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafBezierMovement.cpp > CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.i
+
+CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafBezierMovement.cpp -o CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.s
 
 CMakeFiles/untitled2.dir/src/Mole.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Mole.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Mole.cpp
 CMakeFiles/untitled2.dir/src/Mole.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/untitled2.dir/src/Mole.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/untitled2.dir/src/Mole.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Mole.cpp.o -MF CMakeFiles/untitled2.dir/src/Mole.cpp.o.d -o CMakeFiles/untitled2.dir/src/Mole.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Mole.cpp
 
 CMakeFiles/untitled2.dir/src/Mole.cpp.i: cmake_force
@@ -271,7 +299,7 @@ CMakeFiles/untitled2.dir/src/Mole.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Hammer.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Hammer.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Hammer.cpp
 CMakeFiles/untitled2.dir/src/Hammer.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/untitled2.dir/src/Hammer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/untitled2.dir/src/Hammer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Hammer.cpp.o -MF CMakeFiles/untitled2.dir/src/Hammer.cpp.o.d -o CMakeFiles/untitled2.dir/src/Hammer.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Hammer.cpp
 
 CMakeFiles/untitled2.dir/src/Hammer.cpp.i: cmake_force
@@ -285,7 +313,7 @@ CMakeFiles/untitled2.dir/src/Hammer.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ArcadeScene.cpp
 CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o -MF CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o.d -o CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ArcadeScene.cpp
 
 CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.i: cmake_force
@@ -299,7 +327,7 @@ CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/DrawableObject.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/DrawableObject.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/DrawableObject.cpp
 CMakeFiles/untitled2.dir/src/DrawableObject.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/untitled2.dir/src/DrawableObject.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/untitled2.dir/src/DrawableObject.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/DrawableObject.cpp.o -MF CMakeFiles/untitled2.dir/src/DrawableObject.cpp.o.d -o CMakeFiles/untitled2.dir/src/DrawableObject.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/DrawableObject.cpp
 
 CMakeFiles/untitled2.dir/src/DrawableObject.cpp.i: cmake_force
@@ -313,7 +341,7 @@ CMakeFiles/untitled2.dir/src/DrawableObject.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Camera.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Camera.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Camera.cpp
 CMakeFiles/untitled2.dir/src/Camera.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/untitled2.dir/src/Camera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/untitled2.dir/src/Camera.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Camera.cpp.o -MF CMakeFiles/untitled2.dir/src/Camera.cpp.o.d -o CMakeFiles/untitled2.dir/src/Camera.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Camera.cpp
 
 CMakeFiles/untitled2.dir/src/Camera.cpp.i: cmake_force
@@ -327,7 +355,7 @@ CMakeFiles/untitled2.dir/src/Camera.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Light.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Light.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Light.cpp
 CMakeFiles/untitled2.dir/src/Light.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/untitled2.dir/src/Light.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/untitled2.dir/src/Light.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Light.cpp.o -MF CMakeFiles/untitled2.dir/src/Light.cpp.o.d -o CMakeFiles/untitled2.dir/src/Light.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Light.cpp
 
 CMakeFiles/untitled2.dir/src/Light.cpp.i: cmake_force
@@ -341,7 +369,7 @@ CMakeFiles/untitled2.dir/src/Light.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Subject.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Subject.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Subject.cpp
 CMakeFiles/untitled2.dir/src/Subject.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/untitled2.dir/src/Subject.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/untitled2.dir/src/Subject.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Subject.cpp.o -MF CMakeFiles/untitled2.dir/src/Subject.cpp.o.d -o CMakeFiles/untitled2.dir/src/Subject.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Subject.cpp
 
 CMakeFiles/untitled2.dir/src/Subject.cpp.i: cmake_force
@@ -355,7 +383,7 @@ CMakeFiles/untitled2.dir/src/Subject.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/AbstractModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/AbstractModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/AbstractModel.cpp
 CMakeFiles/untitled2.dir/src/AbstractModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/untitled2.dir/src/AbstractModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/untitled2.dir/src/AbstractModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/AbstractModel.cpp.o -MF CMakeFiles/untitled2.dir/src/AbstractModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/AbstractModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/AbstractModel.cpp
 
 CMakeFiles/untitled2.dir/src/AbstractModel.cpp.i: cmake_force
@@ -369,7 +397,7 @@ CMakeFiles/untitled2.dir/src/AbstractModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/SphereModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/SphereModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SphereModel.cpp
 CMakeFiles/untitled2.dir/src/SphereModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/untitled2.dir/src/SphereModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/untitled2.dir/src/SphereModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/SphereModel.cpp.o -MF CMakeFiles/untitled2.dir/src/SphereModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/SphereModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SphereModel.cpp
 
 CMakeFiles/untitled2.dir/src/SphereModel.cpp.i: cmake_force
@@ -383,7 +411,7 @@ CMakeFiles/untitled2.dir/src/SphereModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/VAO.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/VAO.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VAO.cpp
 CMakeFiles/untitled2.dir/src/VAO.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/untitled2.dir/src/VAO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/untitled2.dir/src/VAO.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/VAO.cpp.o -MF CMakeFiles/untitled2.dir/src/VAO.cpp.o.d -o CMakeFiles/untitled2.dir/src/VAO.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VAO.cpp
 
 CMakeFiles/untitled2.dir/src/VAO.cpp.i: cmake_force
@@ -397,7 +425,7 @@ CMakeFiles/untitled2.dir/src/VAO.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/VBO.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/VBO.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VBO.cpp
 CMakeFiles/untitled2.dir/src/VBO.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/untitled2.dir/src/VBO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/untitled2.dir/src/VBO.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/VBO.cpp.o -MF CMakeFiles/untitled2.dir/src/VBO.cpp.o.d -o CMakeFiles/untitled2.dir/src/VBO.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VBO.cpp
 
 CMakeFiles/untitled2.dir/src/VBO.cpp.i: cmake_force
@@ -411,7 +439,7 @@ CMakeFiles/untitled2.dir/src/VBO.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/TreeModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/TreeModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TreeModel.cpp
 CMakeFiles/untitled2.dir/src/TreeModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/untitled2.dir/src/TreeModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/untitled2.dir/src/TreeModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/TreeModel.cpp.o -MF CMakeFiles/untitled2.dir/src/TreeModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/TreeModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TreeModel.cpp
 
 CMakeFiles/untitled2.dir/src/TreeModel.cpp.i: cmake_force
@@ -425,7 +453,7 @@ CMakeFiles/untitled2.dir/src/TreeModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/BushModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/BushModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BushModel.cpp
 CMakeFiles/untitled2.dir/src/BushModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/untitled2.dir/src/BushModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/untitled2.dir/src/BushModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/BushModel.cpp.o -MF CMakeFiles/untitled2.dir/src/BushModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/BushModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BushModel.cpp
 
 CMakeFiles/untitled2.dir/src/BushModel.cpp.i: cmake_force
@@ -439,7 +467,7 @@ CMakeFiles/untitled2.dir/src/BushModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/PlainModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/PlainModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/PlainModel.cpp
 CMakeFiles/untitled2.dir/src/PlainModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/untitled2.dir/src/PlainModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/untitled2.dir/src/PlainModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/PlainModel.cpp.o -MF CMakeFiles/untitled2.dir/src/PlainModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/PlainModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/PlainModel.cpp
 
 CMakeFiles/untitled2.dir/src/PlainModel.cpp.i: cmake_force
@@ -453,7 +481,7 @@ CMakeFiles/untitled2.dir/src/PlainModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/GiftModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/GiftModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/GiftModel.cpp
 CMakeFiles/untitled2.dir/src/GiftModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/untitled2.dir/src/GiftModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/untitled2.dir/src/GiftModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/GiftModel.cpp.o -MF CMakeFiles/untitled2.dir/src/GiftModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/GiftModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/GiftModel.cpp
 
 CMakeFiles/untitled2.dir/src/GiftModel.cpp.i: cmake_force
@@ -467,7 +495,7 @@ CMakeFiles/untitled2.dir/src/GiftModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/BenchModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/BenchModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BenchModel.cpp
 CMakeFiles/untitled2.dir/src/BenchModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/untitled2.dir/src/BenchModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/untitled2.dir/src/BenchModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/BenchModel.cpp.o -MF CMakeFiles/untitled2.dir/src/BenchModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/BenchModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BenchModel.cpp
 
 CMakeFiles/untitled2.dir/src/BenchModel.cpp.i: cmake_force
@@ -481,7 +509,7 @@ CMakeFiles/untitled2.dir/src/BenchModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/FileReader.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/FileReader.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/FileReader.cpp
 CMakeFiles/untitled2.dir/src/FileReader.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/untitled2.dir/src/FileReader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/untitled2.dir/src/FileReader.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/FileReader.cpp.o -MF CMakeFiles/untitled2.dir/src/FileReader.cpp.o.d -o CMakeFiles/untitled2.dir/src/FileReader.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/FileReader.cpp
 
 CMakeFiles/untitled2.dir/src/FileReader.cpp.i: cmake_force
@@ -495,7 +523,7 @@ CMakeFiles/untitled2.dir/src/FileReader.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/LoadedModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/LoadedModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LoadedModel.cpp
 CMakeFiles/untitled2.dir/src/LoadedModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/untitled2.dir/src/LoadedModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/untitled2.dir/src/LoadedModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/LoadedModel.cpp.o -MF CMakeFiles/untitled2.dir/src/LoadedModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/LoadedModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LoadedModel.cpp
 
 CMakeFiles/untitled2.dir/src/LoadedModel.cpp.i: cmake_force
@@ -509,7 +537,7 @@ CMakeFiles/untitled2.dir/src/LoadedModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/PointLight.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/PointLight.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/PointLight.cpp
 CMakeFiles/untitled2.dir/src/PointLight.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/untitled2.dir/src/PointLight.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/untitled2.dir/src/PointLight.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/PointLight.cpp.o -MF CMakeFiles/untitled2.dir/src/PointLight.cpp.o.d -o CMakeFiles/untitled2.dir/src/PointLight.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/PointLight.cpp
 
 CMakeFiles/untitled2.dir/src/PointLight.cpp.i: cmake_force
@@ -523,7 +551,7 @@ CMakeFiles/untitled2.dir/src/PointLight.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/DirectionalLight.cpp
 CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.o -MF CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.o.d -o CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/DirectionalLight.cpp
 
 CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.i: cmake_force
@@ -537,7 +565,7 @@ CMakeFiles/untitled2.dir/src/DirectionalLight.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SpotlightCamera.cpp
 CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.o -MF CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.o.d -o CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SpotlightCamera.cpp
 
 CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.i: cmake_force
@@ -551,7 +579,7 @@ CMakeFiles/untitled2.dir/src/SpotlightCamera.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Spotlight.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Spotlight.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Spotlight.cpp
 CMakeFiles/untitled2.dir/src/Spotlight.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/untitled2.dir/src/Spotlight.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/untitled2.dir/src/Spotlight.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Spotlight.cpp.o -MF CMakeFiles/untitled2.dir/src/Spotlight.cpp.o.d -o CMakeFiles/untitled2.dir/src/Spotlight.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Spotlight.cpp
 
 CMakeFiles/untitled2.dir/src/Spotlight.cpp.i: cmake_force
@@ -565,7 +593,7 @@ CMakeFiles/untitled2.dir/src/Spotlight.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/LightManager.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/LightManager.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LightManager.cpp
 CMakeFiles/untitled2.dir/src/LightManager.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/untitled2.dir/src/LightManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/untitled2.dir/src/LightManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/LightManager.cpp.o -MF CMakeFiles/untitled2.dir/src/LightManager.cpp.o.d -o CMakeFiles/untitled2.dir/src/LightManager.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LightManager.cpp
 
 CMakeFiles/untitled2.dir/src/LightManager.cpp.i: cmake_force
@@ -579,7 +607,7 @@ CMakeFiles/untitled2.dir/src/LightManager.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/ObjectManager.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/ObjectManager.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ObjectManager.cpp
 CMakeFiles/untitled2.dir/src/ObjectManager.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/untitled2.dir/src/ObjectManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/untitled2.dir/src/ObjectManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/ObjectManager.cpp.o -MF CMakeFiles/untitled2.dir/src/ObjectManager.cpp.o.d -o CMakeFiles/untitled2.dir/src/ObjectManager.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ObjectManager.cpp
 
 CMakeFiles/untitled2.dir/src/ObjectManager.cpp.i: cmake_force
@@ -593,7 +621,7 @@ CMakeFiles/untitled2.dir/src/ObjectManager.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ObjectInteractionManager.cpp
 CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.o -MF CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.o.d -o CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ObjectInteractionManager.cpp
 
 CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.i: cmake_force
@@ -607,7 +635,7 @@ CMakeFiles/untitled2.dir/src/ObjectInteractionManager.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ShaderProgramManager.cpp
 CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.o -MF CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.o.d -o CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ShaderProgramManager.cpp
 
 CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.i: cmake_force
@@ -621,7 +649,7 @@ CMakeFiles/untitled2.dir/src/ShaderProgramManager.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/AbstractScene.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/AbstractScene.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/AbstractScene.cpp
 CMakeFiles/untitled2.dir/src/AbstractScene.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/untitled2.dir/src/AbstractScene.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/untitled2.dir/src/AbstractScene.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/AbstractScene.cpp.o -MF CMakeFiles/untitled2.dir/src/AbstractScene.cpp.o.d -o CMakeFiles/untitled2.dir/src/AbstractScene.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/AbstractScene.cpp
 
 CMakeFiles/untitled2.dir/src/AbstractScene.cpp.i: cmake_force
@@ -635,7 +663,7 @@ CMakeFiles/untitled2.dir/src/AbstractScene.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Window.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Window.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Window.cpp
 CMakeFiles/untitled2.dir/src/Window.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/untitled2.dir/src/Window.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/untitled2.dir/src/Window.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Window.cpp.o -MF CMakeFiles/untitled2.dir/src/Window.cpp.o.d -o CMakeFiles/untitled2.dir/src/Window.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Window.cpp
 
 CMakeFiles/untitled2.dir/src/Window.cpp.i: cmake_force
@@ -649,7 +677,7 @@ CMakeFiles/untitled2.dir/src/Window.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/VertexShader.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/VertexShader.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VertexShader.cpp
 CMakeFiles/untitled2.dir/src/VertexShader.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/untitled2.dir/src/VertexShader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/untitled2.dir/src/VertexShader.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/VertexShader.cpp.o -MF CMakeFiles/untitled2.dir/src/VertexShader.cpp.o.d -o CMakeFiles/untitled2.dir/src/VertexShader.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VertexShader.cpp
 
 CMakeFiles/untitled2.dir/src/VertexShader.cpp.i: cmake_force
@@ -663,7 +691,7 @@ CMakeFiles/untitled2.dir/src/VertexShader.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/FragmentShader.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/FragmentShader.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/FragmentShader.cpp
 CMakeFiles/untitled2.dir/src/FragmentShader.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/untitled2.dir/src/FragmentShader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/untitled2.dir/src/FragmentShader.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/FragmentShader.cpp.o -MF CMakeFiles/untitled2.dir/src/FragmentShader.cpp.o.d -o CMakeFiles/untitled2.dir/src/FragmentShader.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/FragmentShader.cpp
 
 CMakeFiles/untitled2.dir/src/FragmentShader.cpp.i: cmake_force
@@ -677,7 +705,7 @@ CMakeFiles/untitled2.dir/src/FragmentShader.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Callback.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Callback.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Callback.cpp
 CMakeFiles/untitled2.dir/src/Callback.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/untitled2.dir/src/Callback.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/untitled2.dir/src/Callback.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Callback.cpp.o -MF CMakeFiles/untitled2.dir/src/Callback.cpp.o.d -o CMakeFiles/untitled2.dir/src/Callback.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Callback.cpp
 
 CMakeFiles/untitled2.dir/src/Callback.cpp.i: cmake_force
@@ -691,7 +719,7 @@ CMakeFiles/untitled2.dir/src/Callback.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/MinimalForestScene.cpp
 CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o -MF CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o.d -o CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/MinimalForestScene.cpp
 
 CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.i: cmake_force
@@ -705,7 +733,7 @@ CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/SceneManager.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/SceneManager.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SceneManager.cpp
 CMakeFiles/untitled2.dir/src/SceneManager.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/untitled2.dir/src/SceneManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/untitled2.dir/src/SceneManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/SceneManager.cpp.o -MF CMakeFiles/untitled2.dir/src/SceneManager.cpp.o.d -o CMakeFiles/untitled2.dir/src/SceneManager.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SceneManager.cpp
 
 CMakeFiles/untitled2.dir/src/SceneManager.cpp.i: cmake_force
@@ -719,7 +747,7 @@ CMakeFiles/untitled2.dir/src/SceneManager.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/TriangleModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/TriangleModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TriangleModel.cpp
 CMakeFiles/untitled2.dir/src/TriangleModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/untitled2.dir/src/TriangleModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/untitled2.dir/src/TriangleModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/TriangleModel.cpp.o -MF CMakeFiles/untitled2.dir/src/TriangleModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/TriangleModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TriangleModel.cpp
 
 CMakeFiles/untitled2.dir/src/TriangleModel.cpp.i: cmake_force
@@ -733,7 +761,7 @@ CMakeFiles/untitled2.dir/src/TriangleModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene1_PhongTest.cpp
 CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.o -MF CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.o.d -o CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene1_PhongTest.cpp
 
 CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.i: cmake_force
@@ -747,7 +775,7 @@ CMakeFiles/untitled2.dir/src/Scene1_PhongTest.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene2_SolarSystem.cpp
 CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.o -MF CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.o.d -o CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene2_SolarSystem.cpp
 
 CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.i: cmake_force
@@ -761,7 +789,7 @@ CMakeFiles/untitled2.dir/src/Scene2_SolarSystem.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene3_LightingDemo.cpp
 CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o -MF CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o.d -o CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene3_LightingDemo.cpp
 
 CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.i: cmake_force
@@ -775,7 +803,7 @@ CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Firefly.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Firefly.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Firefly.cpp
 CMakeFiles/untitled2.dir/src/Firefly.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/untitled2.dir/src/Firefly.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object CMakeFiles/untitled2.dir/src/Firefly.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Firefly.cpp.o -MF CMakeFiles/untitled2.dir/src/Firefly.cpp.o.d -o CMakeFiles/untitled2.dir/src/Firefly.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Firefly.cpp
 
 CMakeFiles/untitled2.dir/src/Firefly.cpp.i: cmake_force
@@ -789,7 +817,7 @@ CMakeFiles/untitled2.dir/src/Firefly.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene4_BackfaceTest.cpp
 CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o -MF CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o.d -o CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene4_BackfaceTest.cpp
 
 CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.i: cmake_force
@@ -803,7 +831,7 @@ CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene5_LoadedModelTest.cpp
 CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o -MF CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o.d -o CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene5_LoadedModelTest.cpp
 
 CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.i: cmake_force
@@ -814,10 +842,38 @@ CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene5_LoadedModelTest.cpp -o CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.s
 
+CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o: CMakeFiles/untitled2.dir/flags.make
+CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene6_BezierSpline.cpp
+CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building CXX object CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o -MF CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o.d -o CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene6_BezierSpline.cpp
+
+CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene6_BezierSpline.cpp > CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.i
+
+CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene6_BezierSpline.cpp -o CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.s
+
+CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o: CMakeFiles/untitled2.dir/flags.make
+CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene7_NormalMapTest.cpp
+CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building CXX object CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o -MF CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o.d -o CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene7_NormalMapTest.cpp
+
+CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene7_NormalMapTest.cpp > CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.i
+
+CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene7_NormalMapTest.cpp -o CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.s
+
 CMakeFiles/untitled2.dir/src/Texture2D.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/Texture2D.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Texture2D.cpp
 CMakeFiles/untitled2.dir/src/Texture2D.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object CMakeFiles/untitled2.dir/src/Texture2D.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building CXX object CMakeFiles/untitled2.dir/src/Texture2D.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/Texture2D.cpp.o -MF CMakeFiles/untitled2.dir/src/Texture2D.cpp.o.d -o CMakeFiles/untitled2.dir/src/Texture2D.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Texture2D.cpp
 
 CMakeFiles/untitled2.dir/src/Texture2D.cpp.i: cmake_force
@@ -831,7 +887,7 @@ CMakeFiles/untitled2.dir/src/Texture2D.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TextureCubemap.cpp
 CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building CXX object CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o -MF CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o.d -o CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TextureCubemap.cpp
 
 CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.i: cmake_force
@@ -845,7 +901,7 @@ CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/TextureManager.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/TextureManager.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TextureManager.cpp
 CMakeFiles/untitled2.dir/src/TextureManager.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building CXX object CMakeFiles/untitled2.dir/src/TextureManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building CXX object CMakeFiles/untitled2.dir/src/TextureManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/TextureManager.cpp.o -MF CMakeFiles/untitled2.dir/src/TextureManager.cpp.o.d -o CMakeFiles/untitled2.dir/src/TextureManager.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TextureManager.cpp
 
 CMakeFiles/untitled2.dir/src/TextureManager.cpp.i: cmake_force
@@ -859,7 +915,7 @@ CMakeFiles/untitled2.dir/src/TextureManager.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SkyboxModel.cpp
 CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building CXX object CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building CXX object CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.o -MF CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SkyboxModel.cpp
 
 CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.i: cmake_force
@@ -873,7 +929,7 @@ CMakeFiles/untitled2.dir/src/SkyboxModel.cpp.s: cmake_force
 CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.o: CMakeFiles/untitled2.dir/flags.make
 CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.o: /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/PlainTextureModel.cpp
 CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.o: CMakeFiles/untitled2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building CXX object CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building CXX object CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.o -MF CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.o.d -o CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.o -c /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/PlainTextureModel.cpp
 
 CMakeFiles/untitled2.dir/src/PlainTextureModel.cpp.i: cmake_force
@@ -898,7 +954,9 @@ untitled2_OBJECTS = \
 "CMakeFiles/untitled2.dir/src/LeafMatrix.cpp.o" \
 "CMakeFiles/untitled2.dir/src/LeafPathMovement.cpp.o" \
 "CMakeFiles/untitled2.dir/src/TransformationComposite.cpp.o" \
-"CMakeFiles/untitled2.dir/src/Target.cpp.o" \
+"CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o" \
+"CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o" \
+"CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o" \
 "CMakeFiles/untitled2.dir/src/Mole.cpp.o" \
 "CMakeFiles/untitled2.dir/src/Hammer.cpp.o" \
 "CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o" \
@@ -939,6 +997,8 @@ untitled2_OBJECTS = \
 "CMakeFiles/untitled2.dir/src/Firefly.cpp.o" \
 "CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o" \
 "CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o" \
+"CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o" \
+"CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o" \
 "CMakeFiles/untitled2.dir/src/Texture2D.cpp.o" \
 "CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o" \
 "CMakeFiles/untitled2.dir/src/TextureManager.cpp.o" \
@@ -960,7 +1020,9 @@ untitled2: CMakeFiles/untitled2.dir/src/LeafCustomW.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/LeafMatrix.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/LeafPathMovement.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/TransformationComposite.cpp.o
-untitled2: CMakeFiles/untitled2.dir/src/Target.cpp.o
+untitled2: CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o
+untitled2: CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o
+untitled2: CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/Mole.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/Hammer.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/ArcadeScene.cpp.o
@@ -1001,6 +1063,8 @@ untitled2: CMakeFiles/untitled2.dir/src/Scene3_LightingDemo.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/Firefly.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/Scene4_BackfaceTest.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.o
+untitled2: CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o
+untitled2: CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/Texture2D.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/TextureCubemap.cpp.o
 untitled2: CMakeFiles/untitled2.dir/src/TextureManager.cpp.o
@@ -1011,7 +1075,7 @@ untitled2: /opt/homebrew/lib/libglfw.dylib
 untitled2: /opt/homebrew/lib/libGLEW.dylib
 untitled2: /opt/homebrew/lib/libassimp.dylib
 untitled2: CMakeFiles/untitled2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Linking CXX executable untitled2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Linking CXX executable untitled2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/untitled2.dir/link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "📁 Copying shaders to build directory..."
 	/opt/homebrew/bin/cmake -E copy_directory /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Shaders /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/build/Shaders

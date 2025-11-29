@@ -249,6 +249,54 @@ src/BenchModel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/BenchModel.cpp.s
 .PHONY : src/BenchModel.cpp.s
 
+src/BezierCurve.o: src/BezierCurve.cpp.o
+.PHONY : src/BezierCurve.o
+
+# target to build an object file
+src/BezierCurve.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/BezierCurve.cpp.o
+.PHONY : src/BezierCurve.cpp.o
+
+src/BezierCurve.i: src/BezierCurve.cpp.i
+.PHONY : src/BezierCurve.i
+
+# target to preprocess a source file
+src/BezierCurve.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/BezierCurve.cpp.i
+.PHONY : src/BezierCurve.cpp.i
+
+src/BezierCurve.s: src/BezierCurve.cpp.s
+.PHONY : src/BezierCurve.s
+
+# target to generate assembly for a file
+src/BezierCurve.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/BezierCurve.cpp.s
+.PHONY : src/BezierCurve.cpp.s
+
+src/BezierSpline.o: src/BezierSpline.cpp.o
+.PHONY : src/BezierSpline.o
+
+# target to build an object file
+src/BezierSpline.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/BezierSpline.cpp.o
+.PHONY : src/BezierSpline.cpp.o
+
+src/BezierSpline.i: src/BezierSpline.cpp.i
+.PHONY : src/BezierSpline.i
+
+# target to preprocess a source file
+src/BezierSpline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/BezierSpline.cpp.i
+.PHONY : src/BezierSpline.cpp.i
+
+src/BezierSpline.s: src/BezierSpline.cpp.s
+.PHONY : src/BezierSpline.s
+
+# target to generate assembly for a file
+src/BezierSpline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/BezierSpline.cpp.s
+.PHONY : src/BezierSpline.cpp.s
+
 src/BushModel.o: src/BushModel.cpp.o
 .PHONY : src/BushModel.o
 
@@ -488,6 +536,30 @@ src/Hammer.s: src/Hammer.cpp.s
 src/Hammer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Hammer.cpp.s
 .PHONY : src/Hammer.cpp.s
+
+src/LeafBezierMovement.o: src/LeafBezierMovement.cpp.o
+.PHONY : src/LeafBezierMovement.o
+
+# target to build an object file
+src/LeafBezierMovement.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.o
+.PHONY : src/LeafBezierMovement.cpp.o
+
+src/LeafBezierMovement.i: src/LeafBezierMovement.cpp.i
+.PHONY : src/LeafBezierMovement.i
+
+# target to preprocess a source file
+src/LeafBezierMovement.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.i
+.PHONY : src/LeafBezierMovement.cpp.i
+
+src/LeafBezierMovement.s: src/LeafBezierMovement.cpp.s
+.PHONY : src/LeafBezierMovement.s
+
+# target to generate assembly for a file
+src/LeafBezierMovement.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/LeafBezierMovement.cpp.s
+.PHONY : src/LeafBezierMovement.cpp.s
 
 src/LeafCustomW.o: src/LeafCustomW.cpp.o
 .PHONY : src/LeafCustomW.o
@@ -993,6 +1065,54 @@ src/Scene5_LoadedModelTest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Scene5_LoadedModelTest.cpp.s
 .PHONY : src/Scene5_LoadedModelTest.cpp.s
 
+src/Scene6_BezierSpline.o: src/Scene6_BezierSpline.cpp.o
+.PHONY : src/Scene6_BezierSpline.o
+
+# target to build an object file
+src/Scene6_BezierSpline.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o
+.PHONY : src/Scene6_BezierSpline.cpp.o
+
+src/Scene6_BezierSpline.i: src/Scene6_BezierSpline.cpp.i
+.PHONY : src/Scene6_BezierSpline.i
+
+# target to preprocess a source file
+src/Scene6_BezierSpline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.i
+.PHONY : src/Scene6_BezierSpline.cpp.i
+
+src/Scene6_BezierSpline.s: src/Scene6_BezierSpline.cpp.s
+.PHONY : src/Scene6_BezierSpline.s
+
+# target to generate assembly for a file
+src/Scene6_BezierSpline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.s
+.PHONY : src/Scene6_BezierSpline.cpp.s
+
+src/Scene7_NormalMapTest.o: src/Scene7_NormalMapTest.cpp.o
+.PHONY : src/Scene7_NormalMapTest.o
+
+# target to build an object file
+src/Scene7_NormalMapTest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.o
+.PHONY : src/Scene7_NormalMapTest.cpp.o
+
+src/Scene7_NormalMapTest.i: src/Scene7_NormalMapTest.cpp.i
+.PHONY : src/Scene7_NormalMapTest.i
+
+# target to preprocess a source file
+src/Scene7_NormalMapTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.i
+.PHONY : src/Scene7_NormalMapTest.cpp.i
+
+src/Scene7_NormalMapTest.s: src/Scene7_NormalMapTest.cpp.s
+.PHONY : src/Scene7_NormalMapTest.s
+
+# target to generate assembly for a file
+src/Scene7_NormalMapTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Scene7_NormalMapTest.cpp.s
+.PHONY : src/Scene7_NormalMapTest.cpp.s
+
 src/SceneManager.o: src/SceneManager.cpp.o
 .PHONY : src/SceneManager.o
 
@@ -1208,30 +1328,6 @@ src/Subject.s: src/Subject.cpp.s
 src/Subject.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Subject.cpp.s
 .PHONY : src/Subject.cpp.s
-
-src/Target.o: src/Target.cpp.o
-.PHONY : src/Target.o
-
-# target to build an object file
-src/Target.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Target.cpp.o
-.PHONY : src/Target.cpp.o
-
-src/Target.i: src/Target.cpp.i
-.PHONY : src/Target.i
-
-# target to preprocess a source file
-src/Target.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Target.cpp.i
-.PHONY : src/Target.cpp.i
-
-src/Target.s: src/Target.cpp.s
-.PHONY : src/Target.s
-
-# target to generate assembly for a file
-src/Target.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled2.dir/build.make CMakeFiles/untitled2.dir/src/Target.cpp.s
-.PHONY : src/Target.cpp.s
 
 src/Texture2D.o: src/Texture2D.cpp.o
 .PHONY : src/Texture2D.o
@@ -1545,6 +1641,12 @@ help:
 	@echo "... src/BenchModel.o"
 	@echo "... src/BenchModel.i"
 	@echo "... src/BenchModel.s"
+	@echo "... src/BezierCurve.o"
+	@echo "... src/BezierCurve.i"
+	@echo "... src/BezierCurve.s"
+	@echo "... src/BezierSpline.o"
+	@echo "... src/BezierSpline.i"
+	@echo "... src/BezierSpline.s"
 	@echo "... src/BushModel.o"
 	@echo "... src/BushModel.i"
 	@echo "... src/BushModel.s"
@@ -1575,6 +1677,9 @@ help:
 	@echo "... src/Hammer.o"
 	@echo "... src/Hammer.i"
 	@echo "... src/Hammer.s"
+	@echo "... src/LeafBezierMovement.o"
+	@echo "... src/LeafBezierMovement.i"
+	@echo "... src/LeafBezierMovement.s"
 	@echo "... src/LeafCustomW.o"
 	@echo "... src/LeafCustomW.i"
 	@echo "... src/LeafCustomW.s"
@@ -1638,6 +1743,12 @@ help:
 	@echo "... src/Scene5_LoadedModelTest.o"
 	@echo "... src/Scene5_LoadedModelTest.i"
 	@echo "... src/Scene5_LoadedModelTest.s"
+	@echo "... src/Scene6_BezierSpline.o"
+	@echo "... src/Scene6_BezierSpline.i"
+	@echo "... src/Scene6_BezierSpline.s"
+	@echo "... src/Scene7_NormalMapTest.o"
+	@echo "... src/Scene7_NormalMapTest.i"
+	@echo "... src/Scene7_NormalMapTest.s"
 	@echo "... src/SceneManager.o"
 	@echo "... src/SceneManager.i"
 	@echo "... src/SceneManager.s"
@@ -1665,9 +1776,6 @@ help:
 	@echo "... src/Subject.o"
 	@echo "... src/Subject.i"
 	@echo "... src/Subject.s"
-	@echo "... src/Target.o"
-	@echo "... src/Target.i"
-	@echo "... src/Target.s"
 	@echo "... src/Texture2D.o"
 	@echo "... src/Texture2D.i"
 	@echo "... src/Texture2D.s"

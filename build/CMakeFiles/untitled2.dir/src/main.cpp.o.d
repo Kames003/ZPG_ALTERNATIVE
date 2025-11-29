@@ -1156,21 +1156,26 @@ CMakeFiles/untitled2.dir/src/main.cpp.o: \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/AbstractModel.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VBO.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VAO.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/MinimalForestScene.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/MaterialManager.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Material.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ObjectInteractionManager.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene1_PhongTest.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SphereModel.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/models/sphere.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene6_BezierSpline.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierSpline.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierCurve.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafBezierMovement.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TransformationComponent.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafScale.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/DrawableObject.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TransformationComposite.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TransformationComponent.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafRotate.h \
-  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafScale.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafTranslate.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafCustomW.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/LeafMatrix.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Material.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/MaterialManager.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ObjectInteractionManager.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene7_NormalMapTest.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/MinimalForestScene.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene1_PhongTest.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/SphereModel.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/models/sphere.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TriangleModel.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/models/triangle.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Scene2_SolarSystem.h \

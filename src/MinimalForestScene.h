@@ -3,11 +3,13 @@
 #include "TextureManager.h"
 #include "MaterialManager.h"
 #include "ObjectInteractionManager.h"
+#include "BezierSpline.h"
 #include <vector>
 
 
 class Firefly;
 class SpotlightCamera;
+class DrawableObject;
 
 
 class MinimalForestScene : public AbstractScene
@@ -20,6 +22,10 @@ private:
     SpotlightCamera* flashlight = nullptr;
     bool flashlightEnabled = false;
     bool keyFWasPressed = false;
+
+    // Bezier curve test
+    BezierSpline* planetPath = nullptr;
+    DrawableObject* orbitingPlanet = nullptr;
 
 protected:
     void createShaders() override;

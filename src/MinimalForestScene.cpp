@@ -420,6 +420,29 @@ void MinimalForestScene::createDrawableObjects()
         fireflies.push_back(firefly);
     }
 
+    // ========================================
+    // BEZIER CURVE TEST - Orbiting Planet
+    // ========================================
+    printf("Creating Bezier curve planet...\n");
+
+    // Define Bezier spline control points (higher than shuttle at y=25)
+    planetPath = new BezierSpline();
+    planetPath->addControlPoint(glm::vec3(-20.0f, 32.0f, -10.0f));  // P0
+    planetPath->addControlPoint(glm::vec3(20.0f, 35.0f, -10.0f));   // P1
+    planetPath->addControlPoint(glm::vec3(-20.0f, 38.0f, 10.0f));   // P2
+    planetPath->addControlPoint(glm::vec3(20.0f, 32.0f, 10.0f));    // P3
+    planetPath->setPingPong(true);
+    planetPath->setSpeed(0.002f);
+
+    // Create planet (using existing sphere model)
+    orbitingPlanet = new DrawableObject(sphereModel, phongShader);
+    orbitingPlanet->setColor(glm::vec3(0.8f, 0.3f, 0.1f));  // Orange/red planet
+    orbitingPlanet->scale(glm::vec3(2.5f));  // Larger than fireflies
+    // Position will be updated in renderFrame()
+    om->addDrawableObject(orbitingPlanet);
+
+    printf("Bezier planet created!\n");
+
     printf("Total: %d objects\n", om->getObjectCount());
 }
 
@@ -509,6 +532,22 @@ void MinimalForestScene::renderFrame()
     for (Firefly* firefly : fireflies)
     {
         firefly->updateAnimation(time);
+    }
+
+    // Update orbiting planet position on Bezier spline
+    if (orbitingPlanet && planetPath)
+    {
+        // Update spline animation
+        planetPath->update(0.016f);
+
+        // Get current position on spline
+        glm::vec3 planetPosition = planetPath->calculatePoint();
+
+        // Apply transformations (calculateModelMatrix() will auto-clear previous ones)
+        orbitingPlanet->scale(glm::vec3(2.5f));
+        orbitingPlanet->translate(planetPosition);
+        orbitingPlanet->calculateModelMatrix();
+        orbitingPlanet->updateModelMatrix();
     }
 
     spm->updateLights();

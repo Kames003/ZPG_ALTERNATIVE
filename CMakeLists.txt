@@ -131,6 +131,12 @@ set(SOURCES
         src/LeafPathMovement.h
         src/TransformationComposite.cpp
         src/TransformationComposite.h
+        src/BezierCurve.cpp
+        src/BezierCurve.h
+        src/BezierSpline.cpp
+        src/BezierSpline.h
+        src/LeafBezierMovement.cpp
+        src/LeafBezierMovement.h
 
         # Arcade Game (Whac-A-Mole)
         src/Mole.cpp
@@ -219,7 +225,11 @@ set(SOURCES
         src/Scene4_BackfaceTest.h
         src/Scene5_LoadedModelTest.cpp
         src/Scene5_LoadedModelTest.h
-        
+        src/Scene6_BezierSpline.cpp
+        src/Scene6_BezierSpline.h
+        src/Scene7_NormalMapTest.cpp
+        src/Scene7_NormalMapTest.h
+
         # Textures
         src/Texture.h
         src/Texture2D.cpp

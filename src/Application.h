@@ -16,6 +16,8 @@
 
 
 #include "Scene5_LoadedModelTest.h"
+#include "Scene6_BezierSpline.h"
+#include "Scene7_NormalMapTest.h"
 #include "MinimalForestScene.h"
 #include "Scene1_PhongTest.h"
 #include "Scene2_SolarSystem.h"

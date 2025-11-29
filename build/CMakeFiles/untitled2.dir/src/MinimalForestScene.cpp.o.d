@@ -1120,6 +1120,8 @@ CMakeFiles/untitled2.dir/src/MinimalForestScene.cpp.o: \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/MaterialManager.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/Material.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/ObjectInteractionManager.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierSpline.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/BezierCurve.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TreeModel.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/AbstractModel.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VBO.h \

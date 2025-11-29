@@ -30,6 +30,7 @@ public:
     static glm::vec3 position;
     static int clicked;
     static int stencil_id;
+    static bool splineEditMode;  // Režim zadávania bodov spline
 
     static Callback& GetInstance();
 
