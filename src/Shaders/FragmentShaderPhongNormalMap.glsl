@@ -66,7 +66,6 @@ uniform SpotlightCamera spotlightCamera;
 uniform bool directional_bool = false;
 uniform DirectionalLight directional;
 
-// Normal map intensity (optional - can be set from application)
 uniform float normalMapIntensity = 1.0;
 
 // ========================================

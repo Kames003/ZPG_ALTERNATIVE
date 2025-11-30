@@ -18,15 +18,10 @@ void Scene7_NormalMapTest::createDrawableObjects()
 
     ShaderProgram* normalMapShader = spm->getShaderProgram(0);
 
-    // ========================================
-    // TEXTÚRY - Main Model
-    // ========================================
+
     tm->addTexture(new Texture2D("models/NormalMapTest/albedo.png"));      // 0 - Diffuse
     tm->addTexture(new Texture2D("models/NormalMapTest/normalmap.png"));   // 1 - Normal Map
 
-    // ========================================
-    // TEXTÚRY - Sphere
-    // ========================================
     tm->addTexture(new Texture2D("models/NormalMapTest/Sphere/albedo.png"));      // 2
     tm->addTexture(new Texture2D("models/NormalMapTest/Sphere/normalmap.png"));   // 3
 
@@ -167,10 +162,10 @@ void Scene7_NormalMapTest::createScene(GLFWwindow* window)
     ShaderProgram* normalMapShader = spm->getShaderProgram(0);
     normalMapShader->activateShaderProgram();
 
-    // Nastavenie texture units
+
     normalMapShader->updateUniform("tex", 0);           // Diffuse texture na GL_TEXTURE0
     normalMapShader->updateUniform("normalMap", 1);     // Normal map na GL_TEXTURE1
-    normalMapShader->updateUniform("normalMapIntensity", 3.0f);  // VEĽMI vysoká intenzita pre dramatický efekt
+    normalMapShader->updateUniform("normalMapIntensity", 3.0f);
 
     normalMapShader->deactivateShaderProgram();
 
@@ -190,17 +185,14 @@ void Scene7_NormalMapTest::renderFrame()
     camera->checkChanges();
     camera->controls();
 
-    // Pre každý objekt bindni jeho textúry
     for (int i = 0; i < 3; i++) {
         DrawableObject* obj = om->getDrawableObject(i);
 
-        // Bindni diffuse textúru
         if (obj->textures.size() > 0) {
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, obj->textures[0]->getID());
         }
 
-        // Bindni normálovu mapu
         GLuint normalMapID = 0;
         if (i == 0) normalMapID = tm->getTexture(3)->getID();  // Sphere normal map
         else if (i == 1) normalMapID = tm->getTexture(1)->getID();  // Main model normal map
@@ -212,6 +204,7 @@ void Scene7_NormalMapTest::renderFrame()
         obj->drawModel();
     }
 }
+
 
 void Scene7_NormalMapTest::renderScene()
 {

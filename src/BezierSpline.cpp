@@ -50,19 +50,15 @@ void BezierSpline::clearControlPoints()
 
 void BezierSpline::rebuildSegments()
 {
-	// Vymaž staré segmenty
 	for (auto segment : segments) {
 		delete segment;
 	}
 	segments.clear();
 
-	// Potrebujeme aspoň 4 body pre jeden segment
 	if (controlPoints.size() < 4) {
 		return;
 	}
 
-	// Vytvor segmenty po 4 bodoch
-	// Každý segment sa prekrýva o 1 bod s predchádzajúcim
 	size_t numSegments = (controlPoints.size() - 1) / 3;
 
 	for (size_t i = 0; i < numSegments; i++)

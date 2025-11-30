@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/vec3.hpp>
 #include "Camera.h"
+#include <functional>
 
 // Forward declaration
 class SceneManager;
@@ -26,6 +27,16 @@ private:
     bool key9WasPressed = false;
     bool keyHWasPressed = false;
 
+    // Debouncing pre Scene6 Bezier klávesy
+    bool keySpaceWasPressed = false;
+    bool keyEWasPressed = false;
+    bool keyRWasPressed = false;
+
+    // Scene6 Bezier callbacks (funkcie ktoré sa volajú pri stlačení kláves)
+    std::function<void()> onSpacePressed = nullptr;
+    std::function<void()> onEPressed = nullptr;
+    std::function<void()> onRPressed = nullptr;
+
 public:
     static glm::vec3 position;
     static int clicked;
@@ -33,6 +44,17 @@ public:
     static bool splineEditMode;  // Režim zadávania bodov spline
 
     static Callback& GetInstance();
+
+
+    // SCENE6 BEZIER CALLBACK REGISTRATION
+
+    void registerBezierCallbacks(
+        std::function<void()> spaceCallback,
+        std::function<void()> eCallback,
+        std::function<void()> rCallback
+    );
+
+    void unregisterBezierCallbacks();
 
 
     // HELPER METÓDY PRE MOUSE INTERAKCIU
@@ -78,4 +100,8 @@ private:
     // SCENE SWITCHING LOGIC
 
     void handleSceneSwitching(int key, int action);
+
+    // SCENE6 BEZIER KEYS LOGIC
+
+    void handleBezierKeys(int key, int action);
 };

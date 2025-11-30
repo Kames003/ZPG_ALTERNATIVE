@@ -64,6 +64,28 @@ void Callback::setSceneManager(SceneManager* sm)
 }
 
 
+// SCENE6 BEZIER CALLBACK REGISTRATION
+
+void Callback::registerBezierCallbacks(
+    std::function<void()> spaceCallback,
+    std::function<void()> eCallback,
+    std::function<void()> rCallback)
+{
+    this->onSpacePressed = spaceCallback;
+    this->onEPressed = eCallback;
+    this->onRPressed = rCallback;
+    printf("Callback: Bezier callbacks registered\n");
+}
+
+void Callback::unregisterBezierCallbacks()
+{
+    this->onSpacePressed = nullptr;
+    this->onEPressed = nullptr;
+    this->onRPressed = nullptr;
+    printf("Callback: Bezier callbacks unregistered\n");
+}
+
+
 // KEY CALLBACK - DELEGUJE NA handleSceneSwitching
 
 void Callback::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -82,6 +104,9 @@ void Callback::keyCallback(GLFWwindow* window, int key, int scancode, int action
 
     // Scene switching (1-9, H)
     handleSceneSwitching(key, action);
+
+    // Scene6 Bezier klávesy (SPACE, E, R)
+    handleBezierKeys(key, action);
 
     // Debug log
     printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
@@ -244,6 +269,57 @@ void Callback::handleSceneSwitching(int key, int action)
     else if (key == GLFW_KEY_H && action == GLFW_RELEASE)
     {
         keyHWasPressed = false;
+    }
+}
+
+
+// SCENE6 BEZIER KEYS LOGIC
+
+void Callback::handleBezierKeys(int key, int action)
+{
+    // KLÁVESA SPACE - play/pause Shrek movement
+
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+    {
+        if (!keySpaceWasPressed && onSpacePressed)
+        {
+            onSpacePressed();
+            keySpaceWasPressed = true;
+        }
+    }
+    else if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
+    {
+        keySpaceWasPressed = false;
+    }
+
+    // KLÁVESA E - toggle edit mode
+
+    if (key == GLFW_KEY_E && action == GLFW_PRESS)
+    {
+        if (!keyEWasPressed && onEPressed)
+        {
+            onEPressed();
+            keyEWasPressed = true;
+        }
+    }
+    else if (key == GLFW_KEY_E && action == GLFW_RELEASE)
+    {
+        keyEWasPressed = false;
+    }
+
+    // KLÁVESA R - reset spline
+
+    if (key == GLFW_KEY_R && action == GLFW_PRESS)
+    {
+        if (!keyRWasPressed && onRPressed)
+        {
+            onRPressed();
+            keyRWasPressed = true;
+        }
+    }
+    else if (key == GLFW_KEY_R && action == GLFW_RELEASE)
+    {
+        keyRWasPressed = false;
     }
 }
 

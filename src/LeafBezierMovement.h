@@ -3,12 +3,6 @@
 #include "TransformationComponent.h"
 #include "BezierSpline.h"
 
-/**
- * @brief Transformačný komponent pre pohyb po Bézierovej spline
- *
- * Integruje BezierSpline do transformation systému.
- * Kombinuje translate + rotate podľa tečného vektora.
- */
 class LeafBezierMovement : public TransformationComponent
 {
 private:

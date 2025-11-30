@@ -25,13 +25,11 @@ void main () {
 
     textureCoords = v_texture;
 
-    // Gram–Schmidt orthonormalization
     vec3 _normal = normalize(v_normal);
     vec3 _tangent = normalize(v_tangent);
     _tangent = normalize(_tangent - dot(_tangent, _normal) * _normal);
     vec3 _bitangent = cross(_normal, _tangent);
 
-    // TBN Matrix
     vec3 T = normalize(vec3(normalMatrix * _tangent));
     vec3 B = normalize(vec3(normalMatrix * _bitangent));
     vec3 N = normalize(vec3(normalMatrix * _normal));

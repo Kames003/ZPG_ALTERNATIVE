@@ -31065,12 +31065,14 @@ CMakeFiles/untitled2.dir/src/Scene6_BezierSpline.cpp.o: /Users/tomasmucha/CLionP
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TextureManager.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TransformationComponent.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TransformationComposite.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/TreeModel.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VAO.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VBO.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/VertexShader.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/models/plain.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/models/plain_texture.h \
   /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/models/sphere.h \
+  /Users/tomasmucha/CLionProjects/ZPG_ALTERNATIVE/src/models/tree.h \
   /opt/homebrew/include/GL/glew.h \
   /opt/homebrew/include/GLFW/glfw3.h \
   /opt/homebrew/include/assimp/Compiler/poppack1.h \

@@ -32,14 +32,8 @@ private:
 	bool splineEditMode;  // Režim zadávania bodov
 	bool shrekMoving;     // Či sa Shrek pohybuje
 
-	// Debouncing pre klávesy
-	bool keySpaceWasPressed;
-	bool keyEWasPressed;
-	bool keyRWasPressed;
-
 	void createPredefinedSpline();  // Vytvor default spline
 	void handleSplineInput();       // Mouse input pre body
-	void handleKeyboardInput();     // Klavesnica pre ovládanie
 	void addControlPointMarker(glm::vec3 position);  // Pridaj vizuálny marker
 
 protected:

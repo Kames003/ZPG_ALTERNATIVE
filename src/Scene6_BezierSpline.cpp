@@ -4,12 +4,15 @@
 #include "PlainModel.h"
 #include "PlainTextureModel.h"
 #include "SkyboxModel.h"
+#include "TreeModel.h"
 #include "Texture2D.h"
 #include "TextureCubemap.h"
 #include "Material.h"
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "Callback.h"
+#include <cstdlib>
+#include <ctime>
 
 void Scene6_BezierSpline::createShaders()
 {
@@ -20,32 +23,39 @@ void Scene6_BezierSpline::createShaders()
 		"Shaders/VertexShaderSkybox.glsl",
 		"Shaders/FragmentShaderSkybox.glsl");
 
-	// Phong Material (index 1) - pre Shreka
+	// Phong (index 1) - pre stromy
 	spm->addShaderProgram(camera,
 		"Shaders/VertexShaderPhong.glsl",
-		"Shaders/FragmentShaderPhongMaterial.glsl");
+		"Shaders/FragmentShaderPhong.glsl");
 
-	// Phong Texture Material (index 2) - pre textúrovaný Shrek
+	// Phong Texture (index 2) - pre ground
+	spm->addShaderProgram(camera,
+		"Shaders/VertexShaderPhongTexture.glsl",
+		"Shaders/FragmentShaderPhongTexture.glsl");
+
+	// Phong Texture Material (index 3) - pre textúrovaný Shrek
 	spm->addShaderProgram(camera,
 		"Shaders/VertexShaderPhongTexture.glsl",
 		"Shaders/FragmentShaderPhongTextureMaterial.glsl");
 
-	// Constant (index 3) - pre debug markery
+	// Constant (index 4) - pre debug markery
 	spm->addShaderProgram(camera,
 		"Shaders/VertexShaderConstant.glsl",
 		"Shaders/FragmentShaderConstant.glsl");
 
-	printf("Shaders 0-3 created\n");
+	printf("Shaders 0-4 created\n");
 }
 
 void Scene6_BezierSpline::createDrawableObjects()
 {
 	printf("  Creating objects...\n");
+	srand(static_cast<unsigned>(time(nullptr)));
 
 	ShaderProgram* skyboxShader = spm->getShaderProgram(0);
-	ShaderProgram* phongMaterialShader = spm->getShaderProgram(1);
-	ShaderProgram* phongTextureMaterialShader = spm->getShaderProgram(2);
-	ShaderProgram* constantShader = spm->getShaderProgram(3);
+	ShaderProgram* phongShader = spm->getShaderProgram(1);
+	ShaderProgram* phongTextureShader = spm->getShaderProgram(2);
+	ShaderProgram* phongTextureMaterialShader = spm->getShaderProgram(3);
+	ShaderProgram* constantShader = spm->getShaderProgram(4);
 
 	// SKYBOX
 	SkyboxModel* skyboxModel = new SkyboxModel();
@@ -56,68 +66,70 @@ void Scene6_BezierSpline::createDrawableObjects()
 	skybox->updateModelMatrix();
 	om->addSkybox(skybox);
 
-	// GROUND s textúrou trávy
-	PlainTextureModel* groundModel = new PlainTextureModel();
-	DrawableObject* ground = new DrawableObject(groundModel, phongTextureMaterialShader);
+	// GROUND s textúrou trávy (PlainTextureModel)
+	PlainTextureModel* groundTextureModel = new PlainTextureModel();
+	DrawableObject* ground = new DrawableObject(groundTextureModel, phongTextureShader);
 	ground->addTexture(tm->getTexture(2)); // grass.png
-
-	// MATERIÁL PRE GRASS - phongTextureMaterialShader potrebuje material!
-	Material* grassMaterial = new Material(
-		glm::vec3(0.2f, 0.25f, 0.2f),    // Ambient - tmavá zelená
-		glm::vec3(0.8f, 1.0f, 0.8f),     // Diffuse - svetlá (textúra bude viditeľná)
-		glm::vec3(0.1f, 0.1f, 0.1f),     // Specular - bez lesku
-		4.0f,                             // Shininess - matný povrch
-		"GrassMaterial"
-	);
-	mm->addMaterial(grassMaterial);
-	ground->setMaterial(grassMaterial);
-
 	ground->scale(glm::vec3(100.0f, 1.0f, 100.0f));
 	ground->translate(glm::vec3(0.0f, -0.5f, 0.0f));
 	ground->calculateModelMatrix();
 	ground->updateModelMatrix();
 	om->addDrawableObject(ground);
 
-	// SHREK MODEL - použijeme textúrovaný phong shader
+	// TREES (70) - náhodne rozmiestnené stromy
+	TreeModel* treeModel = new TreeModel();
+	for (int i = 0; i < 70; i++)
+	{
+		float x, z;
+		do {
+			x = (rand() % 80) - 40.0f;
+			z = (rand() % 80) - 40.0f;
+		} while (abs(x) < 2.5f); // Vyhni sa stredu (kde bude Shrek)
+
+		float scale = 0.2f + static_cast<float>(rand() % 15) / 100.0f; // 0.2 - 0.35
+		float rotation = static_cast<float>(rand() % 360);
+
+		DrawableObject* tree = new DrawableObject(treeModel, phongShader);
+		tree->setColor(glm::vec3(0.1f, 0.2f, 0.05f)); // Tmavá zelená
+		tree->translate(glm::vec3(x, -0.5f, z));
+		tree->rotate(rotation, glm::vec3(0.0f, 1.0f, 0.0f));
+		tree->scale(glm::vec3(scale));
+		tree->calculateModelMatrix();
+		tree->updateModelMatrix();
+		om->addDrawableObject(tree);
+	}
+	printf("70 trees created\n");
+
 	LoadedModel* shrekModel = new LoadedModel("models/shrek.obj");
 	shrekObject = new DrawableObject(shrekModel, phongTextureMaterialShader);
-
-	// Pridaj textúru Shreka
 	shrekObject->addTexture(tm->getTexture(1)); // shrek.png
 
-	// MATERIÁL PRE SHREKA - zelený odraz s odleskami
 	Material* shrekMaterial = new Material(
-		glm::vec3(0.3f, 0.4f, 0.3f),     // Ambient - svetlejšia zelená (lepšia viditeľnosť)
-		glm::vec3(0.6f, 1.0f, 0.5f),     // Diffuse - svietiáca zelená (Shrekova koža)
-		glm::vec3(0.7f, 0.7f, 0.7f),     // Specular - väčší lesk
-		32.0f,                            // Shininess - jemne lesklá koža
+		glm::vec3(0.3f, 0.4f, 0.3f),
+		glm::vec3(0.6f, 1.0f, 0.5f),
+		glm::vec3(0.7f, 0.7f, 0.7f),
+		32.0f,
 		"ShrekMaterial"
 	);
 	mm->addMaterial(shrekMaterial);
 	shrekObject->setMaterial(shrekMaterial);
-	shrekObject->setColor(glm::vec3(0.5f, 0.9f, 0.4f)); // Shrekova zelená
+	shrekObject->setColor(glm::vec3(0.5f, 0.9f, 0.4f));
 
-	// SPLINE - ZAČÍNA PRÁZDNA (user musí naklikať body!)
 	bezierSpline = new BezierSpline();
 	bezierSpline->setPingPong(true);
-	bezierSpline->setSpeed(0.0015f);  // 50% pomalšie (bolo 0.003f)
+	bezierSpline->setSpeed(0.0015f);
 
 	printf("Spline initialized with 0 points.\n");
 	printf("  -> Press E to enter EDIT MODE\n");
 	printf("  -> Click LEFT MOUSE to add control points\n");
 	printf("  -> Need at least 4 points for Shrek to move!\n");
 
-	// TRANSFORMATION COMPONENT
 	bezierMovement = new LeafBezierMovement(bezierSpline);
-	bezierMovement->setRotateAlongPath(true);  // ✅ ZAPNUTÉ - Shrek sa natáča podľa cesty!
+	bezierMovement->setRotateAlongPath(true);  //
 	bezierMovement->setUpVector(glm::vec3(0.0f, 1.0f, 0.0f));
 
-	// ✅ SETUP TRANSFORMÁCIÍ - RAZ pri inicializácii!
-	// DÔLEŽITÉ: Poradie je kľúčové! Bezier (translate+rotation) PRED scale!
 	shrekObject->getTransformationComposite()->addTransformation(bezierMovement);
-	shrekObject->scale(glm::vec3(0.5f));  // Scale MUSÍ byť POSLEDNÝ!
-	// ⚠️ NEVOLAJ calculateModelMatrix() - vymazalo by to transformácie!
-	// Matica sa vypočíta až pri prvom renderovaní
+	shrekObject->scale(glm::vec3(0.5f));
 
 	om->addDrawableObject(shrekObject);
 
@@ -167,6 +179,54 @@ void Scene6_BezierSpline::callbacks()
 		Callback::GetInstance().mouseButtonCallback(w, button, action, mods);
 	});
 
+	// Zaregistruj KEY callback
+	glfwSetKeyCallback(window, [](GLFWwindow* w, int key, int scancode, int action, int mods) {
+		Callback::GetInstance().keyCallback(w, key, scancode, action, mods);
+	});
+
+	// Zaregistruj BEZIER callbacky (SPACE, E, R)
+	Callback::GetInstance().registerBezierCallbacks(
+		// SPACE callback - play/pause
+		[this]() {
+			if (bezierSpline->isValid()) {
+				shrekMoving = !shrekMoving;
+				printf("🎬 Shrek movement: %s\n", shrekMoving ? "▶️  PLAYING" : "⏸️  PAUSED");
+			} else {
+				printf("⚠️  Cannot start - need at least 4 points! (Press E, then click to add points)\n");
+			}
+		},
+		// E callback - toggle edit mode
+		[this]() {
+			splineEditMode = !splineEditMode;
+			Callback::splineEditMode = splineEditMode;
+
+			if (splineEditMode) {
+				printf("\n📝 EDIT MODE: ON\n");
+				printf("   → Click LEFT MOUSE to add control points\n");
+				printf("   → You need 4 points minimum to create a path\n");
+			} else {
+				printf("\n📝 EDIT MODE: OFF\n");
+			}
+		},
+		// R callback - reset spline
+		[this]() {
+			size_t previousCount = bezierSpline->getControlPointCount();
+			bezierSpline->clearControlPoints();
+
+			// Zastaviť pohyb
+			shrekMoving = false;
+
+			// Skry vizuálne markery
+			for (DrawableObject* marker : controlPointMarkers) {
+				marker->visible = false;
+			}
+			controlPointMarkers.clear();
+
+			printf("\n🔄 RESET - removed %zu points and their markers.\n", previousCount);
+			printf("   Shrek movement stopped. Add new points!\n\n");
+		}
+	);
+
 	printf("Callbacks registered\n");
 }
 
@@ -178,7 +238,7 @@ void Scene6_BezierSpline::createScene(GLFWwindow* window)
 
 	this->window = window;
 	this->camera = new Camera(window, 60.0f, 0.1f, 200.0f);
-	// ✅ Lepšia počiatoč ná pozícia kamery - vidíme celú scénu
+
 	this->camera->setPosition(glm::vec3(0.0f, 15.0f, 30.0f));
 
 	this->lm = new LightManager();
@@ -189,12 +249,10 @@ void Scene6_BezierSpline::createScene(GLFWwindow* window)
 
 	this->interactionManager = new ObjectInteractionManager(om, camera, window);
 
-	// Initialize states - ZAČÍNAME V EDIT MODE!
-	this->splineEditMode = true;   // ✅ Edit mode ON hneď na začiatku
-	this->shrekMoving = false;     // Shrek čaká na body
-	this->keySpaceWasPressed = false;
-	this->keyEWasPressed = false;
-	this->keyRWasPressed = false;
+
+	this->splineEditMode = true;
+	this->shrekMoving = false;
+	Callback::splineEditMode = true;
 
 	// Create textures
 	tm->addTexture(new TextureCubemap(
@@ -211,10 +269,10 @@ void Scene6_BezierSpline::createScene(GLFWwindow* window)
 	// Create lights
 	DirectionalLight* sunLight = new DirectionalLight(
 		glm::normalize(glm::vec3(0.5f, -1.0f, 0.3f)),
-		glm::vec3(1.0f, 0.95f, 0.9f) * 1.2f  // ✅ Zvýšená intenzita (0.7f → 1.2f)
+		glm::vec3(1.0f, 0.95f, 0.9f) * 1.2f
 	);
 	lm->addDirectionalLight(sunLight);
-	lm->ambient = 0.4f;  // ✅ Viac ambientného svetla (0.25f → 0.4f)
+	lm->ambient = 0.4f;
 
 	createShaders();
 	createDrawableObjects();
@@ -227,40 +285,34 @@ void Scene6_BezierSpline::createScene(GLFWwindow* window)
 
 void Scene6_BezierSpline::handleSplineInput()
 {
-	// Ľavé tlačidlo = pridaj bod (len v edit mode)
 	if (Callback::hasLeftClick() && Callback::splineEditMode)
 	{
 		glm::vec3 screenPos = Callback::position;
 		glm::vec3 worldPos = interactionManager->screenToWorld(screenPos);
 
-		// ✅ OPRAVA: Nastav Y na úroveň plainu (-0.5)
 		worldPos.y = -0.5f;
 
-		// Pridaj bod do spline
 		bezierSpline->addControlPoint(worldPos);
 		size_t count = bezierSpline->getControlPointCount();
 
 		printf("[SPLINE] Point %zu added at (%.2f, %.2f, %.2f)\n",
 			count, worldPos.x, worldPos.y, worldPos.z);
 
-		// Pridaj vizuálny marker
 		addControlPointMarker(worldPos);
 
-		// Progress feedback
 		if (count < 4) {
 			printf("         Progress: %zu/4 points - need %zu more to create spline\n",
 				count, 4 - count);
 		} else if (count == 4) {
 			printf("\n");
 			printf("╔════════════════════════════════════════════════╗\n");
-			printf("║  ✅ FIRST SEGMENT CREATED!                    ║\n");
+			printf("║  FIRST SEGMENT CREATED!                    ║\n");
 			printf("║  Shrek can now move!                          ║\n");
 			printf("║  Press SPACE to start animation               ║\n");
 			printf("║  Press E to exit Edit Mode                    ║\n");
 			printf("╚════════════════════════════════════════════════╝\n");
 			printf("\n");
 
-			// ✅ KRITICKÉ: Re-inicializuj LeafBezierMovement TERAZ keď máme validnú spline!
 			if (bezierMovement && bezierSpline->isValid()) {
 				glm::vec3 position = bezierSpline->calculatePoint();
 				glm::vec3 tangent = bezierSpline->calculateTangent();
@@ -279,82 +331,10 @@ void Scene6_BezierSpline::handleSplineInput()
 	}
 }
 
-void Scene6_BezierSpline::handleKeyboardInput()
-{
-	// SPACE = play/pause
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-	{
-		if (!keySpaceWasPressed)
-		{
-			if (bezierSpline->isValid()) {
-				shrekMoving = !shrekMoving;
-				printf("🎬 Shrek movement: %s\n", shrekMoving ? "▶️  PLAYING" : "⏸️  PAUSED");
-			} else {
-				printf("⚠️  Cannot start - need at least 4 points! (Press E, then click to add points)\n");
-			}
-			keySpaceWasPressed = true;
-		}
-	}
-	else
-	{
-		keySpaceWasPressed = false;
-	}
-
-	// E = edit mode (pridávanie bodov myšou)
-	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-	{
-		if (!keyEWasPressed)
-		{
-			splineEditMode = !splineEditMode;
-			Callback::splineEditMode = splineEditMode;
-
-			if (splineEditMode) {
-				printf("\n📝 EDIT MODE: ON\n");
-				printf("   → Click LEFT MOUSE to add control points\n");
-				printf("   → You need 4 points minimum to create a path\n");
-			} else {
-				printf("\n📝 EDIT MODE: OFF\n");
-			}
-			keyEWasPressed = true;
-		}
-	}
-	else
-	{
-		keyEWasPressed = false;
-	}
-
-	// R = reset spline (odstráň všetky body)
-	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
-	{
-		if (!keyRWasPressed)
-		{
-			size_t previousCount = bezierSpline->getControlPointCount();
-			bezierSpline->clearControlPoints();
-
-			// Zastaviť pohyb
-			shrekMoving = false;
-
-			// ✅ OPRAVA: Skry vizuálne markery (nastav invisible)
-			for (DrawableObject* marker : controlPointMarkers) {
-				marker->visible = false;  // Skry marker
-			}
-			controlPointMarkers.clear();  // Vyčisti vector (objekty ostanú v OM, ale nebudú viditeľné)
-
-			printf("\n🔄 RESET - removed %zu points and their markers.\n", previousCount);
-			printf("   Shrek movement stopped. Add new points!\n\n");
-			keyRWasPressed = true;
-		}
-	}
-	else
-	{
-		keyRWasPressed = false;
-	}
-}
-
 void Scene6_BezierSpline::addControlPointMarker(glm::vec3 position)
 {
-	// Získaj constant shader (index 3)
-	ShaderProgram* constantShader = spm->getShaderProgram(3);
+	// Získaj constant shader (index 4)
+	ShaderProgram* constantShader = spm->getShaderProgram(4);
 
 	// Vytvor malú sphere ako marker
 	SphereModel* markerModel = new SphereModel();
@@ -374,7 +354,7 @@ void Scene6_BezierSpline::addControlPointMarker(glm::vec3 position)
 
 	// Umiestnenie a veľkosť
 	marker->translate(position);
-	marker->scale(glm::vec3(0.2f)); // ✅ Menšia sphere pre lepšiu viditeľnosť
+	marker->scale(glm::vec3(0.2f));
 	marker->calculateModelMatrix();
 	marker->updateModelMatrix();
 
@@ -390,7 +370,6 @@ void Scene6_BezierSpline::renderFrame()
 {
 	camera->checkChanges();
 	camera->controls();
-	handleKeyboardInput();
 	handleSplineInput();
 
 	// Update Shrek pozície a rotácie po spline krivke
@@ -398,7 +377,7 @@ void Scene6_BezierSpline::renderFrame()
 	{
 		float deltaTime = 0.016f; // ~60 FPS
 
-		// ✅ DEBUG: Výpis aktuálneho parametra PRED update
+
 		static int frameCount = 0;
 		if (frameCount % 60 == 0) {  // Každú sekundu
 			float t = bezierSpline->getGlobalParameter();
@@ -411,7 +390,7 @@ void Scene6_BezierSpline::renderFrame()
 		bezierMovement->update(deltaTime);
 	}
 
-	// ✅ VŽDY prepočítaj a aktualizuj maticu (aj keď sa nepohýba)
+
 	shrekObject->getTransformationComposite()->resultMatrix();
 	shrekObject->updateModelMatrix();
 
@@ -467,6 +446,7 @@ void Scene6_BezierSpline::renderScene()
 		glfwPollEvents();
 		glfwSwapBuffers(window);
 	}
+
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
